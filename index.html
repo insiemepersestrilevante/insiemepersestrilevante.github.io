@@ -736,7 +736,7 @@
                 <h3 class="font-bold text-slate-900 text-lg mb-2">Informativa
                   Privacy GDPR</h3>
                 <p class="text-slate-500 text-xs mb-4">Informativa sul
-                  trattamento dei dati personali dei soci ed utenti
+                  trattamento dei dati personali dosi ed utenti
                   dell'associazione.</p>
               </div>
               <button onclick="downloadDocument('Informativa_Privacy_GDPR_ODV.pdf')"
@@ -766,16 +766,10 @@
               <!-- Success Banner (Hidden by default) -->
               <div id="contactSuccess" class="hidden mb-6 p-4 rounded-xl bg-emerald-100 border border-emerald-300 text-emerald-800 text-sm font-semibold flex items-center gap-3">
                 <i class="fa-solid fa-circle-check text-xl text-emerald-600"></i>
-                <div>Grazie per averci scritto! Risponderemo alla tua richiesta
-                  il prima possibile.</div>
+                <div>Messaggio inviato correttamente! Verrai reindirizzato alla home...</div>
               </div>
-              <form id="contactForm" action="https://formsubmit.co/insiemepersestrilevante@gmail.com" method="POST" class="space-y-4">
-                <!-- Indirizzo email dell'associazione destinataria -->
-                <input type="hidden" name="_to" value="insiemepersestrilevante@gmail.com">
-                <input type="hidden" name="_subject" value="Nuovo messaggio dal sito web - Insieme per Sestri Levante ODV">
-                <!-- Reindirizzamento automatico alla home dopo l'invio -->
-                <input type="hidden" name="_next" value="https://insiemepersestrilevante.github.io">
-                <!-- Disattiva il captcha di verifica di FormSubmit -->
+              <form id="contactForm" action="https://formsubmit.co/ajax/insiemepersestrilevante@gmail.com" method="POST" class="space-y-4">
+                <!-- Disattiva il captcha di FormSubmit -->
                 <input type="hidden" name="_captcha" value="false">
                 <div> <label for="fullName" class="block text-xs font-bold text-slate-700 uppercase mb-1">Nome
                     e Cognome *</label> <input id="fullName" name="name" required="" placeholder="Mario Rossi"
@@ -813,7 +807,7 @@
                     Acconsento al trattamento dei dati personali ai sensi della
                     legge Privacy GDPR per la gestione della richiesta. </label>
                 </div>
-                <button type="submit" class="w-full bg-brand-green hover:bg-brand-darkgreen text-white font-bold py-3.5 rounded-xl shadow-md transition-all duration-300 flex items-center justify-center gap-2">
+                <button type="submit" id="submitBtn" class="w-full bg-brand-green hover:bg-brand-darkgreen text-white font-bold py-3.5 rounded-xl shadow-md transition-all duration-300 flex items-center justify-center gap-2">
                   <i class="fa-solid fa-paper-plane"></i> Invia Messaggio </button>
               </form>
             </div>
@@ -1028,6 +1022,39 @@
                         navLink.classList.remove('text-brand-green', 'font-bold');
                     }
                 }
+            });
+        });
+
+        // AJAX Contact Form submission with success message and delayed redirect to home
+        const contactForm = document.getElementById('contactForm');
+        const contactSuccess = document.getElementById('contactSuccess');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(contactForm);
+
+            fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    // Mostra il messaggio di successo
+                    contactSuccess.classList.remove('hidden');
+                    contactForm.reset();
+                    
+                    // Dopo 3 secondi reindirizza alla home page (#home)
+                    setTimeout(() => {
+                        contactSuccess.classList.add('hidden');
+                        window.location.href = '#home';
+                    }, 3000);
+                } else {
+                    alert('Errore durante l\'invio del messaggio. Riprova più tardi.');
+                }
+            }).catch(error => {
+                alert('Errore di connessione. Controlla la tua rete e riprova.');
             });
         });
     </script>
