@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="it">
+  <head>
+    <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insieme per Sestri Levante ODV | Associazione di Volontariato</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            green: '#2e7d32',
+                            darkgreen: '#1b5e20',
+                            lightgreen: '#4caf50',
+                            blue: '#0288d1',
+                            darkblue: '#01579b',
+                            accent: '#f59e0b',
+                            bg: '#f8fafc'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom Styles for smooth UI touches */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(27, 94, 32, 0.85) 0%, rgba(1, 87, 155, 0.75) 100%);
+        }
+        .tab-btn.active {
+            border-bottom-color: #2e7d32;
+            color: #2e7d32;
+            font-weight: 700;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2e7d32;
+            border-radius: 4px;
+        }
+    </style>
+    <link href="https://berjon.com/blog/2009/07/force-svg.html" rel="force-svg">
+    <script type="application/javascript">(function () {
+
+    function ForceSVGInHTML() {
+        window.removeEventListener("load", ForceSVGInHTML, true);
+        var svgs = document.getElementsByTagName("svg");
+        for (var i = 0; i < svgs.length; i++) {
+            var svg = svgs[i];
+            var div = document.createElement("div");
+            div.appendChild(svg.cloneNode(true));
+            var dom = (new DOMParser).parseFromString(div.innerHTML, "application/xml");
+            svg.parentNode.replaceChild(document.importNode(dom.documentElement, true), svg);
+        }
+    }
+
+    window.addEventListener("load", ForceSVGInHTML, true);
+})();</script>
+  </head>
+  <body class="font-sans text-slate-800 bg-slate-50 flex flex-col min-h-screen">
+    <!-- TOP HEADER BAR -->
+    <div class="bg-brand-darkgreen text-white text-[10px] sm:text-xs py-2 px-3 overflow-x-auto">
+      <div class="max-w-7xl mx-auto flex flex-nowrap justify-start lg:justify-between items-center gap-x-4 min-w-max lg:min-w-0">
+        <div class="flex flex-nowrap items-center justify-start gap-x-3 whitespace-nowrap">
+          <span><i class="fa-solid fa-location-dot text-brand-accent mr-1"></i>
+            Sede operativa: Via Dante, 16039 Sestri Levante (GE)</span>
+          <span class="inline"><i class="fa-solid fa-id-card text-brand-accent mr-1"></i>
+            C.F. 90088290102</span>
+        </div>
+        <div class="flex flex-nowrap items-center justify-start gap-x-3 whitespace-nowrap">
+          <a href="mailto:insiemepersestrilevante@gmail.com"
+             class="inline-flex items-center hover:text-amber-300 transition-colors whitespace-nowrap">
+            <i class="fa-solid fa-envelope mr-1"></i>insiemepersestrilevante@gmail.com
+          </a>
+          <div class="flex flex-nowrap items-center justify-center gap-x-1 whitespace-nowrap text-[10px] sm:text-xs text-white/90 leading-none">
+            <i class="fa-solid fa-certificate text-brand-accent mr-1"></i>
+            <strong>ODV Iscritta al RUNTS</strong> — N. Atto 822-2025 del 06/02/2025 — Prot. 2025-68388
+          </div>
+          <div class="flex flex-nowrap items-center justify-center gap-2 pl-3 border-l border-green-700 text-base sm:text-lg shrink-0">
+            <a href="https://www.facebook.com/InsiemeperSestriLevanteODV/"
+               target="_blank" rel="noopener noreferrer" class="inline-flex items-center hover:text-amber-300 transition-colors p-1"
+               title="Facebook" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+            <a href="https://www.instagram.com/insiemepersestrilevante"
+               target="_blank" rel="noopener noreferrer" class="inline-flex items-center hover:text-amber-300 transition-colors p-1"
+               title="Instagram" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+            <a href="https://wa.me/393519027800" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center text-green-400 hover:text-green-300 transition-colors p-1"
+               title="Contattaci su WhatsApp al +39 351 902 7800" aria-label="Contattaci su WhatsApp al +39 351 902 7800">
+              <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- MAIN NAVBAR -->
+    <header class="sticky top-0 z-50 glass-nav border-b border-slate-200 shadow-sm transition-all duration-300">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+          <!-- BRAND LOGO --> <a href="#home" class="flex items-center gap-3 group">
+            <div class="relative w-12 h-12 flex-shrink-0 bg-white rounded-full shadow-md border-2 border-brand-green flex items-center justify-center overflow-hidden">
+              <img alt="Logo Insieme per Sestri Levante ODV" src="logo.jpeg" class="block w-full h-full object-contain object-center" style="margin:0; padding:0;" onerror="this.onerror=null; this.src='../OneDrive/Desktop/logo.jpeg'">
+            </div>
+            <div class="min-w-0"> <span class="whitespace-nowrap font-serif font-semibold text-[13px] sm:text-base md:text-lg tracking-tight text-brand-green leading-none group-hover:text-brand-darkgreen transition-colors">Insieme per Sestri Levante <span class="font-sans font-extrabold text-brand-green text-[0.82em] tracking-wide">ODV</span></span> </div>
+          </a>
+          <!-- DESKTOP NAVIGATION -->
+          <nav class="hidden lg:flex items-center space-x-1 xl:space-x-2"> <a href="#home"
+              class="nav-link px-3 py-2 text-sm font-semibold text-slate-700 hover:text-brand-green rounded-lg transition-colors">Home</a>
+            <a href="#chi-siamo" class="nav-link px-3 py-2 text-sm font-semibold text-slate-700 hover:text-brand-green rounded-lg transition-colors">Chi
+              Siamo</a> <a href="#attivita" class="nav-link px-3 py-2 text-sm font-semibold text-slate-700 hover:text-brand-green rounded-lg transition-colors">Attività</a>
+            <a href="#eventi" class="nav-link px-3 py-2 text-sm font-semibold text-slate-700 hover:text-brand-green rounded-lg transition-colors">Eventi</a>
+            <a href="#iscriviti" class="nav-link px-3 py-2 text-sm font-semibold text-slate-700 hover:text-brand-green rounded-lg transition-colors">Come
+              Iscriversi</a> <a href="#modulistica" class="nav-link px-3 py-2 text-sm font-semibold text-slate-700 hover:text-brand-green rounded-lg transition-colors">Modulistica</a>
+            <a href="#contatti" class="nav-link px-3 py-2 text-sm font-semibold text-slate-700 hover:text-brand-green rounded-lg transition-colors">Contatti</a>
+          </nav>
+          <!-- CALL TO ACTION BUTTON -->
+          <div class="hidden sm:flex items-center space-x-3"> <a href="#iscriviti"
+              class="bg-brand-green hover:bg-brand-darkgreen text-white px-4 py-2.5 rounded-full text-sm font-bold shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 flex items-center gap-2">
+              <i class="fa-solid fa-hand-holding-heart"></i> Diventa Volontario
+            </a> </div>
+          <!-- MOBILE MENU BUTTON -->
+          <div class="flex lg:hidden items-center"> <button id="mobileMenuBtn"
+              aria-label="Apri Menu" class="text-slate-700 hover:text-brand-green p-2 rounded-lg focus:outline-none">
+              <i class="fa-solid fa-bars text-2xl" id="menuIcon"></i> </button>
+          </div>
+        </div>
+      </div>
+      <!-- MOBILE NAVIGATION DROPDOWN -->
+      <div id="mobileMenu" class="hidden lg:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-2 shadow-lg">
+        <a href="#home" class="mobile-nav-link block px-4 py-2.5 text-base font-semibold text-slate-700 hover:bg-emerald-50 hover:text-brand-green rounded-lg">Home</a>
+        <a href="#chi-siamo" class="mobile-nav-link block px-4 py-2.5 text-base font-semibold text-slate-700 hover:bg-emerald-50 hover:text-brand-green rounded-lg">Chi
+          Siamo</a> <a href="#attivita" class="mobile-nav-link block px-4 py-2.5 text-base font-semibold text-slate-700 hover:bg-emerald-50 hover:text-brand-green rounded-lg">Attività</a>
+        <a href="#eventi" class="mobile-nav-link block px-4 py-2.5 text-base font-semibold text-slate-700 hover:bg-emerald-50 hover:text-brand-green rounded-lg">Eventi</a>
+        <a href="#iscriviti" class="mobile-nav-link block px-4 py-2.5 text-base font-semibold text-slate-700 hover:bg-emerald-50 hover:text-brand-green rounded-lg">Come
+          Iscriversi</a> <a href="#modulistica" class="mobile-nav-link block px-4 py-2.5 text-base font-semibold text-slate-700 hover:bg-emerald-50 hover:text-brand-green rounded-lg">Modulistica</a>
+        <a href="#contatti" class="mobile-nav-link block px-4 py-2.5 text-base font-semibold text-slate-700 hover:bg-emerald-50 hover:text-brand-green rounded-lg">Contatti</a>
+        <div class="pt-2"> <a href="#iscriviti" class="mobile-nav-link w-full bg-brand-green text-white text-center py-3 rounded-xl font-bold flex items-center justify-center gap-2">
+            <i class="fa-solid fa-hand-holding-heart"></i> Diventa Volontario </a>
+        </div>
+      </div>
+    </header>
+    <main class="flex-grow">
+      <!-- SECTION 1: HERO & HOME -->
+      <section id="home" class="relative bg-slate-900 text-white min-h-[85vh] flex items-center justify-center overflow-hidden">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0"> <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&amp;fit=crop&amp;w=2000&amp;q=80"
+            alt="Vista panoramica Sestri Levante Baia del Silenzio" class="w-full h-full object-cover object-center scale-105 transform animate-pulse duration-[10000ms]"
+            onerror="this.onerror=null; this.src='https://placehold.co/1920x1080/0288d1/ffffff?text=Sestri+Levante+Vista+Mare'">
+          <div class="absolute inset-0 hero-gradient"></div>
+        </div>
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+          <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-amber-300 font-semibold text-xs sm:text-sm uppercase tracking-wider mb-6 border border-white/20">
+            <i class="fa-solid fa-heart text-red-400"></i> Volontariato Attivo a
+            Sestri Levante </span>
+          <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-6">
+            Prendiamoci cura della nostra città. </h1>
+          <p class="text-lg sm:text-2xl text-slate-100 font-light max-w-3xl mx-auto mb-10 leading-relaxed italic">
+            "INSIEME possiamo essere parte attiva per rendere più bella Sestri
+            Levante." </p>
+          <!-- HERO ACTION BUTTONS -->
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+            <a href="#iscriviti" class="w-full sm:w-auto bg-brand-green hover:bg-emerald-600 text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-3 transform hover:-translate-y-1">
+              <i class="fa-solid fa-user-plus text-lg"></i> Unisciti a Noi </a>
+            <a href="https://wa.me/?text=Ciao%21%20Vorrei%20avere%20maggiori%20informazioni%20sulle%20attivit%C3%A0%20di%20Insieme%20per%20Sestri%20Levante%20ODV"
+              target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-3 transform hover:-translate-y-1">
+              <i class="fa-brands fa-whatsapp text-xl"></i> Scrivici su WhatsApp
+            </a> <a href="#chi-siamo" class="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white border border-white/30 font-semibold px-6 py-4 rounded-xl backdrop-blur-sm transition-all duration-300 flex items-center justify-center gap-2">
+              Scopri di più <i class="fa-solid fa-arrow-down text-xs"></i> </a>
+          </div>
+          <!-- QUICK STATS BAR -->
+          <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-8 border-t border-white/20 text-left sm:text-center">
+            <div class="p-3">
+              <div class="text-2xl sm:text-3xl font-extrabold text-amber-300">100%</div>
+              <div class="text-xs sm:text-sm text-slate-200">Volontariato
+                No-Profit</div>
+            </div>
+            <div class="p-3">
+              <div class="text-2xl sm:text-3xl font-extrabold text-amber-300">Decoro</div>
+              <div class="text-xs sm:text-sm text-slate-200">Verde &amp; Arredi
+                Urbani</div>
+            </div>
+            <div class="p-3">
+              <div class="text-2xl sm:text-3xl font-extrabold text-amber-300">Eventi</div>
+              <div class="text-xs sm:text-sm text-slate-200">Supporto alla
+                Comunità</div>
+            </div>
+            <div class="p-3">
+              <div class="text-2xl sm:text-3xl font-extrabold text-amber-300">RUNTS</div>
+              <div class="text-xs sm:text-sm text-slate-200">Trasparenza
+                Garantita</div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- LATEST NEWS HIGHLIGHTS -->
+      <section class="py-12 bg-emerald-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-amber-400 text-slate-900 flex items-center justify-center text-xl flex-shrink-0 font-bold">
+                <i class="fa-solid fa-bullhorn"></i> </div>
+              <div> <span class="text-xs font-bold text-amber-300 uppercase tracking-widest">Ultimo
+                  Aggiornamento</span>
+                <h3 class="text-lg font-bold">I Volontari in azione per Andersen
+                  Run &amp; Cura del Parco</h3>
+              </div>
+            </div>
+            <p class="text-sm text-slate-200 max-w-xl"> Partecipazione attiva
+              nella gestione della sicurezza per gli atleti e costante
+              manutenzione delle aree verdi e panchine cittadine. </p>
+            <a href="#attivita" class="bg-white text-emerald-900 hover:bg-slate-100 px-5 py-2.5 rounded-lg text-sm font-bold transition-colors whitespace-nowrap flex-shrink-0">
+              Vedi tutte le attività </a> </div>
+        </div>
+      </section>
+      <!-- SECTION 2: CHI SIAMO -->
+      <section id="chi-siamo" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-xs font-bold uppercase tracking-widest text-brand-green mb-2">La
+              Nostra Identità</h2>
+            <p class="text-3xl sm:text-4xl font-extrabold text-slate-900">Chi
+              Siamo e Cosa Facciamo</p>
+            <div class="w-20 h-1.5 bg-brand-green mx-auto mt-4 rounded-full"></div>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+              <div class="bg-emerald-50 border-l-4 border-brand-green p-4 rounded-r-lg">
+                <p class="text-brand-darkgreen font-semibold text-base sm:text-lg">
+                  <strong>Insieme per Sestri Levante ODV</strong> è
+                  un'Organizzazione di Volontariato regolarmente iscritta al
+                  Registro Unico Nazionale del Terzo Settore (RUNTS). </p>
+              </div>
+              <p class="text-slate-600 leading-relaxed"> Nata dall'amore
+                incondizionato per la città di Sestri Levante, la nostra
+                associazione raccoglie cittadini di tutte le età che desiderano
+                mettere a disposizione il proprio tempo, le proprie competenze e
+                le proprie energie per migliorare gli spazi comuni e la qualità
+                della vita nella nostra comunità. </p>
+              <p class="text-slate-600 leading-relaxed"> Operiamo in costante
+                sinergia con il Comune, le realtà sociali territoriali e le
+                altre associazioni per promuovere la tutela ambientale, il
+                decoro urbano e la coesione sociale attraverso azioni pratiche e
+                trasparenti. </p>
+              <!-- SCOPI STATUTARI PILLARS -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                <div class="p-4 rounded-xl border border-slate-100 bg-slate-50 shadow-sm flex items-start gap-3">
+                  <i class="fa-solid fa-tree text-2xl text-brand-green mt-1"></i>
+                  <div>
+                    <h4 class="font-bold text-slate-900 text-sm">Tutela del
+                      Verde</h4>
+                    <p class="text-xs text-slate-500">Cura di parchi, giardini e
+                      spazi naturali della città.</p>
+                  </div>
+                </div>
+                <div class="p-4 rounded-xl border border-slate-100 bg-slate-50 shadow-sm flex items-start gap-3">
+                  <i class="fa-solid fa-paint-roller text-2xl text-brand-blue mt-1"></i>
+                  <div>
+                    <h4 class="font-bold text-slate-900 text-sm">Decoro Urbano</h4>
+                    <p class="text-xs text-slate-500">Ripristino di arredi
+                      pubblici, panchine e vialetti.</p>
+                  </div>
+                </div>
+                <div class="p-4 rounded-xl border border-slate-100 bg-slate-50 shadow-sm flex items-start gap-3">
+                  <i class="fa-solid fa-people-group text-2xl text-amber-500 mt-1"></i>
+                  <div>
+                    <h4 class="font-bold text-slate-900 text-sm">Utilità Sociale</h4>
+                    <p class="text-xs text-slate-500">Supporto a manifestazioni
+                      sportive e culturali.</p>
+                  </div>
+                </div>
+                <div class="p-4 rounded-xl border border-slate-100 bg-slate-50 shadow-sm flex items-start gap-3">
+                  <i class="fa-solid fa-file-contract text-2xl text-purple-600 mt-1"></i>
+                  <div>
+                    <h4 class="font-bold text-slate-900 text-sm">Trasparenza</h4>
+                    <p class="text-xs text-slate-500">Atto costitutivo e bilanci
+                      consultabili da tutti.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- RIGHT COLUMN: IMAGE & TRANSPARENCY CARD -->
+            <div class="space-y-6">
+              <div class="relative rounded-2xl overflow-hidden shadow-2xl group">
+                <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&amp;fit=crop&amp;w=1000&amp;q=80"
+                  alt="Volontari al lavoro per il decoro urbano" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500"
+                  onerror="this.onerror=null; this.src='https://placehold.co/800x600/2e7d32/ffffff?text=Volontari+Insieme+per+Sestri'">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-6">
+                  <span class="text-white font-medium text-sm"><i class="fa-solid fa-camera mr-2"></i>I
+                    nostri volontari durante un intervento di riqualificazione</span>
+                </div>
+              </div>
+              <!-- STATUTORY DATA BOX -->
+              <div class="bg-slate-900 text-white p-6 rounded-2xl shadow-xl space-y-3 text-sm">
+                <h3 class="text-base font-bold text-amber-400 flex items-center gap-2">
+                  <i class="fa-solid fa-circle-info"></i> Dati Istituzionali
+                  &amp; Trasparenza </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm text-slate-300">
+                  <div><strong>Denominazione:</strong> Insieme per Sestri
+                    Levante ODV</div>
+                  <div><strong>Codice Fiscale:</strong> 90088290102</div>
+                  <div><strong>Sede Legale:</strong> Via A. Manzoni 5, Sestri
+                    Levante</div>
+                  <div><strong>Sede Operativa:</strong> Via Dante, Sestri
+                    Levante</div>
+                  <div><strong>Registro:</strong> RUNTS Sezione ODV</div>
+                  <div><strong>N. Atto:</strong> 822-2025 del 06/02/2025</div>
+                  <div><strong>Protocollo:</strong> Prot-2025-68388</div>
+                  <div><strong>Ambito:</strong> Tutela Ambientale &amp; Sociale</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION 3: ATTIVITÀ & PROGETTI -->
+      <section id="attivita" class="py-20 bg-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-3xl mx-auto mb-12">
+            <h2 class="text-xs font-bold uppercase tracking-widest text-brand-green mb-2">Azione
+              sul Campo</h2>
+            <p class="text-3xl sm:text-4xl font-extrabold text-slate-900">I
+              Nostri Progetti e Attività</p>
+            <p class="text-slate-600 mt-2">Scopri come interveniamo
+              concretamente per valorizzare il territorio di Sestri Levante.</p>
+            <div class="w-20 h-1.5 bg-brand-green mx-auto mt-4 rounded-full"></div>
+          </div>
+          <!-- ACTIVITY FILTER BUTTONS -->
+          <div class="flex justify-center flex-wrap gap-2 mb-10"> <button onclick="filterActivities('all')"
+              class="filter-btn active bg-brand-green text-white font-semibold px-5 py-2 rounded-full text-sm shadow transition-all">Tutte
+              le Attività</button> <button onclick="filterActivities('verde')"
+              class="filter-btn bg-white hover:bg-emerald-50 text-slate-700 font-semibold px-5 py-2 rounded-full text-sm shadow transition-all">Verde
+              &amp; Decoro</button> <button onclick="filterActivities('eventi')"
+              class="filter-btn bg-white hover:bg-emerald-50 text-slate-700 font-semibold px-5 py-2 rounded-full text-sm shadow transition-all">Sport
+              &amp; Eventi</button> <button onclick="filterActivities('quartiere')"
+              class="filter-btn bg-white hover:bg-emerald-50 text-slate-700 font-semibold px-5 py-2 rounded-full text-sm shadow transition-all">Pulizie
+              di Quartiere</button> </div>
+          <!-- CARDS GRID -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Activity Card 1 -->
+            <div class="activity-card eventi bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col">
+              <div class="relative h-48 overflow-hidden"> <img src="https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+                  alt="Supporto Andersen Run" class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
+                  onerror="this.onerror=null; this.src='https://placehold.co/600x400/0288d1/ffffff?text=Andersen+Run'">
+                <span class="absolute top-3 left-3 bg-brand-blue text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Sport
+                  &amp; Eventi</span> </div>
+              <div class="p-6 flex-grow flex flex-col justify-between">
+                <div>
+                  <h3 class="text-xl font-bold text-slate-900 mb-2">Supporto
+                    Andersen Run</h3>
+                  <p class="text-slate-600 text-sm leading-relaxed mb-4"> I
+                    nostri volontari sono stati coinvolti in prima linea per
+                    guidare gli atleti nel percorso cittadino, garantendo
+                    sicurezza, ristoro e accoglienza durante la celebre
+                    manifestazione podistica. </p>
+                </div>
+                <div class="pt-4 border-t border-slate-100 flex justify-between items-center text-xs text-slate-500 font-medium">
+                  <span><i class="fa-regular fa-calendar text-brand-green mr-1"></i>
+                    Annuale / Ottobre</span> <span><i class="fa-solid fa-location-dot text-brand-blue mr-1"></i>
+                    Centro Città</span> </div>
+              </div>
+            </div>
+            <!-- Activity Card 2 -->
+            <div class="activity-card verde bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col">
+              <div class="relative h-48 overflow-hidden"> <img src="https://images.unsplash.com/photo-1592417817098-8f3d6eb12765?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+                  alt="Cura del Verde Pubblico" class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
+                  onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?auto=format&amp;fit=crop&amp;w=800&amp;q=80'">
+                <span class="absolute top-3 left-3 bg-brand-green text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Verde
+                  &amp; Decoro</span> </div>
+              <div class="p-6 flex-grow flex flex-col justify-between">
+                <div>
+                  <h3 class="text-xl font-bold text-slate-900 mb-2">Manutenzione
+                    Giardini e Parchi</h3>
+                  <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                    Interventi periodici di sfalcio dell'erba, potatura di
+                    contenimento e pulizia approfondita dei parchi giochi per
+                    restituire alle famiglie spazi verdi curati e sicuri. </p>
+                </div>
+                <div class="pt-4 border-t border-slate-100 flex justify-between items-center text-xs text-slate-500 font-medium">
+                  <span><i class="fa-regular fa-calendar text-brand-green mr-1"></i>
+                    Continuativo</span> <span><i class="fa-solid fa-location-dot text-brand-blue mr-1"></i>
+                    Aree Verdi Sestri</span> </div>
+              </div>
+            </div>
+            <!-- Activity Card 3 -->
+            <div class="activity-card quartiere bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col">
+              <div class="relative h-48 overflow-hidden"> <img src="https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+                  alt="Pulizie di Quartiere" class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
+                  onerror="this.onerror=null; this.src='https://placehold.co/600x400/f59e0b/ffffff?text=Operazione+Salva+il+Mondo'">
+                <span class="absolute top-3 left-3 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Pulizie
+                  di Quartiere</span> </div>
+              <div class="p-6 flex-grow flex flex-col justify-between">
+                <div>
+                  <h3 class="text-xl font-bold text-slate-900 mb-2">Operazione
+                    Salva il Mondo</h3>
+                  <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                    Giornate dedicate alla raccolta differenziata dei rifiuti
+                    abbandonati lungo i sentieri, le spiagge e le vie
+                    periferiche, promuovendo il rispetto ambientale tra i
+                    giovani. </p>
+                </div>
+                <div class="pt-4 border-t border-slate-100 flex justify-between items-center text-xs text-slate-500 font-medium">
+                  <span><i class="fa-regular fa-calendar text-brand-green mr-1"></i>
+                    Giornate dedicate</span> <span><i class="fa-solid fa-location-dot text-brand-blue mr-1"></i>
+                    Frazioni &amp; Litorale</span> </div>
+              </div>
+            </div>
+            <!-- Activity Card 4 -->
+            <div class="activity-card verde bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col">
+              <div class="relative h-48 overflow-hidden"> <img src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+                  alt="Restauro Panchine" class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
+                  onerror="this.onerror=null; this.src='https://placehold.co/600x400/1b5e20/ffffff?text=Ripristino+Arredi'">
+                <span class="absolute top-3 left-3 bg-brand-green text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Verde
+                  &amp; Decoro</span> </div>
+              <div class="p-6 flex-grow flex flex-col justify-between">
+                <div>
+                  <h3 class="text-xl font-bold text-slate-900 mb-2">Ripristino
+                    Arredi Urbani</h3>
+                  <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                    Carteggiatura, verniciatura e riparazione delle panchine
+                    pubbliche danneggiate dalle intemperie per restituire decoro
+                    e comfort al passeggio cittadino. </p>
+                </div>
+                <div class="pt-4 border-t border-slate-100 flex justify-between items-center text-xs text-slate-500 font-medium">
+                  <span><i class="fa-regular fa-calendar text-brand-green mr-1"></i>
+                    Periodico</span> <span><i class="fa-solid fa-location-dot text-brand-blue mr-1"></i>
+                    Piazze di Sestri</span> </div>
+              </div>
+            </div>
+            <!-- Activity Card 5 -->
+            <div class="activity-card eventi bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col">
+              <div class="relative h-48 overflow-hidden"> <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+                  alt="Convegni e Incontri" class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
+                  onerror="this.onerror=null; this.src='https://placehold.co/600x400/01579b/ffffff?text=Biodiversit%C3%A0+e+Ambiente'">
+                <span class="absolute top-3 left-3 bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Incontri
+                  &amp; Cultura</span> </div>
+              <div class="p-6 flex-grow flex flex-col justify-between">
+                <div>
+                  <h3 class="text-xl font-bold text-slate-900 mb-2">Incontri
+                    sulla Biodiversità</h3>
+                  <p class="text-slate-600 text-sm leading-relaxed mb-4"> Tavole
+                    rotonde e seminari aperti alla cittadinanza in
+                    collaborazione con l'Amministrazione Comunale per
+                    sensibilizzare sul valore del verde e delle essenze liguri.
+                  </p>
+                </div>
+                <div class="pt-4 border-t border-slate-100 flex justify-between items-center text-xs text-slate-500 font-medium">
+                  <span><i class="fa-regular fa-calendar text-brand-green mr-1"></i>
+                    Eventi speciali</span> <span><i class="fa-solid fa-location-dot text-brand-blue mr-1"></i>
+                    Sale Comunali</span> </div>
+              </div>
+            </div>
+            <!-- Activity Card 6 -->
+            <div class="activity-card quartiere bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col">
+              <div class="relative h-48 overflow-hidden"> <img src="https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+                  alt="Manutenzione Frazioni" class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
+                  onerror="this.onerror=null; this.src='https://placehold.co/600x400/8e24aa/ffffff?text=Cura+Frazioni'">
+                <span class="absolute top-3 left-3 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Pulizie
+                  di Quartiere</span> </div>
+              <div class="p-6 flex-grow flex flex-col justify-between">
+                <div>
+                  <h3 class="text-xl font-bold text-slate-900 mb-2">Interventi
+                    nelle Frazioni</h3>
+                  <p class="text-slate-600 text-sm leading-relaxed mb-4"> Oltre
+                    al centro urbano, portiamo la nostra opera di pulizia e
+                    manutenzione costante nelle frazioni collinari di Sestri
+                    Levante per non lasciare indietro nessuno. </p>
+                </div>
+                <div class="pt-4 border-t border-slate-100 flex justify-between items-center text-xs text-slate-500 font-medium">
+                  <span><i class="fa-regular fa-calendar text-brand-green mr-1"></i>
+                    Mensile</span> <span><i class="fa-solid fa-location-dot text-brand-blue mr-1"></i>
+                    Riva, Santa Vittoria, San Bartolomeo</span> </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION 4: EVENTI -->
+      <section id="eventi" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-xs font-bold uppercase tracking-widest text-brand-green mb-2">Iniziative
+              in Calendario</h2>
+            <p class="text-3xl sm:text-4xl font-extrabold text-slate-900">Prossimi
+              Eventi e Incontri</p>
+            <div class="w-20 h-1.5 bg-brand-green mx-auto mt-4 rounded-full"></div>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Featured Event 1 -->
+            <div class="lg:col-span-2 bg-gradient-to-br from-emerald-900 to-slate-900 rounded-3xl p-8 text-white shadow-2xl relative overflow-hidden flex flex-col justify-between">
+              <div class="absolute -right-10 -bottom-10 opacity-10 text-white text-9xl">
+                <i class="fa-solid fa-seedling"></i> </div>
+              <div>
+                <div class="flex items-center gap-3 mb-4"> <span class="bg-amber-400 text-slate-900 text-xs font-extrabold px-3 py-1 rounded-full uppercase">In
+                    Programma</span> <span class="text-xs text-slate-300"><i class="fa-solid fa-handshake mr-1"></i>
+                    In collaborazione con il Comune di Sestri Levante</span> </div>
+                <h3 class="text-2xl sm:text-3xl font-extrabold mb-4">Giornata
+                  del Verde Urbano &amp; Convegno sulla Biodiversità</h3>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6">
+                  Un appuntamento speciale aperto a tutta la cittadinanza: al
+                  mattino ci dedicheremo alla piantumazione di nuove essenze
+                  autoctone e alla pulizia del parco urbano; nel pomeriggio si
+                  terrà un tavolo tecnico-divulgativo sulla tutela della
+                  biodiversità ligure. </p>
+              </div>
+              <div class="space-y-4 pt-6 border-t border-white/20">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
+                  <div>
+                    <div class="text-xs text-slate-400">Quando</div>
+                    <div class="font-bold text-amber-300"><i class="fa-regular fa-calendar mr-1"></i>
+                      Prossimo Sabato</div>
+                  </div>
+                  <div>
+                    <div class="text-xs text-slate-400">Dove</div>
+                    <div class="font-bold"><i class="fa-solid fa-location-dot mr-1"></i>
+                      Parco Nelson Mandela &amp; Sala Comunale</div>
+                  </div>
+                  <div>
+                    <div class="text-xs text-slate-400">Orario</div>
+                    <div class="font-bold"><i class="fa-regular fa-clock mr-1"></i>
+                      Ore 09:30 - 17:00</div>
+                  </div>
+                </div>
+                <div class="pt-2"> <a href="#contatti" class="inline-flex items-center gap-2 bg-brand-green hover:bg-emerald-600 text-white font-bold px-6 py-3 rounded-xl transition-colors text-sm">
+                    <i class="fa-solid fa-circle-check"></i> Prenota la tua
+                    partecipazione </a> </div>
+              </div>
+            </div>
+            <!-- Past / Regular Events List -->
+            <div class="bg-slate-50 border border-slate-200 rounded-3xl p-6 flex flex-col justify-between">
+              <div>
+                <h4 class="text-lg font-bold text-slate-900 mb-4 pb-2 border-b border-slate-200 flex items-center justify-between">
+                  <span>Calendario Ricorrente</span> <i class="fa-solid fa-calendar-days text-brand-green"></i>
+                </h4>
+                <ul class="space-y-4 text-sm">
+                  <li class="p-3 bg-white rounded-xl border border-slate-200 shadow-sm">
+                    <div class="font-bold text-slate-900">Raduno Settimanale
+                      Volontari</div>
+                    <div class="text-xs text-slate-500 my-1"><i class="fa-regular fa-clock"></i>
+                      Ogni Sabato mattina ore 09:00</div>
+                    <p class="text-xs text-slate-600">Punto di ritrovo presso la
+                      sede per coordinare le squadre sul territorio.</p>
+                  </li>
+                  <li class="p-3 bg-white rounded-xl border border-slate-200 shadow-sm">
+                    <div class="font-bold text-slate-900">Assemblea dei Soci ODV</div>
+                    <div class="text-xs text-slate-500 my-1"><i class="fa-regular fa-clock"></i>
+                      Convocazione Periodica</div>
+                    <p class="text-xs text-slate-600">Incontro trasparente per
+                      la rendicontazione delle attività e approvazione bilancio.</p>
+                  </li>
+                  <li class="p-3 bg-white rounded-xl border border-slate-200 shadow-sm">
+                    <div class="font-bold text-slate-900">Giornate Andersen Run</div>
+                    <div class="text-xs text-slate-500 my-1"><i class="fa-regular fa-clock"></i>
+                      Ottobre (Annuale)</div>
+                    <p class="text-xs text-slate-600">Presidio del percorso e
+                      assistenza agli atleti della maratona.</p>
+                  </li>
+                </ul>
+              </div>
+              <div class="mt-6 pt-4 border-t border-slate-200 text-center"> <a
+                  href="https://www.facebook.com/InsiemeperSestriLevanteODV/" target="_blank"
+                  rel="noopener noreferrer" class="text-brand-blue hover:underline text-xs font-bold inline-flex items-center gap-1">
+                  <i class="fa-brands fa-facebook"></i> Segui tutti i post in
+                  tempo reale su Facebook </a> </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION 5: COME ISCRIVERSI -->
+      <section id="iscriviti" class="py-20 bg-emerald-950 text-white relative overflow-hidden">
+        <!-- Background Glow -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-emerald-600/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-xs font-bold uppercase tracking-widest text-amber-400 mb-2">Unisciti
+              alla Nostra Famiglia</h2>
+            <p class="text-3xl sm:text-4xl font-extrabold text-white">Come
+              Diventare Volontario o Socio</p>
+            <p class="text-slate-300 mt-2">Dona un po' del tuo tempo per fare la
+              differenza a Sestri Levante.</p>
+            <div class="w-20 h-1.5 bg-amber-400 mx-auto mt-4 rounded-full"></div>
+          </div>
+          <!-- STEPS GRID -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-8 relative flex flex-col justify-between hover:bg-white/15 transition-all">
+              <div class="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-amber-400 text-slate-900 font-extrabold flex items-center justify-center text-lg shadow-lg">1</div>
+              <div> <i class="fa-solid fa-file-signature text-4xl text-emerald-400 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">Scarica il Modulo</h3>
+                <p class="text-slate-300 text-sm leading-relaxed"> Scarica la
+                  domanda di adesione socio dalla sezione modulistica del sito o
+                  richiedila via email. </p>
+              </div>
+              <a href="#modulistica" class="mt-6 text-amber-300 hover:text-white font-bold text-sm inline-flex items-center gap-1">
+                Vai ai moduli <i class="fa-solid fa-arrow-down text-xs"></i> </a>
+            </div>
+            <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-8 relative flex flex-col justify-between hover:bg-white/15 transition-all">
+              <div class="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-amber-400 text-slate-900 font-extrabold flex items-center justify-center text-lg shadow-lg">2</div>
+              <div> <i class="fa-solid fa-hand-holding-dollar text-4xl text-emerald-400 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">Quota Associativa</h3>
+                <p class="text-slate-300 text-sm leading-relaxed"> Sostieni le
+                  attività con la quota annua simbolica. Avrai la copertura
+                  assicurativa per tutte le attività svolte sul campo. </p>
+              </div>
+              <span class="mt-6 text-slate-400 text-xs font-semibold">Tesseramento
+                annuale trasparente</span> </div>
+            <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-8 relative flex flex-col justify-between hover:bg-white/15 transition-all">
+              <div class="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-amber-400 text-slate-900 font-extrabold flex items-center justify-center text-lg shadow-lg">3</div>
+              <div> <i class="fa-solid fa-vest-patches text-4xl text-emerald-400 mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">Scendi in Campo</h3>
+                <p class="text-slate-300 text-sm leading-relaxed"> Ricevi la
+                  maglia o la pettorina dell'associazione e partecipa agli
+                  interventi coordinati di pulizia e manutenzione! </p>
+              </div>
+              <a href="#contatti" class="mt-6 text-amber-300 hover:text-white font-bold text-sm inline-flex items-center gap-1">
+                Contattaci subito <i class="fa-solid fa-chevron-right text-xs"></i>
+              </a> </div>
+          </div>
+          <!-- FREQUENTLY ASKED QUESTIONS (FAQ ACCORDION) -->
+          <div class="max-w-3xl mx-auto bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-8 backdrop-blur-sm">
+            <h3 class="text-xl font-bold text-amber-400 mb-6 text-center">Domande
+              Frequenti (FAQ)</h3>
+            <div class="space-y-4">
+              <div class="faq-item border-b border-white/10 pb-4"> <button onclick="toggleFaq(1)"
+                  class="w-full flex justify-between items-center text-left font-bold text-slate-100 hover:text-amber-300 transition-colors">
+                  <span>C'è un obbligo di orari o presenze per i volontari?</span>
+                  <i class="fa-solid fa-chevron-down text-xs text-amber-400 transform transition-transform"
+                    id="faq-icon-1"></i> </button>
+                <p class="text-slate-300 text-sm mt-2 hidden" id="faq-ans-1">
+                  Nessun obbligo! Ciascun volontario dona il tempo che desidera,
+                  partecipando alle attività in base alle proprie disponibilità
+                  personali e lavorative. </p>
+              </div>
+              <div class="faq-item border-b border-white/10 pb-4"> <button onclick="toggleFaq(2)"
+                  class="w-full flex justify-between items-center text-left font-bold text-slate-100 hover:text-amber-300 transition-colors">
+                  <span>Sono coperto da assicurazione durante le attività?</span>
+                  <i class="fa-solid fa-chevron-down text-xs text-amber-400 transform transition-transform"
+                    id="faq-icon-2"></i> </button>
+                <p class="text-slate-300 text-sm mt-2 hidden" id="faq-ans-2">
+                  Sì. In quanto ODV iscritta al RUNTS, tutti i soci regolarmente
+                  tesserati beneficeranno della copertura assicurativa contro
+                  infortuni e responsabilità civile prescritta dalla legge per
+                  il Terzo Settore. </p>
+              </div>
+              <div class="faq-item"> <button onclick="toggleFaq(3)" class="w-full flex justify-between items-center text-left font-bold text-slate-100 hover:text-amber-300 transition-colors">
+                  <span>Posso sostenere l'associazione anche senza partecipare
+                    ai lavori fisici?</span> <i class="fa-solid fa-chevron-down text-xs text-amber-400 transform transition-transform"
+                    id="faq-icon-3"></i> </button>
+                <p class="text-slate-300 text-sm mt-2 hidden" id="faq-ans-3">
+                  Assolutamente sì. Puoi tesserarti come socio sostenitore,
+                  collaborare nell'organizzazione amministrativa e nella
+                  comunicazione social, oppure donare materiale da lavoro. </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION 6: MODULISTICA & AREA DOWNLOAD -->
+      <section id="modulistica" class="py-20 bg-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-xs font-bold uppercase tracking-widest text-brand-green mb-2">Trasparenza
+              &amp; Documenti</h2>
+            <p class="text-3xl sm:text-4xl font-extrabold text-slate-900">Area
+              Download Modulistica</p>
+            <p class="text-slate-600 mt-2">Consulta e scarica la documentazione
+              ufficiale dell'Associazione.</p>
+            <div class="w-20 h-1.5 bg-brand-green mx-auto mt-4 rounded-full"></div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Document Card 1: Modulo Socio PDF Allegato -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+              <div>
+                <div class="w-12 h-12 rounded-xl bg-red-100 text-red-600 flex items-center justify-center text-xl font-bold mb-4">
+                  <i class="fa-solid fa-file-pdf"></i> </div>
+                <h3 class="font-bold text-slate-900 text-lg mb-2">Modulo
+                  Adesione Socio</h3>
+                <p class="text-slate-500 text-xs mb-4">Scheda di iscrizione
+                  ufficiale da compilare e firmare per la richiesta di
+                  ammissione all'ODV.</p>
+              </div>
+              <a href="Modulo_iscrizione.pdf" download="Modulo_iscrizione.pdf"
+                class="w-full bg-slate-100 hover:bg-brand-green hover:text-white text-slate-700 font-bold py-2.5 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
+                <i class="fa-solid fa-download"></i> Scarica PDF </a> </div>
+            <!-- Document Card 2: Statuto PDF Allegato -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+              <div>
+                <div class="w-12 h-12 rounded-xl bg-red-100 text-red-600 flex items-center justify-center text-xl font-bold mb-4">
+                  <i class="fa-solid fa-file-pdf"></i> </div>
+                <h3 class="font-bold text-slate-900 text-lg mb-2">Statuto
+                  dell'Associazione</h3>
+                <p class="text-slate-500 text-xs mb-4">Testo dello Statuto
+                  sociale registrato ed in vigore ai sensi del Codice del Terzo
+                  Settore.</p>
+              </div>
+              <a href="Statuto.pdf" download="Statuto.pdf"
+                class="w-full bg-slate-100 hover:bg-brand-green hover:text-white text-slate-700 font-bold py-2.5 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
+                <i class="fa-solid fa-download"></i> Scarica PDF </a> </div>
+            <!-- Document Card 3 -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+              <div>
+                <div class="w-12 h-12 rounded-xl bg-red-100 text-red-600 flex items-center justify-center text-xl font-bold mb-4">
+                  <i class="fa-solid fa-file-pdf"></i> </div>
+                <h3 class="font-bold text-slate-900 text-lg mb-2">Atto
+                  Costitutivo</h3>
+                <p class="text-slate-500 text-xs mb-4">Atto costitutivo
+                  originario depositato dell'Organizzazione di Volontariato.</p>
+              </div>
+              <button onclick="downloadDocument('Atto_Costitutivo_ODV.pdf')" class="w-full bg-slate-100 hover:bg-brand-green hover:text-white text-slate-700 font-bold py-2.5 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
+                <i class="fa-solid fa-download"></i> Scarica PDF </button> </div>
+            <!-- Document Card 4 -->
+            <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+              <div>
+                <div class="w-12 h-12 rounded-xl bg-blue-100 text-brand-blue flex items-center justify-center text-xl font-bold mb-4">
+                  <i class="fa-solid fa-shield-halved"></i> </div>
+                <h3 class="font-bold text-slate-900 text-lg mb-2">Informativa
+                  Privacy GDPR</h3>
+                <p class="text-slate-500 text-xs mb-4">Informativa sul
+                  trattamento dei dati personali dei soci ed utenti
+                  dell'associazione.</p>
+              </div>
+              <button onclick="downloadDocument('Informativa_Privacy_GDPR_ODV.pdf')"
+                class="w-full bg-slate-100 hover:bg-brand-green hover:text-white text-slate-700 font-bold py-2.5 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
+                <i class="fa-solid fa-download"></i> Scarica PDF </button> </div>
+          </div>
+        </div>
+      </section>
+      <!-- SECTION 7: CONTATTI & MAPPA -->
+      <section id="contatti" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-xs font-bold uppercase tracking-widest text-brand-green mb-2">Entra
+              in Contatto</h2>
+            <p class="text-3xl sm:text-4xl font-extrabold text-slate-900">Scrivici
+              o Vieni a Trovarci</p>
+            <p class="text-slate-600 mt-2">Siamo a tua disposizione per
+              qualsiasi informazione o proposta di collaborazione.</p>
+            <div class="w-20 h-1.5 bg-brand-green mx-auto mt-4 rounded-full"></div>
+          </div>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- CONTACT FORM -->
+            <div class="bg-slate-50 border border-slate-200 rounded-3xl p-8 shadow-sm">
+              <h3 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+                <i class="fa-regular fa-paper-plane text-brand-green"></i> Invia
+                un Messaggio </h3>
+              <!-- Success Banner (Hidden by default) -->
+              <div id="contactSuccess" class="hidden mb-6 p-4 rounded-xl bg-emerald-100 border border-emerald-300 text-emerald-800 text-sm font-semibold flex items-center gap-3">
+                <i class="fa-solid fa-circle-check text-xl text-emerald-600"></i>
+                <div>Grazie per averci scritto! Risponderemo alla tua richiesta
+                  il prima possibile.</div>
+              </div>
+              <form id="contactForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <div> <label for="fullName" class="block text-xs font-bold text-slate-700 uppercase mb-1">Nome
+                    e Cognome *</label> <input id="fullName" required="" placeholder="Mario Rossi"
+                    class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-transparent text-sm transition-all"
+                    type="text"> </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div> <label for="emailAddr" class="block text-xs font-bold text-slate-700 uppercase mb-1">Email
+                      *</label> <input id="emailAddr" required="" placeholder="mario@esempio.it"
+                      class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-transparent text-sm transition-all"
+                      type="email"> </div>
+                  <div> <label for="phoneNum" class="block text-xs font-bold text-slate-700 uppercase mb-1">Telefono</label>
+                    <input id="phoneNum" placeholder="+39 333 1234567" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-transparent text-sm transition-all"
+                      type="tel"> </div>
+                </div>
+                <div> <label for="subject" class="block text-xs font-bold text-slate-700 uppercase mb-1">Oggetto
+                    *</label>
+                  <select id="subject" required="" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-transparent text-sm transition-all bg-white">
+                    <option value="">Seleziona un argomento...</option>
+                    <option value="volontariato">Informazioni per diventare
+                      Volontario</option>
+                    <option value="segnalazione">Segnalazione area verde /
+                      arredo urbano</option>
+                    <option value="collaborazione">Proposta di collaborazione /
+                      evento</option>
+                    <option value="altro">Altra richiesta</option>
+                  </select>
+                </div>
+                <div> <label for="message" class="block text-xs font-bold text-slate-700 uppercase mb-1">Messaggio
+                    *</label> <textarea id="message" rows="4" required="" placeholder="Scrivi qui il tuo messaggio..."
+                    class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-transparent text-sm transition-all"></textarea>
+                </div>
+                <div class="flex items-start gap-2"> <input id="privacyConsent"
+                    required="" class="mt-1 rounded text-brand-green focus:ring-brand-green"
+                    type="checkbox"> <label for="privacyConsent" class="text-xs text-slate-500">
+                    Acconsento al trattamento dei dati personali ai sensi della
+                    legge Privacy GDPR per la gestione della richiesta. </label>
+                </div>
+                <button type="submit" class="w-full bg-brand-green hover:bg-brand-darkgreen text-white font-bold py-3.5 rounded-xl shadow-md transition-all duration-300 flex items-center justify-center gap-2">
+                  <i class="fa-solid fa-paper-plane"></i> Invia Messaggio </button>
+              </form>
+            </div>
+            <!-- DIRECT CONTACT DETAILS & MAP -->
+            <div class="space-y-8 flex flex-col justify-between">
+              <div class="space-y-6">
+                <div class="flex items-start gap-4">
+                  <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-brand-green flex items-center justify-center text-xl flex-shrink-0">
+                    <i class="fa-solid fa-location-dot"></i> </div>
+                  <div>
+                    <h4 class="font-bold text-slate-900 text-base">Sede
+                      Operativa e Contatti</h4>
+                    <p class="text-slate-600 text-sm">Via Dante, 16039 Sestri
+                      Levante (GE), Liguria</p>
+                    <p class="text-xs text-slate-400 mt-1">Sede Legale: Via
+                      Alessandro Manzoni 5, 16039 Sestri Levante (GE)</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="w-12 h-12 rounded-2xl bg-blue-100 text-brand-blue flex items-center justify-center text-xl flex-shrink-0">
+                    <i class="fa-solid fa-envelope"></i> </div>
+                  <div>
+                    <h4 class="font-bold text-slate-900 text-base">Email
+                      Ufficiale</h4>
+                    <a href="mailto:insiemepersestrilevante@gmail.com" class="text-brand-blue hover:underline text-sm font-semibold">
+                      insiemepersestrilevante@gmail.com </a> </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl flex-shrink-0">
+                    <i class="fa-brands fa-whatsapp"></i> </div>
+                  <div>
+                    <h4 class="font-bold text-slate-900 text-base">WhatsApp
+                      Diretto</h4>
+                    <a href="https://wa.me/?text=Ciao%21%20Desidero%20informazioni"
+                      target="_blank" rel="noopener noreferrer" class="text-emerald-600 hover:underline text-sm font-semibold">
+                      Invia messaggio immediato su WhatsApp </a> </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-xl flex-shrink-0">
+                    <i class="fa-solid fa-share-nodes"></i> </div>
+                  <div>
+                    <h4 class="font-bold text-slate-900 text-base">Social Media</h4>
+                    <div class="flex gap-4 mt-2"> <a href="https://www.facebook.com/InsiemeperSestriLevanteODV/"
+                        target="_blank" rel="noopener noreferrer" class="bg-blue-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-2 hover:bg-blue-700 transition-colors">
+                        <i class="fa-brands fa-facebook"></i> Facebook </a> <a
+                        href="https://www.instagram.com/insiemepersestrilevante"
+                        target="_blank" rel="noopener noreferrer" class="bg-pink-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-2 hover:bg-pink-700 transition-colors">
+                        <i class="fa-brands fa-instagram"></i> Instagram </a> </div>
+                  </div>
+                </div>
+              </div>
+              <!-- EMBEDDED MAP OF SESTRI LEVANTE -->
+              <div class="rounded-2xl overflow-hidden border border-slate-200 shadow-md h-64 relative bg-slate-100">
+                <iframe title="Mappa Sestri Levante" marginheight="0" marginwidth="0"
+                  src="https://maps.google.com/maps?q=Via%20Dante%20Sestri%20Levante&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=&amp;output=embed"
+                  frameborder="0" height="100%" scrolling="no" width="100%"> </iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 pb-8 border-b border-slate-800">
+          <!-- Col 1: Logo and motto -->
+          <div>
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-8 h-8 rounded-full bg-brand-green flex items-center justify-center text-white font-bold text-xs">
+                ODV </div>
+              <span class="text-white font-extrabold text-lg">Insieme per Sestri
+                Levante</span> </div>
+            <p class="text-xs text-slate-400 leading-relaxed italic">
+              "Prendiamoci cura della nostra città. INSIEME possiamo essere
+              parte attiva per rendere più bella Sestri Levante." </p>
+          </div>
+          <!-- Col 2: Navigation links -->
+          <div class="flex justify-start md:justify-center">
+            <div class="space-y-2 text-xs">
+              <div class="font-bold text-white uppercase tracking-wider mb-2">Navigazione
+                Rapida</div>
+              <div class="grid grid-cols-2 gap-x-6 gap-y-1"> <a href="#home" class="hover:text-amber-400 transition-colors">Home</a>
+                <a href="#chi-siamo" class="hover:text-amber-400 transition-colors">Chi
+                  Siamo</a> <a href="#attivita" class="hover:text-amber-400 transition-colors">Attività</a>
+                <a href="#eventi" class="hover:text-amber-400 transition-colors">Eventi</a>
+                <a href="#iscriviti" class="hover:text-amber-400 transition-colors">Iscriviti</a>
+                <a href="#modulistica" class="hover:text-amber-400 transition-colors">Modulistica</a>
+                <a href="#contatti" class="hover:text-amber-400 transition-colors">Contatti</a>
+              </div>
+            </div>
+          </div>
+          <!-- Col 3: Institutional legal notice -->
+          <div class="text-xs space-y-1">
+            <div class="font-bold text-white uppercase tracking-wider mb-2">Note
+              Legali</div>
+            <p><strong>Insieme per Sestri Levante ODV</strong></p>
+            <p>Organizzazione di Volontariato - Iscritta al RUNTS</p>
+            <p>Atto n. 822-2025 del 06/02/2025 - Prot. 2025-68388</p>
+            <p>Codice Fiscale: 90088290102</p>
+            <p>Sede Legale: Via Alessandro Manzoni 5, 16039 Sestri Levante (GE)</p>
+          </div>
+        </div>
+        <div class="flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-4">
+          <div> © <span id="currentYear"></span> Insieme per Sestri Levante
+            ODV. Tutti i diritti riservati. </div>
+          <div class="flex space-x-4"> <a href="#modulistica" class="hover:underline">Privacy
+              Policy</a> <span>•</span> <a href="#modulistica" class="hover:underline">Statuto
+              Societario</a> </div>
+        </div>
+      </div>
+    </footer>
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        // Set dynamic current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle logic
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = document.getElementById('menuIcon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-xmark');
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            }
+        });
+
+        // Close mobile menu on clicking any navigation link
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('fa-xmark');
+                menuIcon.classList.add('fa-bars');
+            });
+        });
+
+        // Filter Activity Cards
+        function filterActivities(category) {
+            const cards = document.querySelectorAll('.activity-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            // Update Active Button Style
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-brand-green', 'text-white', 'active');
+                btn.classList.add('bg-white', 'text-slate-700');
+            });
+            event.currentTarget.classList.remove('bg-white', 'text-slate-700');
+            event.currentTarget.classList.add('bg-brand-green', 'text-white', 'active');
+
+            // Show / Hide cards with simple animation
+            cards.forEach(card => {
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Toggle FAQ Accordions
+        function toggleFaq(index) {
+            const answer = document.getElementById(`faq-ans-${index}`);
+            const icon = document.getElementById(`faq-icon-${index}`);
+
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                answer.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Form Submit Simulation
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const successBox = document.getElementById('contactSuccess');
+            const form = document.getElementById('contactForm');
+
+            // Show success alert inside form
+            successBox.classList.remove('hidden');
+            form.reset();
+
+            // Scroll smoothly to success box
+            successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            // Auto hide after 6 seconds
+            setTimeout(() => {
+                successBox.classList.add('hidden');
+            }, 6000);
+        }
+
+        // Simulated Download Notification Function
+        function downloadDocument(docName) {
+            // Create a temporary link element to simulate downloading a document
+            const dummyContent = `Documento Ufficiale: ${docName}\nInsieme per Sestri Levante ODV\nCodice Fiscale: 90088290102\nSede: Via Dante, Sestri Levante (GE)`;
+            const blob = new Blob([dummyContent], { type: 'application/pdf' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = docName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Active Navbar Link Highlight on Scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const scrollY = window.pageYOffset;
+
+            sections.forEach(current => {
+                const sectionHeight = current.offsetHeight;
+                const sectionTop = current.offsetTop - 100;
+                const sectionId = current.getAttribute('id');
+                const navLink = document.querySelector(`.nav-link[href*=${sectionId}]`);
+
+                if (navLink) {
+                    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                        navLink.classList.add('text-brand-green', 'font-bold');
+                    } else {
+                        navLink.classList.remove('text-brand-green', 'font-bold');
+                    }
+                }
+            });
+        });
+    </script>
+  </body>
+</html>
