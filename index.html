@@ -171,7 +171,7 @@
           <div class="absolute inset-0 hero-gradient"></div>
         </div>
         <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-          <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/20 backdrop-blur-md text-amber-300 font-semibold text-xs sm:text-sm uppercase tracking-wider mb-6 border border-white/20">
+          <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/25 backdrop-blur-md text-amber-300 font-semibold text-xs sm:text-sm uppercase tracking-wider mb-6 border border-white/20">
             <i class="fa-solid fa-heart text-red-400"></i> Volontariato Attivo a
             Sestri Levante </span>
           <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-6">
@@ -769,23 +769,26 @@
                 <div>Grazie per averci scritto! Risponderemo alla tua richiesta
                   il prima possibile.</div>
               </div>
-              <form id="contactForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+              <form id="contactForm" action="https://formsubmit.co/insiemepersestrilevante@gmail.com" method="POST" class="space-y-4">
+                <!-- Indirizzo email dell'associazione destinataria -->
+                <input type="hidden" name="_to" value="insiemepersestrilevante@gmail.com">
+                <input type="hidden" name="_subject" value="Nuovo messaggio dal sito web - Insieme per Sestri Levante ODV">
                 <div> <label for="fullName" class="block text-xs font-bold text-slate-700 uppercase mb-1">Nome
-                    e Cognome *</label> <input id="fullName" required="" placeholder="Mario Rossi"
+                    e Cognome *</label> <input id="fullName" name="name" required="" placeholder="Mario Rossi"
                     class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-transparent text-sm transition-all"
                     type="text"> </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div> <label for="emailAddr" class="block text-xs font-bold text-slate-700 uppercase mb-1">Email
-                      *</label> <input id="emailAddr" required="" placeholder="mario@esempio.it"
+                      *</label> <input id="emailAddr" name="email" required="" placeholder="mario@esempio.it"
                       class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-transparent text-sm transition-all"
                       type="email"> </div>
                   <div> <label for="phoneNum" class="block text-xs font-bold text-slate-700 uppercase mb-1">Telefono</label>
-                    <input id="phoneNum" placeholder="+39 333 1234567" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-transparent text-sm transition-all"
+                    <input id="phoneNum" name="phone" placeholder="+39 333 1234567" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-transparent text-sm transition-all"
                       type="tel"> </div>
                 </div>
                 <div> <label for="subject" class="block text-xs font-bold text-slate-700 uppercase mb-1">Oggetto
                     *</label>
-                  <select id="subject" required="" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-transparent text-sm transition-all bg-white">
+                  <select id="subject" name="subject" required="" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-transparent text-sm transition-all bg-white">
                     <option value="">Seleziona un argomento...</option>
                     <option value="volontariato">Informazioni per diventare
                       Volontario</option>
@@ -797,7 +800,7 @@
                   </select>
                 </div>
                 <div> <label for="message" class="block text-xs font-bold text-slate-700 uppercase mb-1">Messaggio
-                    *</label> <textarea id="message" rows="4" required="" placeholder="Scrivi qui il tuo messaggio..."
+                    *</label> <textarea id="message" name="message" rows="4" required="" placeholder="Scrivi qui il tuo messaggio..."
                     class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-transparent text-sm transition-all"></textarea>
                 </div>
                 <div class="flex items-start gap-2"> <input id="privacyConsent"
@@ -986,25 +989,6 @@
                 answer.classList.add('hidden');
                 icon.style.transform = 'rotate(0deg)';
             }
-        }
-
-        // Form Submit Simulation
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            const successBox = document.getElementById('contactSuccess');
-            const form = document.getElementById('contactForm');
-
-            // Show success alert inside form
-            successBox.classList.remove('hidden');
-            form.reset();
-
-            // Scroll smoothly to success box
-            successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-            // Auto hide after 6 seconds
-            setTimeout(() => {
-                successBox.classList.add('hidden');
-            }, 6000);
         }
 
         // Simulated Download Notification Function
