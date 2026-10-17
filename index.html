@@ -43,7 +43,7 @@
             -webkit-backdrop-filter: blur(12px);
         }
         .hero-gradient {
-            background: linear-gradient(135deg, rgba(27, 94, 32, 0.85) 0%, rgba(1, 87, 155, 0.75) 100%);
+            background: linear-gradient(135deg, rgba(27, 94, 32, 0.45) 0%, rgba(1, 87, 155, 0.35) 100%);
         }
         .tab-btn.active {
             border-bottom-color: #2e7d32;
@@ -164,21 +164,24 @@
     <main class="flex-grow">
       <!-- SECTION 1: HERO & HOME -->
       <section id="home" class="relative bg-slate-900 text-white min-h-[85vh] flex items-center justify-center overflow-hidden">
-        <!-- Background Image with Overlay -->
-        <div class="absolute inset-0 z-0"> <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&amp;fit=crop&amp;w=2000&amp;q=80"
-            alt="Vista panoramica Sestri Levante Baia del Silenzio" class="w-full h-full object-cover object-center scale-105 transform animate-pulse duration-[10000ms]"
-            onerror="this.onerror=null; this.src='https://placehold.co/1920x1080/0288d1/ffffff?text=Sestri+Levante+Vista+Mare'">
+        <!-- Background Image with Lightened Transparent Gradient Overlay -->
+        <div class="absolute inset-0 z-0">
+          <img src="Sfondo.jpg" alt="Murales dell'albero del volontariato" class="w-full h-full object-cover object-center">
           <div class="absolute inset-0 hero-gradient"></div>
         </div>
         <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-          <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/25 backdrop-blur-md text-amber-300 font-semibold text-xs sm:text-sm uppercase tracking-wider mb-6 border border-white/20">
-            <i class="fa-solid fa-heart text-red-400"></i> Volontariato Attivo a
-            Sestri Levante </span>
-          <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-6">
-            Prendiamoci cura della nostra città. </h1>
-          <p class="text-lg sm:text-2xl text-slate-100 font-light max-w-3xl mx-auto mb-10 leading-relaxed italic">
-            "INSIEME possiamo essere parte attiva per rendere più bella Sestri
-            Levante." </p>
+          <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-900/50 backdrop-blur-md text-amber-300 font-semibold text-xs sm:text-sm uppercase tracking-wider mb-4 border border-emerald-700/40 shadow-lg">
+            <i class="fa-solid fa-heart text-red-400"></i> Volontariato Attivo a Sestri Levante
+          </span>
+          <p class="text-xs sm:text-sm md:text-base text-slate-100 font-medium max-w-3xl mx-auto mb-6 italic leading-relaxed bg-emerald-950/50 p-3 rounded-xl backdrop-blur-sm border border-emerald-800/30 shadow-md">
+            "Il volontariato è sempre in uscita, il cuore aperto, la mano tesa, le gambe pronte ad andare, uscire per incontrare, uscire per dare....."
+          </p>
+          <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-6 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
+            Prendiamoci cura della nostra città.
+          </h1>
+          <p class="text-lg sm:text-2xl text-slate-100 font-light max-w-3xl mx-auto mb-10 leading-relaxed italic drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
+            "INSIEME possiamo essere parte attiva per rendere più bella Sestri Levante."
+          </p>
           <!-- HERO ACTION BUTTONS -->
           <div class="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
             <a href="#iscriviti" class="w-full sm:w-auto bg-brand-green hover:bg-emerald-600 text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-3 transform hover:-translate-y-1">
@@ -186,27 +189,27 @@
             <a href="https://wa.me/?text=Ciao%21%20Vorrei%20avere%20maggiori%20informazioni%20sulle%20attivit%C3%A0%20di%20Insieme%20per%20Sestri%20Levante%20ODV"
               target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-3 transform hover:-translate-y-1">
               <i class="fa-brands fa-whatsapp text-xl"></i> Scrivici su WhatsApp
-            </a> <a href="#chi-siamo" class="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white border border-white/30 font-semibold px-6 py-4 rounded-xl backdrop-blur-sm transition-all duration-300 flex items-center justify-center gap-2">
+            </a> <a href="#chi-siamo" class="w-full sm:w-auto bg-emerald-900/50 hover:bg-emerald-900/75 text-white border border-emerald-700/50 font-semibold px-6 py-4 rounded-xl backdrop-blur-sm transition-all duration-300 flex items-center justify-center gap-2 shadow-lg">
               Scopri di più <i class="fa-solid fa-arrow-down text-xs"></i> </a>
           </div>
           <!-- QUICK STATS BAR -->
-          <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-8 border-t border-white/20 text-left sm:text-center">
-            <div class="p-3">
+          <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-8 border-t border-white/20 text-left sm:text-center bg-emerald-950/50 p-4 rounded-2xl backdrop-blur-md shadow-xl border border-emerald-800/30">
+            <div class="p-2">
               <div class="text-2xl sm:text-3xl font-extrabold text-amber-300">100%</div>
               <div class="text-xs sm:text-sm text-slate-200">Volontariato
                 No-Profit</div>
             </div>
-            <div class="p-3">
+            <div class="p-2">
               <div class="text-2xl sm:text-3xl font-extrabold text-amber-300">Decoro</div>
               <div class="text-xs sm:text-sm text-slate-200">Verde &amp; Arredi
                 Urbani</div>
             </div>
-            <div class="p-3">
+            <div class="p-2">
               <div class="text-2xl sm:text-3xl font-extrabold text-amber-300">Eventi</div>
               <div class="text-xs sm:text-sm text-slate-200">Supporto alla
                 Comunità</div>
             </div>
-            <div class="p-3">
+            <div class="p-2">
               <div class="text-2xl sm:text-3xl font-extrabold text-amber-300">RUNTS</div>
               <div class="text-xs sm:text-sm text-slate-200">Trasparenza
                 Garantita</div>
@@ -300,15 +303,43 @@
                 </div>
               </div>
             </div>
-            <!-- RIGHT COLUMN: IMAGE & TRANSPARENCY CARD -->
+            <!-- RIGHT COLUMN: IMAGE CAROUSEL & TRANSPARENCY CARD -->
             <div class="space-y-6">
-              <div class="relative rounded-2xl overflow-hidden shadow-2xl group">
-                <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&amp;fit=crop&amp;w=1000&amp;q=80"
-                  alt="Volontari al lavoro per il decoro urbano" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500"
-                  onerror="this.onerror=null; this.src='https://placehold.co/800x600/2e7d32/ffffff?text=Volontari+Insieme+per+Sestri'">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-6">
-                  <span class="text-white font-medium text-sm"><i class="fa-solid fa-camera mr-2"></i>I
-                    nostri volontari durante un intervento di riqualificazione</span>
+              <div class="relative rounded-2xl overflow-hidden shadow-2xl group h-96 sm:h-[420px] bg-slate-900 flex items-center justify-center">
+                <!-- Slides con Dissolvenza -->
+                <div class="relative w-full h-full">
+                  <!-- Slide 1 -->
+                  <div class="volunteer-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100 pointer-events-auto flex items-center justify-center">
+                    <img src="Volontari1.jpg" alt="Volontari al lavoro per il decoro urbano" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/800x600/2e7d32/ffffff?text=Volontari+Insieme+per+Sestri'">
+                  </div>
+                  <!-- Slide 2 -->
+                  <div class="volunteer-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none flex items-center justify-center">
+                    <img src="Volontari2.jpg" alt="Volontari in azione" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/800x600/2e7d32/ffffff?text=Volontari+Insieme+per+Sestri'">
+                  </div>
+                  <!-- Slide 3 -->
+                  <div class="volunteer-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none flex items-center justify-center">
+                    <img src="Volontari3.jpg" alt="Intervento di riqualificazione verde" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/800x600/2e7d32/ffffff?text=Volontari+Insieme+per+Sestri'">
+                  </div>
+                </div>
+
+                <!-- Overlay del testo e gradiente -->
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-6 z-10 pointer-events-none">
+                  <span class="text-white font-medium text-sm"><i class="fa-solid fa-camera mr-2"></i>I nostri volontari durante un intervento di riqualificazione</span>
+                </div>
+
+                <!-- Pulsanti Navigazione Freccia -->
+                <button onclick="changeVolunteerSlide(-1)" aria-label="Foto precedente" class="absolute left-3 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/70 text-white w-9 h-9 rounded-full flex items-center justify-center transition-colors">
+                  <i class="fa-solid fa-chevron-left text-sm"></i>
+                </button>
+                <button onclick="changeVolunteerSlide(1)" aria-label="Foto successiva" class="absolute right-3 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/70 text-white w-9 h-9 rounded-full flex items-center justify-center transition-colors">
+                  <i class="fa-solid fa-chevron-right text-sm"></i>
+                </button>
+
+                <!-- Pallini Indicatori -->
+                <div class="absolute bottom-2 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+                  <button onclick="setVolunteerSlide(0)" class="volunteer-dot w-2.5 h-2.5 rounded-full bg-white transition-all" aria-label="Slide 1"></button>
+                  <button onclick="setVolunteerSlide(1)" class="volunteer-dot w-2.5 h-2.5 rounded-full bg-white/50 transition-all" aria-label="Slide 2"></button>
+                  <button onclick="setVolunteerSlide(2)" class="volunteer-dot w-2.5 h-2.5 rounded-full bg-white/50 transition-all" aria-label="Slide 3"></button>
                 </div>
               </div>
               <!-- STATUTORY DATA BOX -->
@@ -358,13 +389,32 @@
               di Quartiere</button> </div>
           <!-- CARDS GRID -->
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Activity Card 1 -->
+            <!-- Activity Card 1 (Andersen Run con Carosello Run1 / Run2) -->
             <div class="activity-card eventi bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col">
-              <div class="relative h-48 overflow-hidden"> <img src="https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
-                  alt="Supporto Andersen Run" class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
-                  onerror="this.onerror=null; this.src='https://placehold.co/600x400/0288d1/ffffff?text=Andersen+Run'">
-                <span class="absolute top-3 left-3 bg-brand-blue text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Sport
-                  &amp; Eventi</span> </div>
+              <div class="relative h-64 bg-slate-900 flex items-center justify-center overflow-hidden">
+                <!-- Contenitore delle Slide Andersen Run -->
+                <div class="relative w-full h-full">
+                  <div class="run-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100 pointer-events-auto flex items-center justify-center">
+                    <img src="Run1.jpg" alt="Supporto Andersen Run 1" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0288d1/ffffff?text=Andersen+Run+1'">
+                  </div>
+                  <div class="run-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none flex items-center justify-center">
+                    <img src="Run2.JPG" alt="Supporto Andersen Run 2" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0288d1/ffffff?text=Andersen+Run+2'">
+                  </div>
+                </div>
+                <span class="absolute top-3 left-3 z-20 bg-brand-blue text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Sport &amp; Eventi</span>
+                
+                <!-- Frecce e Pallini per la card Andersen Run -->
+                <button onclick="changeRunSlide(-1)" aria-label="Foto precedente" class="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/70 text-white w-7 h-7 rounded-full flex items-center justify-center transition-colors">
+                  <i class="fa-solid fa-chevron-left text-xs"></i>
+                </button>
+                <button onclick="changeRunSlide(1)" aria-label="Foto successiva" class="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/40 hover:bg-black/70 text-white w-7 h-7 rounded-full flex items-center justify-center transition-colors">
+                  <i class="fa-solid fa-chevron-right text-xs"></i>
+                </button>
+                <div class="absolute bottom-2 left-1/2 -translate-x-1/2 z-20 flex gap-1.5">
+                  <button onclick="setRunSlide(0)" class="run-dot w-2 h-2 rounded-full bg-white transition-all" aria-label="Slide 1"></button>
+                  <button onclick="setRunSlide(1)" class="run-dot w-2 h-2 rounded-full bg-white/50 transition-all" aria-label="Slide 2"></button>
+                </div>
+              </div>
               <div class="p-6 flex-grow flex flex-col justify-between">
                 <div>
                   <h3 class="text-xl font-bold text-slate-900 mb-2">Supporto
@@ -383,8 +433,8 @@
             </div>
             <!-- Activity Card 2 -->
             <div class="activity-card verde bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col">
-              <div class="relative h-48 overflow-hidden"> <img src="https://images.unsplash.com/photo-1592417817098-8f3d6eb12765?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
-                  alt="Cura del Verde Pubblico" class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
+              <div class="relative h-64 bg-slate-900 flex items-center justify-center overflow-hidden"> <img src="https://images.unsplash.com/photo-1592417817098-8f3d6eb12765?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+                  alt="Cura del Verde Pubblico" class="w-full h-full object-contain"
                   onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?auto=format&amp;fit=crop&amp;w=800&amp;q=80'">
                 <span class="absolute top-3 left-3 bg-brand-green text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Verde
                   &amp; Decoro</span> </div>
@@ -405,8 +455,8 @@
             </div>
             <!-- Activity Card 3 -->
             <div class="activity-card quartiere bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col">
-              <div class="relative h-48 overflow-hidden"> <img src="https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
-                  alt="Pulizie di Quartiere" class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
+              <div class="relative h-64 bg-slate-900 flex items-center justify-center overflow-hidden"> <img src="https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+                  alt="Pulizie di Quartiere" class="w-full h-full object-contain"
                   onerror="this.onerror=null; this.src='https://placehold.co/600x400/f59e0b/ffffff?text=Operazione+Salva+il+Mondo'">
                 <span class="absolute top-3 left-3 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Pulizie
                   di Quartiere</span> </div>
@@ -428,8 +478,8 @@
             </div>
             <!-- Activity Card 4 -->
             <div class="activity-card verde bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col">
-              <div class="relative h-48 overflow-hidden"> <img src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
-                  alt="Restauro Panchine" class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
+              <div class="relative h-64 bg-slate-900 flex items-center justify-center overflow-hidden"> <img src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+                  alt="Restauro Panchine" class="w-full h-full object-contain"
                   onerror="this.onerror=null; this.src='https://placehold.co/600x400/1b5e20/ffffff?text=Ripristino+Arredi'">
                 <span class="absolute top-3 left-3 bg-brand-green text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Verde
                   &amp; Decoro</span> </div>
@@ -450,8 +500,8 @@
             </div>
             <!-- Activity Card 5 -->
             <div class="activity-card eventi bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col">
-              <div class="relative h-48 overflow-hidden"> <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
-                  alt="Convegni e Incontri" class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
+              <div class="relative h-64 bg-slate-900 flex items-center justify-center overflow-hidden"> <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+                  alt="Convegni e Incontri" class="w-full h-full object-contain"
                   onerror="this.onerror=null; this.src='https://placehold.co/600x400/01579b/ffffff?text=Biodiversit%C3%A0+e+Ambiente'">
                 <span class="absolute top-3 left-3 bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Incontri
                   &amp; Cultura</span> </div>
@@ -473,8 +523,8 @@
             </div>
             <!-- Activity Card 6 -->
             <div class="activity-card quartiere bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col">
-              <div class="relative h-48 overflow-hidden"> <img src="https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
-                  alt="Manutenzione Frazioni" class="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
+              <div class="relative h-64 bg-slate-900 flex items-center justify-center overflow-hidden"> <img src="https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+                  alt="Manutenzione Frazioni" class="w-full h-full object-contain"
                   onerror="this.onerror=null; this.src='https://placehold.co/600x400/8e24aa/ffffff?text=Cura+Frazioni'">
                 <span class="absolute top-3 left-3 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Pulizie
                   di Quartiere</span> </div>
@@ -618,12 +668,13 @@
               <div class="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-amber-400 text-slate-900 font-extrabold flex items-center justify-center text-lg shadow-lg">2</div>
               <div> <i class="fa-solid fa-hand-holding-dollar text-4xl text-emerald-400 mb-4"></i>
                 <h3 class="text-xl font-bold mb-2">Quota Associativa</h3>
-                <p class="text-slate-300 text-sm leading-relaxed"> Sostieni le
-                  attività con la quota annua simbolica. Avrai la copertura
-                  assicurativa per tutte le attività svolte sul campo. </p>
+                <p class="text-slate-300 text-sm leading-relaxed mb-3"> Sostieni le
+                  attività con la quota annua simbolica tramite bonifico bancario intestato a <strong>Associazione Insieme per Sestri Levante ODV</strong>: </p>
+                <div class="bg-black/40 p-3.5 rounded-xl text-sm sm:text-base font-mono font-bold text-amber-300 select-all border border-amber-400/40 text-center tracking-wider">
+                  IT24S0623032231000035664162
+                </div>
               </div>
-              <span class="mt-6 text-slate-400 text-xs font-semibold">Tesseramento
-                annuale trasparente</span> </div>
+              <span class="mt-4 text-slate-400 text-xs font-semibold">Include copertura assicurativa</span> </div>
             <div class="bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-8 relative flex flex-col justify-between hover:bg-white/15 transition-all">
               <div class="absolute -top-4 -left-4 w-10 h-10 rounded-full bg-amber-400 text-slate-900 font-extrabold flex items-center justify-center text-lg shadow-lg">3</div>
               <div> <i class="fa-solid fa-vest-patches text-4xl text-emerald-400 mb-4"></i>
@@ -812,6 +863,17 @@
                       Levante (GE), Liguria</p>
                     <p class="text-xs text-slate-400 mt-1">Sede Legale: Via
                       Alessandro Manzoni 5, 16039 Sestri Levante (GE)</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-4">
+                  <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-xl flex-shrink-0">
+                    <i class="fa-solid fa-building-columns"></i> </div>
+                  <div>
+                    <h4 class="font-bold text-slate-900 text-base">Donazioni e Sostegno (IBAN)</h4>
+                    <p class="text-slate-600 text-sm">Per erogazioni liberali e donazioni a favore dell'associazione:</p>
+                    <div class="text-sm sm:text-base font-mono font-bold text-brand-green mt-1.5 select-all bg-emerald-50 p-3 rounded-lg border border-emerald-200 text-center tracking-wider">
+                      IT24S0623032231000035664162
+                    </div>
                   </div>
                 </div>
                 <div class="flex items-start gap-4">
@@ -1025,7 +1087,7 @@
                 method: 'POST',
                 body: formData,
                 headers: {
-                    'Accept': 'application/json'
+                    'Accept': 'json'
                 }
             }).then(response => {
                 if (response.ok) {
@@ -1044,6 +1106,122 @@
             }).catch(error => {
                 alert('Errore di connessione. Controlla la tua rete e riprova.');
             });
+        });
+
+        // --- CAROSELLO CON DISSOLVENZA IMMAGINI VOLONTARI ---
+        let currentVolunteerSlide = 0;
+        const volunteerSlides = document.querySelectorAll('.volunteer-slide');
+        const volunteerDots = document.querySelectorAll('.volunteer-dot');
+        let volunteerSlideTimer;
+
+        function showVolunteerSlide(index) {
+            if (!volunteerSlides.length) return;
+
+            if (index >= volunteerSlides.length) currentVolunteerSlide = 0;
+            else if (index < 0) currentVolunteerSlide = volunteerSlides.length - 1;
+            else currentVolunteerSlide = index;
+
+            volunteerSlides.forEach((slide, i) => {
+                if (i === currentVolunteerSlide) {
+                    slide.classList.remove('opacity-0', 'pointer-events-none');
+                    slide.classList.add('opacity-100', 'pointer-events-auto');
+                } else {
+                    slide.classList.remove('opacity-100', 'pointer-events-auto');
+                    slide.classList.add('opacity-0', 'pointer-events-none');
+                }
+            });
+
+            volunteerDots.forEach((dot, i) => {
+                if (i === currentVolunteerSlide) {
+                    dot.classList.remove('bg-white/50');
+                    dot.classList.add('bg-white', 'w-4');
+                } else {
+                    dot.classList.remove('bg-white', 'w-4');
+                    dot.classList.add('bg-white/50');
+                }
+            });
+        }
+
+        function changeVolunteerSlide(direction) {
+            showVolunteerSlide(currentVolunteerSlide + direction);
+            resetVolunteerTimer();
+        }
+
+        function setVolunteerSlide(index) {
+            showVolunteerSlide(index);
+            resetVolunteerTimer();
+        }
+
+        function startVolunteerTimer() {
+            volunteerSlideTimer = setInterval(() => {
+                showVolunteerSlide(currentVolunteerSlide + 1);
+            }, 4000);
+        }
+
+        function resetVolunteerTimer() {
+            clearInterval(volunteerSlideTimer);
+            startVolunteerTimer();
+        }
+
+        // --- CAROSELLO CON DISSOLVENZA IMMAGINI RUN (ANDERSEN RUN) ---
+        let currentRunSlide = 0;
+        const runSlides = document.querySelectorAll('.run-slide');
+        const runDots = document.querySelectorAll('.run-dot');
+        let runSlideTimer;
+
+        function showRunSlide(index) {
+            if (!runSlides.length) return;
+
+            if (index >= runSlides.length) currentRunSlide = 0;
+            else if (index < 0) currentRunSlide = runSlides.length - 1;
+            else currentRunSlide = index;
+
+            runSlides.forEach((slide, i) => {
+                if (i === currentRunSlide) {
+                    slide.classList.remove('opacity-0', 'pointer-events-none');
+                    slide.classList.add('opacity-100', 'pointer-events-auto');
+                } else {
+                    slide.classList.remove('opacity-100', 'pointer-events-auto');
+                    slide.classList.add('opacity-0', 'pointer-events-none');
+                }
+            });
+
+            runDots.forEach((dot, i) => {
+                if (i === currentRunSlide) {
+                    dot.classList.remove('bg-white/50');
+                    dot.classList.add('bg-white', 'w-3.5');
+                } else {
+                    dot.classList.remove('bg-white', 'w-3.5');
+                    dot.classList.add('bg-white/50');
+                }
+            });
+        }
+
+        function changeRunSlide(direction) {
+            showRunSlide(currentRunSlide + direction);
+            resetRunTimer();
+        }
+
+        function setRunSlide(index) {
+            showRunSlide(index);
+            resetRunTimer();
+        }
+
+        function startRunTimer() {
+            runSlideTimer = setInterval(() => {
+                showRunSlide(currentRunSlide + 1);
+            }, 4000);
+        }
+
+        function resetRunTimer() {
+            clearInterval(runSlideTimer);
+            startRunTimer();
+        }
+
+        // Avvio automatico degli slider al caricamento
+        document.addEventListener('DOMContentLoaded', () => {
+            startVolunteerTimer();
+            startRunTimer();
         });
     </script>
   </body>
