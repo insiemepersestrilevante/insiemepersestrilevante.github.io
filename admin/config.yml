@@ -3,3 +3,17 @@ backend:
   repo: insiemepersestrilevante/insiemepersestrilevante.github.io
   branch: main
   base_url: https://decap-bridge.vercel.app
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "pagine"
+    label: "Pagine del sito"
+    files:
+      - file: "index.html"
+        label: "Home Page"
+        name: "home"
+        fields:
+          - { label: "Titolo", name: "title", widget: "string" }
+          - { label: "Contenuto", name: "body", widget: "markdown" }
