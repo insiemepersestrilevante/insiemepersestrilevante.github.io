@@ -1,0 +1,20 @@
+backend:
+  name: github
+  repo: insiemepersestrilevante/insiemepersestrilevante.github.io
+  branch: main
+
+media_folder: ""
+public_folder: ""
+
+collections:
+  - name: "eventi"
+    label: "Eventi e Iniziative"
+    folder: "content/eventi"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Titolo Evento", name: "title", widget: "string"}
+      - {label: "Data", name: "date", widget: "datetime"}
+      - {label: "Luogo", name: "location", widget: "string"}
+      - {label: "Locandina / Foto", name: "image", widget: "image", required: false}
+      - {label: "Descrizione", name: "body", widget: "markdown"}
