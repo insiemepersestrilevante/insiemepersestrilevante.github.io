@@ -2,8 +2,7 @@ backend:
   name: github
   repo: insiemepersestrilevante/insiemepersestrilevante.github.io
   branch: main
-  use_graphql: false
-  auth_type: pkce
+  auth_type: token
 
 media_folder: ""
 public_folder: ""
