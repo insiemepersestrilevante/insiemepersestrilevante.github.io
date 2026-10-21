@@ -1,11 +1,9 @@
 backend:
-  name: github
-  repo: insiemepersestrilevante/insiemepersestrilevante.github.io
+  name: git-gateway
   branch: main
-  auth_type: token
 
-media_folder: ""
-public_folder: ""
+media_folder: "immagini"
+public_folder: "/immagini"
 
 collections:
   - name: "eventi"
