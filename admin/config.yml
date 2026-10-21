@@ -2,6 +2,7 @@ backend:
   name: github
   repo: insiemepersestrilevante/insiemepersestrilevante.github.io
   branch: main
+  auth_type: implicit
 
 media_folder: ""
 public_folder: ""
