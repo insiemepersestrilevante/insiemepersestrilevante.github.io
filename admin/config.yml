@@ -2,9 +2,10 @@ backend:
   name: github
   repo: insiemepersestrilevante/insiemepersestrilevante.github.io
   branch: main
+  auth_type: implicit
 
-media_folder: ""
-public_folder: ""
+media_folder: "immagini"
+public_folder: "/immagini"
 
 collections:
   - name: "eventi"
