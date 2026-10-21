@@ -9,7 +9,33 @@
 <body>
   <script src="https://unpkg.com/@staticcms/app@^2.0.0/dist/static-cms-app.js"></script>
   <script>
-    window.CMS.init();
+    window.CMS.init({
+      config: {
+        backend: {
+          name: 'github',
+          repo: 'insiemepersestrilevante/insiemepersestrilevante.github.io',
+          branch: 'main',
+          auth_type: 'token'
+        },
+        media_folder: '',
+        public_folder: '',
+        collections: [
+          {
+            name: 'eventi',
+            label: 'Eventi e Iniziative',
+            folder: 'content/eventi',
+            create: true,
+            fields: [
+              { label: 'Titolo Evento', name: 'title', widget: 'string' },
+              { label: 'Data', name: 'date', widget: 'datetime' },
+              { label: 'Luogo', name: 'location', widget: 'string' },
+              { label: 'Locandina / Foto', name: 'image', widget: 'image', required: false },
+              { label: 'Descrizione', name: 'body', widget: 'markdown' }
+            ]
+          }
+        ]
+      }
+    });
   </script>
 </body>
 </html>
