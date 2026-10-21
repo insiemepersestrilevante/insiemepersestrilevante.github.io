@@ -2,3 +2,4 @@ backend:
   name: github
   repo: insiemepersestrilevante/insiemepersestrilevante.github.io
   branch: main
+  base_url: https://decap-bridge.vercel.app
