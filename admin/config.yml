@@ -1,18 +1,4 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: insiemepersestrilevante/insiemepersestrilevante.github.io
   branch: main
-
-media_folder: "immagini"
-public_folder: "/immagini"
-
-collections:
-  - name: "eventi"
-    label: "Eventi e Iniziative"
-    folder: "content/eventi"
-    create: true
-    fields:
-      - {label: "Titolo Evento", name: "title", widget: "string"}
-      - {label: "Data", name: "date", widget: "datetime"}
-      - {label: "Luogo", name: "location", widget: "string"}
-      - {label: "Locandina / Foto", name: "image", widget: "image", required: false}
-      - {label: "Descrizione", name: "body", widget: "markdown"}
