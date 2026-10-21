@@ -2,17 +2,15 @@ backend:
   name: github
   repo: insiemepersestrilevante/insiemepersestrilevante.github.io
   branch: main
-  auth_type: implicit
 
-media_folder: "immagini"
-public_folder: "/immagini"
+media_folder: ""
+public_folder: ""
 
 collections:
   - name: "eventi"
     label: "Eventi e Iniziative"
     folder: "content/eventi"
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - {label: "Titolo Evento", name: "title", widget: "string"}
       - {label: "Data", name: "date", widget: "datetime"}
