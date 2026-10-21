@@ -1,6 +1,9 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: insiemepersestrilevante/insiemepersestrilevante.github.io
   branch: main
+  base_url: https://decap-oauth-provider.vercel.app
+  auth_endpoint: /auth
 
 media_folder: "immagini"
 public_folder: "/immagini"
