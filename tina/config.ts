@@ -2,8 +2,8 @@ import { defineConfig } from "tinacms";
 
 export default defineConfig({
   branch: "main",
-  clientId: "IL_TUO_CLIENT_ID_TINA", // Lo trovi nel dashboard di Tina.io
-  token: "IL_TUO_TOKEN_TINA",       // Lo trovi nel dashboard di Tina.io
+  clientId: "f94823dc-3603-4061-899e-cc2426d522c5", // Lo trovi nel dashboard di Tina.io
+  token: "c5f1d4b70df66591ab2fbff01846ca344dd9dac6",       // Lo trovi nel dashboard di Tina.io
   build: {
     outputFolder: "admin",
     publicFolder: "/",
