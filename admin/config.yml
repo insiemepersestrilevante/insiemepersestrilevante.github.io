@@ -2,7 +2,6 @@ backend:
   name: github
   repo: insiemepersestrilevante/insiemepersestrilevante.github.io
   branch: main
-  base_url: https://api.staticcms.app
 
 media_folder: "images"
 public_folder: "/images"
