@@ -34,10 +34,10 @@
       const date = formatDate(item.date);
       const metadata = [date, item.period].filter(Boolean).join(' · ');
       const videoUrl = String(item.videoUrl || '').trim();
-      const youtubeMatch = videoUrl.match(/(?:youtu\\.be\\/|youtube\\.com\\/(?:watch\\?(?:.*&)?v=|embed\\/|shorts\\/))([A-Za-z0-9_-]{11})/i);
+      const youtubeMatch = videoUrl.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/))([A-Za-z0-9_-]{11})/i);
       const video = youtubeMatch
         ? '<div class="mt-4 w-full overflow-hidden rounded-xl bg-black aspect-video"><iframe class="w-full h-full" src="https://www.youtube-nocookie.com/embed/' + youtubeMatch[1] + '" title="Video: ' + esc(item.title || 'attività') + '" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><a href="https://youtu.be/' + youtubeMatch[1] + '" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-brand-green hover:underline mt-2"><i class="fa-brands fa-youtube"></i> Apri su YouTube</a>'
-        : (/^https?:\\/\\//i.test(videoUrl) ? '<a href="' + esc(videoUrl) + '" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-brand-green hover:underline mt-3"><i class="fa-brands fa-youtube"></i> Guarda il video</a>' : '');
+        : (/^https?:\/\//i.test(videoUrl) ? '<a href="' + esc(videoUrl) + '" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-brand-green hover:underline mt-3"><i class="fa-brands fa-youtube"></i> Guarda il video</a>' : '');
       return '<article class="activity-card ' + cat + ' bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col">' +
         media + '<div class="p-6 flex-grow flex flex-col justify-between"><div><span class="inline-block mb-2 rounded-full bg-emerald-50 text-brand-green px-3 py-1 text-xs font-bold">' + esc(categoryLabels[cat]) + '</span>' +
         '<h3 class="text-xl font-bold text-slate-900 mb-2">' + esc(item.title || '') + '</h3><p class="text-slate-600 text-sm leading-relaxed mb-1">' + esc(item.description || '') + '</p>' + video + '</div>' +
