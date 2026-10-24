@@ -9,11 +9,34 @@
     if (!grid || !Array.isArray(items)) return;
     grid.innerHTML = items.map(item => {
       const cat = ['verde','eventi','quartiere'].includes(item.category) ? item.category : 'verde';
+      const photos = Array.isArray(item.images) && item.images.length ? item.images : [item.imageUrl || item.image || ''];
+      const gallery = photos.length > 1;
+      const media = '<div class="activity-gallery relative h-64 bg-slate-900 overflow-hidden" data-gallery="'+esc(item.title || '')+'">' +
+        photos.map((photo, index) => '<img src="'+esc(photo)+'" alt="'+esc((item.imageAlt || item.title || '')+' - foto '+(index+1))+'" loading="lazy" class="activity-gallery-photo '+(index === 0 ? '' : 'hidden ')+'w-full h-full object-cover object-center">').join('') +
+        (gallery ? '<button type="button" aria-label="Foto precedente" data-gallery-prev class="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-black/60 text-white w-10 h-10 text-2xl hover:bg-black/80">‹</button><button type="button" aria-label="Foto successiva" data-gallery-next class="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-black/60 text-white w-10 h-10 text-2xl hover:bg-black/80">›</button><div class="absolute bottom-3 left-0 right-0 flex justify-center gap-2">'+photos.map((photo,index)=>'<button type="button" aria-label="Vai alla foto '+(index+1)+'" data-gallery-dot="'+index+'" class="w-2.5 h-2.5 rounded-full '+(index===0?'bg-white':'bg-white/50')+'"></button>').join('')+'</div>' : '') +
+        '</div>';
       return '<article class="activity-card '+cat+' bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col">' +
-        '<div class="relative h-64 bg-slate-900 flex items-center justify-center overflow-hidden"><img src="'+esc(item.imageUrl || item.image || '')+'" alt="'+esc(item.imageAlt || item.title || '')+'" loading="lazy" class="w-full h-full object-cover object-center"></div>' +
+        media +
         '<div class="p-6 flex-grow flex flex-col justify-between"><div><h3 class="text-xl font-bold text-slate-900 mb-2">'+esc(item.title)+'</h3><p class="text-slate-600 text-sm leading-relaxed mb-4">'+esc(item.description)+'</p></div>' +
         '<div class="pt-4 border-t border-slate-100 flex justify-between items-center gap-3 text-xs text-slate-500 font-medium"><span><i class="fa-regular fa-calendar text-brand-green mr-1"></i>'+esc(item.period || '')+'</span><span><i class="fa-solid fa-location-dot text-brand-blue mr-1"></i>'+esc(item.location || '')+'</span></div></div></article>';
     }).join('');
+    grid.querySelectorAll('[data-gallery]').forEach(galleryEl => {
+      const photos = [...galleryEl.querySelectorAll('.activity-gallery-photo')];
+      const dots = [...galleryEl.querySelectorAll('[data-gallery-dot]')];
+      if (photos.length < 2) return;
+      let current = 0;
+      const show = index => {
+        current = (index + photos.length) % photos.length;
+        photos.forEach((photo, i) => photo.classList.toggle('hidden', i !== current));
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('bg-white', i === current);
+          dot.classList.toggle('bg-white/50', i !== current);
+        });
+      };
+      galleryEl.querySelector('[data-gallery-prev]')?.addEventListener('click', () => show(current - 1));
+      galleryEl.querySelector('[data-gallery-next]')?.addEventListener('click', () => show(current + 1));
+      dots.forEach((dot, index) => dot.addEventListener('click', () => show(index)));
+    });
     if (typeof window.filterActivities === 'function') window.filterActivities('all');
   }
   function renderDocuments(items) {
