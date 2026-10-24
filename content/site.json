@@ -25,52 +25,58 @@
       "image": "Run1.jpg",
       "imageAlt": "Supporto Andersen Run",
       "period": "Annuale / Ottobre",
-      "location": "Centro Città"
+      "location": "Centro Città",
+      "imageUrl": ""
     },
     {
       "title": "Manutenzione Giardini e Parchi",
       "category": "verde",
       "description": "Interventi periodici di sfalcio dell'erba, potatura di contenimento e pulizia approfondita dei parchi giochi per restituire alle famiglie spazi verdi curati e sicuri.",
-      "image": "https://images.unsplash.com/photo-1592417817098-8f3d6eb12765?auto=format&fit=crop&w=800&q=80",
+      "image": "",
       "imageAlt": "Manutenzione di giardini e parchi",
       "period": "Periodica",
-      "location": "Aree Verdi Sestri"
+      "location": "Aree Verdi Sestri",
+      "imageUrl": "https://images.unsplash.com/photo-1592417817098-8f3d6eb12765?auto=format&fit=crop&w=800&q=80"
     },
     {
       "title": "Operazione Salva il Mondo",
       "category": "quartiere",
       "description": "Giornate dedicate alla raccolta differenziata dei rifiuti abbandonati lungo i sentieri, le spiagge e le vie periferiche, promuovendo il rispetto ambientale tra i giovani.",
-      "image": "https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?auto=format&fit=crop&w=800&q=80",
+      "image": "",
       "imageAlt": "Pulizia ambientale",
       "period": "Durante l'anno",
-      "location": "Frazioni e litorale"
+      "location": "Frazioni e litorale",
+      "imageUrl": "https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?auto=format&fit=crop&w=800&q=80"
     },
     {
       "title": "Ripristino Arredi Urbani",
       "category": "verde",
       "description": "Carteggiatura, verniciatura e riparazione delle panchine pubbliche danneggiate dalle intemperie per restituire decoro e comfort al passeggio cittadino.",
-      "image": "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80",
+      "image": "",
       "imageAlt": "Cura degli spazi pubblici",
       "period": "Periodica",
-      "location": "Piazze di Sestri"
+      "location": "Piazze di Sestri",
+      "imageUrl": "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80"
     },
     {
       "title": "Incontri sulla Biodiversità",
       "category": "eventi",
       "description": "Tavole rotonde e seminari aperti alla cittadinanza in collaborazione con l'Amministrazione Comunale per sensibilizzare sul valore del verde e delle essenze liguri.",
-      "image": "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=800&q=80",
+      "image": "",
       "imageAlt": "Incontri e sensibilizzazione",
       "period": "Su calendario",
-      "location": "Sale Comunali"
+      "location": "Sale Comunali",
+      "imageUrl": "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=800&q=80"
     },
     {
       "title": "Interventi nelle Frazioni",
       "category": "quartiere",
       "description": "Oltre al centro urbano, portiamo la nostra opera di pulizia e manutenzione costante nelle frazioni collinari di Sestri Levante per non lasciare indietro nessuno.",
-      "image": "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?auto=format&fit=crop&w=800&q=80",
+      "image": "",
       "imageAlt": "Interventi nelle frazioni",
       "period": "Durante l'anno",
-      "location": "Frazioni di Sestri Levante"
+      "location": "Frazioni di Sestri Levante",
+      "imageUrl": "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?auto=format&fit=crop&w=800&q=80"
     }
   ],
   "featuredEvent": {
