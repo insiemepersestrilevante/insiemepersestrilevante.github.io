@@ -25,58 +25,52 @@
       "image": "Run1.jpg",
       "imageAlt": "Supporto Andersen Run",
       "period": "Annuale / Ottobre",
-      "location": "Centro Città",
-      "imageUrl": ""
+      "location": "Centro Città"
     },
     {
       "title": "Manutenzione Giardini e Parchi",
       "category": "verde",
       "description": "Interventi periodici di sfalcio dell'erba, potatura di contenimento e pulizia approfondita dei parchi giochi per restituire alle famiglie spazi verdi curati e sicuri.",
-      "image": "",
+      "imageUrl": "https://images.unsplash.com/photo-1592417817098-8f3d6eb12765?auto=format&fit=crop&w=800&q=80",
       "imageAlt": "Manutenzione di giardini e parchi",
       "period": "Periodica",
-      "location": "Aree Verdi Sestri",
-      "imageUrl": "https://images.unsplash.com/photo-1592417817098-8f3d6eb12765?auto=format&fit=crop&w=800&q=80"
+      "location": "Aree Verdi Sestri"
     },
     {
       "title": "Operazione Salva il Mondo",
       "category": "quartiere",
       "description": "Giornate dedicate alla raccolta differenziata dei rifiuti abbandonati lungo i sentieri, le spiagge e le vie periferiche, promuovendo il rispetto ambientale tra i giovani.",
-      "image": "",
+      "imageUrl": "https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?auto=format&fit=crop&w=800&q=80",
       "imageAlt": "Pulizia ambientale",
       "period": "Durante l'anno",
-      "location": "Frazioni e litorale",
-      "imageUrl": "https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?auto=format&fit=crop&w=800&q=80"
+      "location": "Frazioni e litorale"
     },
     {
       "title": "Ripristino Arredi Urbani",
       "category": "verde",
       "description": "Carteggiatura, verniciatura e riparazione delle panchine pubbliche danneggiate dalle intemperie per restituire decoro e comfort al passeggio cittadino.",
-      "image": "",
+      "imageUrl": "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80",
       "imageAlt": "Cura degli spazi pubblici",
       "period": "Periodica",
-      "location": "Piazze di Sestri",
-      "imageUrl": "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80"
+      "location": "Piazze di Sestri"
     },
     {
       "title": "Incontri sulla Biodiversità",
       "category": "eventi",
       "description": "Tavole rotonde e seminari aperti alla cittadinanza in collaborazione con l'Amministrazione Comunale per sensibilizzare sul valore del verde e delle essenze liguri.",
-      "image": "",
+      "imageUrl": "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=800&q=80",
       "imageAlt": "Incontri e sensibilizzazione",
       "period": "Su calendario",
-      "location": "Sale Comunali",
-      "imageUrl": "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=800&q=80"
+      "location": "Sale Comunali"
     },
     {
       "title": "Interventi nelle Frazioni",
       "category": "quartiere",
       "description": "Oltre al centro urbano, portiamo la nostra opera di pulizia e manutenzione costante nelle frazioni collinari di Sestri Levante per non lasciare indietro nessuno.",
-      "image": "",
+      "imageUrl": "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?auto=format&fit=crop&w=800&q=80",
       "imageAlt": "Interventi nelle frazioni",
       "period": "Durante l'anno",
-      "location": "Frazioni di Sestri Levante",
-      "imageUrl": "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?auto=format&fit=crop&w=800&q=80"
+      "location": "Frazioni di Sestri Levante"
     }
   ],
   "featuredEvent": {
@@ -85,8 +79,8 @@
     "title": "Giornata del Verde Urbano & Convegno sulla Biodiversità",
     "description": "Un appuntamento speciale aperto a tutta la cittadinanza: al mattino ci dedicheremo alla piantumazione di nuove essenze autoctone e alla pulizia del parco urbano; nel pomeriggio si terrà un tavolo tecnico-divulgativo sulla tutela della biodiversità ligure.",
     "date": "Prossimo Sabato",
-    "location": "Parco Nelson Mandela & Sala Comunale",
-    "time": "Ore 09:30 - 17:00"
+    "location": "Vi Terremo aggiornati con il prossimo appuntamento",
+    "time": "Ore ----"
   },
   "documents": [
     {
