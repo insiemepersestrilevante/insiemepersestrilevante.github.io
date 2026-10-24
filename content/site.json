@@ -29,7 +29,8 @@
       "images": [
         "Run1.jpg",
         "Run2.JPG"
-      ]
+      ],
+      "status": "recenti"
     },
     {
       "title": "Manutenzione Giardini e Parchi",
@@ -38,16 +39,19 @@
       "image": "/images/3.jpg",
       "imageAlt": "Manutenzione di giardini e parchi",
       "period": "Periodica",
-      "location": "Aree Verdi Sestri"
+      "location": "Aree Verdi Sestri",
+      "status": "recenti"
     },
     {
       "title": "Operazione Salva il Mondo",
       "category": "quartiere",
       "description": "Giornate dedicate alla raccolta differenziata dei rifiuti abbandonati lungo le spiagge, promuovendo il rispetto ambientale tra i giovani. In collaborazione con gli amici di Ambiente Mare Italia guidata dalla preziosa Martina e con l'aiuto degli Scout all'insegna dell'Amore verso il nostro adorato Mare.",
-      "imageUrl": "https://youtu.be/__dAyOZcJqI",
+      "imageUrl": "https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?auto=format&fit=crop&w=800&q=80",
       "imageAlt": "Pulizia ambientale",
       "period": "Durante l'anno",
-      "location": "Litorale - Baia delle Favole Sestri Levante (GE)"
+      "location": "Litorale - Baia delle Favole Sestri Levante (GE)",
+      "status": "recenti",
+      "videoUrl": "https://youtu.be/__dAyOZcJqI"
     },
     {
       "title": "Ripristino Arredi Urbani",
@@ -56,7 +60,8 @@
       "imageUrl": "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80",
       "imageAlt": "Cura degli spazi pubblici",
       "period": "Periodica",
-      "location": "Piazze di Sestri"
+      "location": "Piazze di Sestri",
+      "status": "recenti"
     },
     {
       "title": "Incontri sulla Biodiversità",
@@ -65,7 +70,8 @@
       "imageUrl": "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=800&q=80",
       "imageAlt": "Incontri e sensibilizzazione",
       "period": "Su calendario",
-      "location": "Sale Comunali"
+      "location": "Sale Comunali",
+      "status": "recenti"
     },
     {
       "title": "Interventi nelle Frazioni",
@@ -74,7 +80,8 @@
       "imageUrl": "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?auto=format&fit=crop&w=800&q=80",
       "imageAlt": "Interventi nelle frazioni",
       "period": "Durante l'anno",
-      "location": "Frazioni di Sestri Levante"
+      "location": "Frazioni di Sestri Levante",
+      "status": "recenti"
     }
   ],
   "featuredEvent": {
