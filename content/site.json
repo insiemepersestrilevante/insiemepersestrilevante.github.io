@@ -25,7 +25,11 @@
       "image": "Run1.jpg",
       "imageAlt": "Supporto Andersen Run",
       "period": "Annuale / Ottobre",
-      "location": "Centro Città"
+      "location": "Centro Città",
+      "images": [
+        "Run1.jpg",
+        "Run2.JPG"
+      ]
     },
     {
       "title": "Manutenzione Giardini e Parchi",
