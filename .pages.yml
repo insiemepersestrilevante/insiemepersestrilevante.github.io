@@ -56,7 +56,7 @@ content:
         fields:
           - { name: title, label: Titolo, type: string, required: true }
           - { name: category, label: Categoria, type: select, options: { values: [verde, eventi, quartiere, sociale] } }
-          - { name: date, label: Data dell'attività (AAAA-MM-GG), type: string }
+          - { name: date, label: Data dell'attività, type: date }
           - { name: status, label: Visibilità, type: select, options: { values: [recenti, archivio] } }
           - { name: description, label: Descrizione, type: text, required: true }
           - name: image
@@ -67,8 +67,7 @@ content:
           - name: images
             label: Galleria fotografica (più immagini)
             type: image
-            list: true
-            options: { media: images, extensions: [jpg, jpeg, png, webp] }
+            options: { media: images, multiple: { max: 12 }, unique: true, extensions: [jpg, jpeg, png, webp] }
           - { name: videoUrl, label: Link video YouTube (facoltativo), type: string }
           - { name: imageAlt, label: Descrizione immagine, type: string }
           - { name: period, label: Periodo, type: string }
