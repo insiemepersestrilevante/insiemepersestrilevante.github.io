@@ -1,13 +1,15 @@
 media:
   - name: images
-    label: Immagini
-    input: images
-    output: /images
+    label: Immagini esistenti
+    input: .
+    output: /
+    extensions: [jpg, jpeg, png, gif, webp, avif]
     categories: [image]
   - name: documents
-    label: Documenti
-    input: documents
-    output: /documents
+    label: Documenti PDF esistenti
+    input: .
+    output: /
+    extensions: [pdf]
     categories: [document]
 
 content:
@@ -24,7 +26,10 @@ content:
           - { name: quote, label: Citazione, type: text }
           - { name: title, label: Titolo principale, type: string, required: true }
           - { name: subtitle, label: Sottotitolo, type: text }
-          - { name: backgroundImage, label: Immagine di sfondo, type: image }
+          - name: backgroundImage
+            label: Immagine di sfondo
+            type: image
+            options: { media: images, extensions: [jpg, jpeg, png, webp] }
       - name: latestNews
         label: Ultimo aggiornamento
         type: object
@@ -52,7 +57,10 @@ content:
           - { name: title, label: Titolo, type: string, required: true }
           - { name: category, label: Categoria, type: select, options: { values: [verde, eventi, quartiere] } }
           - { name: description, label: Descrizione, type: text, required: true }
-          - { name: image, label: Immagine, type: image }
+          - name: image
+            label: Immagine
+            type: image
+            options: { media: images, extensions: [jpg, jpeg, png, webp] }
           - { name: imageAlt, label: Descrizione immagine, type: string }
           - { name: period, label: Periodo, type: string }
           - { name: location, label: Luogo, type: string }
@@ -77,5 +85,9 @@ content:
         fields:
           - { name: title, label: Titolo, type: string, required: true }
           - { name: description, label: Descrizione, type: text }
-          - { name: file, label: File PDF, type: file, required: true }
+          - name: file
+            label: File PDF
+            type: file
+            required: true
+            options: { media: documents, extensions: [pdf] }
           - { name: icon, label: Tipo icona, type: select, options: { values: [pdf, privacy] } }
