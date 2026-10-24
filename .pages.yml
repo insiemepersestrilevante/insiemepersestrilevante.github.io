@@ -1,14 +1,14 @@
 media:
   - name: images
     label: Immagini esistenti
-    input: .
-    output: /
+    input: images
+    output: /images
     extensions: [jpg, jpeg, png, gif, webp, avif]
     categories: [image]
   - name: documents
     label: Documenti PDF esistenti
-    input: .
-    output: /
+    input: documents
+    output: /documents
     extensions: [pdf]
     categories: [document]
 
