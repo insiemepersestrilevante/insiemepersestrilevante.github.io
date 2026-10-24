@@ -1,6 +1,14 @@
 media:
-  input: /
-  output: /
+  - name: images
+    label: Immagini
+    input: images
+    output: /images
+    categories: [image]
+  - name: documents
+    label: Documenti
+    input: documents
+    output: /documents
+    categories: [document]
 
 content:
   - name: sito
@@ -16,7 +24,7 @@ content:
           - { name: quote, label: Citazione, type: text }
           - { name: title, label: Titolo principale, type: string, required: true }
           - { name: subtitle, label: Sottotitolo, type: text }
-          - { name: backgroundImage, label: Immagine di sfondo (percorso), type: string }
+          - { name: backgroundImage, label: Immagine di sfondo, type: image }
       - name: latestNews
         label: Ultimo aggiornamento
         type: object
@@ -44,7 +52,7 @@ content:
           - { name: title, label: Titolo, type: string, required: true }
           - { name: category, label: Categoria, type: select, options: { values: [verde, eventi, quartiere] } }
           - { name: description, label: Descrizione, type: text, required: true }
-          - { name: image, label: Immagine (percorso o URL), type: string }
+          - { name: image, label: Immagine, type: image }
           - { name: imageAlt, label: Descrizione immagine, type: string }
           - { name: period, label: Periodo, type: string }
           - { name: location, label: Luogo, type: string }
@@ -69,5 +77,5 @@ content:
         fields:
           - { name: title, label: Titolo, type: string, required: true }
           - { name: description, label: Descrizione, type: text }
-          - { name: file, label: Percorso del PDF, type: string, required: true }
+          - { name: file, label: File PDF, type: file, required: true }
           - { name: icon, label: Tipo icona, type: select, options: { values: [pdf, privacy] } }
