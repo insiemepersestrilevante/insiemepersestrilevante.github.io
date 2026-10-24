@@ -58,9 +58,10 @@ content:
           - { name: category, label: Categoria, type: select, options: { values: [verde, eventi, quartiere] } }
           - { name: description, label: Descrizione, type: text, required: true }
           - name: image
-            label: Immagine
+            label: Immagine dal repository
             type: image
             options: { media: images, extensions: [jpg, jpeg, png, webp] }
+          - { name: imageUrl, label: URL immagine esterna (facoltativo), type: string }
           - { name: imageAlt, label: Descrizione immagine, type: string }
           - { name: period, label: Periodo, type: string }
           - { name: location, label: Luogo, type: string }
