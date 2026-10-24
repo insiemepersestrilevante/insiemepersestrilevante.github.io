@@ -51,7 +51,10 @@
       "status": "recenti",
       "description": "Giornate dedicate alla raccolta differenziata dei rifiuti abbandonati lungo le spiagge, promuovendo il rispetto ambientale tra i giovani. In collaborazione con gli amici di Ambiente Mare Italia guidata dalla preziosa Martina e con l'aiuto degli Scout all'insegna dell'Amore verso il nostro adorato Mare.",
       "images": [
-        "/images/2.jpg"
+        "/images/2.jpg",
+        "/images/KOTZ9970.jpeg",
+        "/images/BYDV5627.jpeg",
+        "/images/IMG_9604.jpeg"
       ],
       "videoUrl": "https://youtu.be/__dAyOZcJqI",
       "imageAlt": "Pulizia ambientale",
@@ -74,8 +77,14 @@
       "category": "eventi",
       "date": "2026-10-24",
       "status": "recenti",
-      "description": "Tavole rotonde e seminari aperti alla cittadinanza in collaborazione con l'Amministrazione Comunale per sensibilizzare sul valore del verde e delle essenze liguri.",
-      "imageUrl": "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=800&q=80",
+      "description": "Tavole rotonde e seminari aperti alla cittadinanza in collaborazione con l'Amministrazione Comunale e Arpal per sensibilizzare sul valore dell'ambiente Marino Ligure.",
+      "images": [
+        "/images/IMG_9404.jpg",
+        "/images/IMG_9399.jpg",
+        "/images/LZEW9691.png",
+        "/images/IMG_9409.jpg",
+        "/images/IMG_9398.jpg"
+      ],
       "imageAlt": "Incontri e sensibilizzazione",
       "period": "Su calendario",
       "location": "Sale Comunali"
