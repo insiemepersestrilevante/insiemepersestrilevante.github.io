@@ -21,67 +21,72 @@
     {
       "title": "Supporto Andersen Run",
       "category": "eventi",
+      "date": "2026-10-24",
+      "status": "recenti",
       "description": "I nostri volontari sono stati coinvolti in prima linea per guidare gli atleti nel percorso cittadino, garantendo sicurezza, ristoro e accoglienza durante la celebre manifestazione podistica.",
       "image": "Run1.jpg",
+      "images": [
+        "/images/Run1.jpeg",
+        "/images/Run2.jpeg"
+      ],
       "imageAlt": "Supporto Andersen Run",
       "period": "Annuale / Ottobre",
-      "location": "Centro Città",
-      "images": [
-        "Run1.jpg",
-        "Run2.JPG"
-      ],
-      "status": "recenti"
+      "location": "Centro Città"
     },
     {
       "title": "Manutenzione Giardini e Parchi",
       "category": "verde",
+      "date": "2026-10-24",
+      "status": "recenti",
       "description": "Interventi periodici di sfalcio dell'erba, potatura di contenimento e pulizia approfondita dei parchi giochi per restituire alle famiglie spazi verdi curati e sicuri.",
       "image": "/images/3.jpg",
       "imageAlt": "Manutenzione di giardini e parchi",
       "period": "Periodica",
-      "location": "Aree Verdi Sestri",
-      "status": "recenti"
+      "location": "Aree Verdi Sestri"
     },
     {
       "title": "Operazione Salva il Mondo",
       "category": "quartiere",
+      "date": "2026-10-24",
+      "status": "recenti",
       "description": "Giornate dedicate alla raccolta differenziata dei rifiuti abbandonati lungo le spiagge, promuovendo il rispetto ambientale tra i giovani. In collaborazione con gli amici di Ambiente Mare Italia guidata dalla preziosa Martina e con l'aiuto degli Scout all'insegna dell'Amore verso il nostro adorato Mare.",
-      "imageUrl": "https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?auto=format&fit=crop&w=800&q=80",
+      "videoUrl": "https://youtu.be/__dAyOZcJqI",
       "imageAlt": "Pulizia ambientale",
       "period": "Durante l'anno",
-      "location": "Litorale - Baia delle Favole Sestri Levante (GE)",
-      "status": "recenti",
-      "videoUrl": "https://youtu.be/__dAyOZcJqI"
+      "location": "Litorale - Baia delle Favole Sestri Levante (GE)"
     },
     {
       "title": "Ripristino Arredi Urbani",
       "category": "verde",
+      "date": "2026-10-24",
+      "status": "recenti",
       "description": "Carteggiatura, verniciatura e riparazione delle panchine pubbliche danneggiate dalle intemperie per restituire decoro e comfort al passeggio cittadino.",
       "imageUrl": "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80",
       "imageAlt": "Cura degli spazi pubblici",
       "period": "Periodica",
-      "location": "Piazze di Sestri",
-      "status": "recenti"
+      "location": "Piazze di Sestri"
     },
     {
       "title": "Incontri sulla Biodiversità",
       "category": "eventi",
+      "date": "2026-10-24",
+      "status": "recenti",
       "description": "Tavole rotonde e seminari aperti alla cittadinanza in collaborazione con l'Amministrazione Comunale per sensibilizzare sul valore del verde e delle essenze liguri.",
       "imageUrl": "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=800&q=80",
       "imageAlt": "Incontri e sensibilizzazione",
       "period": "Su calendario",
-      "location": "Sale Comunali",
-      "status": "recenti"
+      "location": "Sale Comunali"
     },
     {
       "title": "Interventi nelle Frazioni",
       "category": "quartiere",
+      "date": "2026-10-24",
+      "status": "recenti",
       "description": "Oltre al centro urbano, portiamo la nostra opera di pulizia e manutenzione costante nelle frazioni collinari di Sestri Levante per non lasciare indietro nessuno.",
       "imageUrl": "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?auto=format&fit=crop&w=800&q=80",
       "imageAlt": "Interventi nelle frazioni",
       "period": "Durante l'anno",
-      "location": "Frazioni di Sestri Levante",
-      "status": "recenti"
+      "location": "Frazioni di Sestri Levante"
     }
   ],
   "featuredEvent": {
