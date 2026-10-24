@@ -10,7 +10,7 @@
     grid.innerHTML = items.map(item => {
       const cat = ['verde','eventi','quartiere'].includes(item.category) ? item.category : 'verde';
       return '<article class="activity-card '+cat+' bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col">' +
-        '<div class="relative h-64 bg-slate-900 flex items-center justify-center overflow-hidden"><img src="'+esc(item.image || '')+'" alt="'+esc(item.imageAlt || item.title || '')+'" loading="lazy" class="w-full h-full object-cover object-center"></div>' +
+        '<div class="relative h-64 bg-slate-900 flex items-center justify-center overflow-hidden"><img src="'+esc(item.imageUrl || item.image || '')+'" alt="'+esc(item.imageAlt || item.title || '')+'" loading="lazy" class="w-full h-full object-cover object-center"></div>' +
         '<div class="p-6 flex-grow flex flex-col justify-between"><div><h3 class="text-xl font-bold text-slate-900 mb-2">'+esc(item.title)+'</h3><p class="text-slate-600 text-sm leading-relaxed mb-4">'+esc(item.description)+'</p></div>' +
         '<div class="pt-4 border-t border-slate-100 flex justify-between items-center gap-3 text-xs text-slate-500 font-medium"><span><i class="fa-regular fa-calendar text-brand-green mr-1"></i>'+esc(item.period || '')+'</span><span><i class="fa-solid fa-location-dot text-brand-blue mr-1"></i>'+esc(item.location || '')+'</span></div></div></article>';
     }).join('');
