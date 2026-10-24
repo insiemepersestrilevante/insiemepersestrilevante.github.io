@@ -1,0 +1,94 @@
+media:
+  - name: images
+    label: Immagini esistenti
+    input: .
+    output: /
+    extensions: [jpg, jpeg, png, gif, webp, avif]
+    categories: [image]
+  - name: documents
+    label: Documenti PDF esistenti
+    input: .
+    output: /
+    extensions: [pdf]
+    categories: [document]
+
+content:
+  - name: sito
+    label: Contenuti del sito
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - name: home
+        label: Home page
+        type: object
+        fields:
+          - { name: quote, label: Citazione, type: text }
+          - { name: title, label: Titolo principale, type: string, required: true }
+          - { name: subtitle, label: Sottotitolo, type: text }
+          - name: backgroundImage
+            label: Immagine di sfondo
+            type: image
+            options: { media: images, extensions: [jpg, jpeg, png, webp] }
+      - name: latestNews
+        label: Ultimo aggiornamento
+        type: object
+        fields:
+          - { name: label, label: Etichetta, type: string }
+          - { name: title, label: Titolo, type: string, required: true }
+          - { name: summary, label: Testo, type: text }
+          - { name: linkLabel, label: Testo del collegamento, type: string }
+          - { name: link, label: Destinazione del collegamento, type: string }
+      - name: about
+        label: Chi siamo
+        type: object
+        fields:
+          - { name: title, label: Titolo, type: string }
+          - { name: introduction, label: Presentazione, type: text }
+          - { name: collaboration, label: Collaborazioni, type: text }
+      - name: activities
+        label: Attività
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - { name: title, label: Titolo, type: string, required: true }
+          - { name: category, label: Categoria, type: select, options: { values: [verde, eventi, quartiere] } }
+          - { name: description, label: Descrizione, type: text, required: true }
+          - name: image
+            label: Immagine dal repository
+            type: image
+            options: { media: images, extensions: [jpg, jpeg, png, webp] }
+          - { name: imageUrl, label: URL immagine esterna (facoltativo), type: string }
+          - { name: imageAlt, label: Descrizione immagine, type: string }
+          - { name: period, label: Periodo, type: string }
+          - { name: location, label: Luogo, type: string }
+      - name: featuredEvent
+        label: Evento in evidenza
+        type: object
+        fields:
+          - { name: status, label: Stato, type: string }
+          - { name: collaboration, label: Collaborazione, type: string }
+          - { name: title, label: Titolo, type: string, required: true }
+          - { name: description, label: Descrizione, type: text }
+          - { name: date, label: Data o periodo, type: string }
+          - { name: location, label: Luogo, type: string }
+          - { name: time, label: Orario, type: string }
+      - name: documents
+        label: Modulistica e documenti
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - { name: title, label: Titolo, type: string, required: true }
+          - { name: description, label: Descrizione, type: text }
+          - name: file
+            label: File PDF
+            type: file
+            required: true
+            options: { media: documents, extensions: [pdf] }
+          - { name: icon, label: Tipo icona, type: select, options: { values: [pdf, privacy] } }

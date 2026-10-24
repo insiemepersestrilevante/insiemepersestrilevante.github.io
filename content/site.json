@@ -1,0 +1,105 @@
+{
+  "home": {
+    "quote": "Il volontariato è sempre in uscita, il cuore aperto, la mano tesa, le gambe pronte ad andare, uscire per incontrare, uscire per dare.....",
+    "title": "Prendiamoci cura della nostra città.",
+    "subtitle": "INSIEME possiamo essere parte attiva per rendere più bella Sestri Levante.",
+    "backgroundImage": "Sfondo.jpg"
+  },
+  "latestNews": {
+    "label": "Ultimo Aggiornamento",
+    "title": "I Volontari in azione per Andersen Run & Cura del Parco",
+    "summary": "Partecipazione attiva nella gestione della sicurezza per gli atleti e costante manutenzione delle aree verdi e panchine cittadine.",
+    "linkLabel": "Vedi tutte le attività",
+    "link": "#attivita"
+  },
+  "about": {
+    "title": "Chi Siamo e Cosa Facciamo",
+    "introduction": "Nata dall'amore incondizionato per la città di Sestri Levante, la nostra associazione raccoglie cittadini di tutte le età che desiderano mettere a disposizione il proprio tempo, le proprie competenze e le proprie energie per migliorare gli spazi comuni e la qualità della vita nella nostra comunità.",
+    "collaboration": "Operiamo in costante sinergia con il Comune, le realtà sociali territoriali e le altre associazioni per promuovere la tutela ambientale, il decoro urbano e la coesione sociale attraverso azioni pratiche e trasparenti."
+  },
+  "activities": [
+    {
+      "title": "Supporto Andersen Run",
+      "category": "eventi",
+      "description": "I nostri volontari sono stati coinvolti in prima linea per guidare gli atleti nel percorso cittadino, garantendo sicurezza, ristoro e accoglienza durante la celebre manifestazione podistica.",
+      "image": "Run1.jpg",
+      "imageAlt": "Supporto Andersen Run",
+      "period": "Annuale / Ottobre",
+      "location": "Centro Città"
+    },
+    {
+      "title": "Manutenzione Giardini e Parchi",
+      "category": "verde",
+      "description": "Interventi periodici di sfalcio dell'erba, potatura di contenimento e pulizia approfondita dei parchi giochi per restituire alle famiglie spazi verdi curati e sicuri.",
+      "imageUrl": "https://images.unsplash.com/photo-1592417817098-8f3d6eb12765?auto=format&fit=crop&w=800&q=80",
+      "imageAlt": "Manutenzione di giardini e parchi",
+      "period": "Periodica",
+      "location": "Aree Verdi Sestri"
+    },
+    {
+      "title": "Operazione Salva il Mondo",
+      "category": "quartiere",
+      "description": "Giornate dedicate alla raccolta differenziata dei rifiuti abbandonati lungo i sentieri, le spiagge e le vie periferiche, promuovendo il rispetto ambientale tra i giovani.",
+      "imageUrl": "https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?auto=format&fit=crop&w=800&q=80",
+      "imageAlt": "Pulizia ambientale",
+      "period": "Durante l'anno",
+      "location": "Frazioni e litorale"
+    },
+    {
+      "title": "Ripristino Arredi Urbani",
+      "category": "verde",
+      "description": "Carteggiatura, verniciatura e riparazione delle panchine pubbliche danneggiate dalle intemperie per restituire decoro e comfort al passeggio cittadino.",
+      "imageUrl": "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80",
+      "imageAlt": "Cura degli spazi pubblici",
+      "period": "Periodica",
+      "location": "Piazze di Sestri"
+    },
+    {
+      "title": "Incontri sulla Biodiversità",
+      "category": "eventi",
+      "description": "Tavole rotonde e seminari aperti alla cittadinanza in collaborazione con l'Amministrazione Comunale per sensibilizzare sul valore del verde e delle essenze liguri.",
+      "imageUrl": "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=800&q=80",
+      "imageAlt": "Incontri e sensibilizzazione",
+      "period": "Su calendario",
+      "location": "Sale Comunali"
+    },
+    {
+      "title": "Interventi nelle Frazioni",
+      "category": "quartiere",
+      "description": "Oltre al centro urbano, portiamo la nostra opera di pulizia e manutenzione costante nelle frazioni collinari di Sestri Levante per non lasciare indietro nessuno.",
+      "imageUrl": "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?auto=format&fit=crop&w=800&q=80",
+      "imageAlt": "Interventi nelle frazioni",
+      "period": "Durante l'anno",
+      "location": "Frazioni di Sestri Levante"
+    }
+  ],
+  "featuredEvent": {
+    "status": "In Programma",
+    "collaboration": "In collaborazione con il Comune di Sestri Levante",
+    "title": "Giornata del Verde Urbano & Convegno sulla Biodiversità",
+    "description": "Un appuntamento speciale aperto a tutta la cittadinanza: al mattino ci dedicheremo alla piantumazione di nuove essenze autoctone e alla pulizia del parco urbano; nel pomeriggio si terrà un tavolo tecnico-divulgativo sulla tutela della biodiversità ligure.",
+    "date": "Prossimo Sabato",
+    "location": "Vi Terremo aggiornati con il prossimo appuntamento",
+    "time": "Ore ----"
+  },
+  "documents": [
+    {
+      "title": "Modulo Adesione Socio",
+      "description": "Scheda di iscrizione ufficiale da compilare e firmare per la richiesta di ammissione all'ODV.",
+      "file": "Modulo_iscrizione.pdf",
+      "icon": "pdf"
+    },
+    {
+      "title": "Statuto dell'Associazione",
+      "description": "Testo dello Statuto sociale registrato ed in vigore ai sensi del Codice del Terzo Settore.",
+      "file": "Statuto.pdf",
+      "icon": "pdf"
+    },
+    {
+      "title": "Informativa Privacy GDPR",
+      "description": "Informativa sul trattamento dei dati personali dei soci e sostenitori dell'associazione ai sensi del GDPR.",
+      "file": "GDPR.pdf",
+      "icon": "privacy"
+    }
+  ]
+}
