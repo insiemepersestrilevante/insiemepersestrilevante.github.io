@@ -9,7 +9,7 @@
     if (!recentGrid || !Array.isArray(items)) return;
 
     const categoryLabels = { verde: 'Verde & Decoro', eventi: 'Sport & Eventi', quartiere: 'Pulizie di Quartiere', sociale: 'Attività Sociali' };
-    const normaliseDate = value => /^\\d{4}-\\d{2}-\\d{2}$/.test(String(value || '')) ? String(value) : '';
+    const normaliseDate = value => /^\d{4}-\d{2}-\d{2}$/.test(String(value || '')) ? String(value) : '';
     const formatDate = value => {
       const d = normaliseDate(value);
       if (!d) return '';
@@ -33,7 +33,7 @@
         : '<div class="h-64 bg-emerald-50 flex items-center justify-center text-brand-green"><i class="fa-solid fa-leaf text-5xl"></i></div>';
       const date = formatDate(item.date);
       const metadata = [date, item.period].filter(Boolean).join(' · ');
-      const video = /^https?:\\/\\//i.test(item.videoUrl || '')
+      const video = /^https?:\/\//i.test(item.videoUrl || '')
         ? '<a href="' + esc(item.videoUrl) + '" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-brand-green hover:underline mt-3"><i class="fa-brands fa-youtube"></i> Guarda il video</a>' : '';
       return '<article class="activity-card ' + cat + ' bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col">' +
         media + '<div class="p-6 flex-grow flex flex-col justify-between"><div><span class="inline-block mb-2 rounded-full bg-emerald-50 text-brand-green px-3 py-1 text-xs font-bold">' + esc(categoryLabels[cat]) + '</span>' +
