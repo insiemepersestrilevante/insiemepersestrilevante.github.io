@@ -36,6 +36,13 @@
       galleryEl.querySelector('[data-gallery-prev]')?.addEventListener('click', () => show(current - 1));
       galleryEl.querySelector('[data-gallery-next]')?.addEventListener('click', () => show(current + 1));
       dots.forEach((dot, index) => dot.addEventListener('click', () => show(index)));
+      // Avanza automaticamente ogni 4 secondi; si ferma temporaneamente quando il mouse è sulla galleria.
+      let autoAdvance = window.setInterval(() => show(current + 1), 4000);
+      galleryEl.addEventListener('mouseenter', () => window.clearInterval(autoAdvance));
+      galleryEl.addEventListener('mouseleave', () => {
+        window.clearInterval(autoAdvance);
+        autoAdvance = window.setInterval(() => show(current + 1), 4000);
+      });
     });
     if (typeof window.filterActivities === 'function') window.filterActivities('all');
   }
