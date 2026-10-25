@@ -95,7 +95,10 @@
       "date": "2026-10-24",
       "status": "recenti",
       "description": "Oltre al centro urbano, portiamo la nostra opera di pulizia e manutenzione costante nelle frazioni di Sestri Levante per non lasciare indietro nessuno.",
-      "imageUrl": "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?auto=format&fit=crop&w=800&q=80",
+      "images": [
+        "/images/JJGA3109.png",
+        "/images/BAJF4947.png"
+      ],
       "imageAlt": "Interventi nelle frazioni",
       "period": "Durante l'anno",
       "location": "Frazioni di Sestri Levante"
