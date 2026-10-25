@@ -46,7 +46,7 @@
     },
     {
       "title": "Operazione Salva il Mondo",
-      "category": "quartiere",
+      "category": "eventi",
       "date": "2026-04-19",
       "status": "recenti",
       "description": "Giornate dedicate alla raccolta differenziata dei rifiuti abbandonati lungo le spiagge, promuovendo il rispetto ambientale tra i giovani. In collaborazione con gli amici di Ambiente Mare Italia guidata dalla preziosa Martina e con l'aiuto degli Scout all'insegna dell'Amore verso il nostro adorato Mare.",
@@ -62,15 +62,17 @@
       "location": "Litorale - Baia delle Favole Sestri Levante (GE)"
     },
     {
-      "title": "Ripristino Arredi Urbani",
-      "category": "verde",
-      "date": "2026-10-24",
-      "status": "recenti",
-      "description": "Carteggiatura, verniciatura e riparazione delle panchine pubbliche danneggiate dalle intemperie per restituire decoro e comfort al passeggio cittadino.",
-      "imageUrl": "https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=800&q=80",
-      "imageAlt": "Cura degli spazi pubblici",
+      "title": "Accompagnamento attraversamento bimbi scuola",
+      "category": "sociale",
+      "date": "2025-10-20",
+      "status": "archivio",
+      "description": "Viene richiesta dall'Amministrazione comunale di Sestri Levante un servizio di volontariato per attività di accompagnamento ed attraversamento alla nostra Associazione",
+      "images": [
+        "/images/IMG_6156.jpg"
+      ],
+      "imageAlt": "Accompagnamento attraversamento bimbi scuola",
       "period": "Periodica",
-      "location": "Piazze di Sestri"
+      "location": "Sestri Levante (GE) - Via Nazionale"
     },
     {
       "title": "Incontri sulla Biodiversità",
