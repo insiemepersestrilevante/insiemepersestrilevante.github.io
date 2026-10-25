@@ -17,10 +17,10 @@
       return parts[2] + '/' + parts[1] + '/' + parts[0];
     };
     const sorted = [...items].sort((a,b) => (normaliseDate(b.date) || '').localeCompare(normaliseDate(a.date) || '') || String(a.title || '').localeCompare(String(b.title || ''), 'it'));
-    // Le attività datate prima del 2025 vengono archiviate automaticamente, anche se lo stato CMS è "recenti".
-    const isBefore2025 = item => { const date = normaliseDate(item.date); return Boolean(date) && date < '2025-01-01'; };
-    const recent = sorted.filter(item => item.status !== 'archivio' && !isBefore2025(item));
-    const archived = sorted.filter(item => item.status === 'archivio' || isBefore2025(item));
+    // Le attività datate prima del 2026 vengono archiviate automaticamente, quindi anche quelle del 2025.
+    const isBefore2026 = item => { const date = normaliseDate(item.date); return Boolean(date) && date < '2026-01-01'; };
+    const recent = sorted.filter(item => item.status !== 'archivio' && !isBefore2026(item));
+    const archived = sorted.filter(item => item.status === 'archivio' || isBefore2026(item));
 
     const card = item => {
       const cat = ['verde','eventi','quartiere','sociale'].includes(item.category) ? item.category : 'verde';
