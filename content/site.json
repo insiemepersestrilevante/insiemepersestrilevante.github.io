@@ -111,6 +111,25 @@
       "imageAlt": "Interventi nelle frazioni",
       "period": "Durante l'anno",
       "location": "Frazione della Lavagnina di Sestri Levante"
+    },
+    {
+      "title": "Intervento Teatro Conchiglia di Sestri Levante (GE)",
+      "category": "verde",
+      "date": "2025-05-31",
+      "status": "archivio",
+      "description": "In preparazione del Festival Andersen l'Amministrazione Comunale attraverso Mediaterraneo Servizi ha chiesto il nostro supporto per la sistemazione delle aiuole presenti presso il Teatro.",
+      "images": [
+        "/images/IMG_0597.jpg",
+        "/images/IMG_0596.jpg",
+        "/images/IMG_0598.jpg",
+        "/images/IMG_0599.jpg",
+        "/images/IMG_2238.jpg",
+        "/images/IMG_0595.jpg",
+        "/images/IMG_2236.jpg"
+      ],
+      "imageAlt": "Sfalcio aiuole Teatro Conchiglia",
+      "period": "Su calendario",
+      "location": "Teatro Conchiglia - Sestri Levante (GE)"
     }
   ],
   "featuredEvent": {
