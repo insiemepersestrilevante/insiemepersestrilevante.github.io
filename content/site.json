@@ -130,6 +130,21 @@
       "imageAlt": "Sfalcio aiuole Teatro Conchiglia",
       "period": "Su calendario",
       "location": "Teatro Conchiglia - Sestri Levante (GE)"
+    },
+    {
+      "title": "Festa dei popoli",
+      "category": "eventi",
+      "date": "2026-06-14",
+      "status": "recenti",
+      "description": "Una bellissima collaborazione nata tra varie Associazioni del territorio, Parrocchia e realtà esterne alla nostra città. Vi condividiamo la prima parte del video realizzato, la seconda parte la trovate sul nostro canale Youtube (in alto a destra del sito trovate il link)",
+      "images": [
+        "/images/GLZP1891.jpg",
+        "/images/KHAR4603.jpg"
+      ],
+      "videoUrl": "https://youtu.be/oFedrJsHaJw",
+      "imageAlt": "Panoramica dell'evento",
+      "period": "Durante l'anno",
+      "location": "Parco Mandela - Sestri Levante (GE)"
     }
   ],
   "featuredEvent": {
