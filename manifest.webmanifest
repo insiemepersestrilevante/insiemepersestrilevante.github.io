@@ -1,0 +1,22 @@
+{
+  "id": "/",
+  "name": "Insieme per Sestri Levante ODV",
+  "short_name": "Insieme Sestri",
+  "description": "L'app ufficiale di Insieme per Sestri Levante ODV: attività, iniziative e contatti.",
+  "lang": "it-IT",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
+  "theme_color": "#2e7d32",
+  "categories": ["lifestyle", "social"],
+  "icons": [
+    {
+      "src": "/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
