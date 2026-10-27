@@ -13,10 +13,10 @@
   "categories": ["lifestyle", "social"],
   "icons": [
     {
-      "src": "/app-icon.svg",
+      "src": "/logo.jpeg",
       "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "type": "image/jpeg",
+      "purpose": "any"
     }
   ]
 }
