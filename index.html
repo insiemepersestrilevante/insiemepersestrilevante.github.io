@@ -4,6 +4,10 @@
     <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2e7d32">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="icon" href="/app-icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/app-icon.svg">
     <title>Insieme per Sestri Levante ODV | Associazione di Volontariato</title>
     <meta name="description" content="Insieme per Sestri Levante ODV: volontariato, tutela del verde, decoro urbano ed eventi per una comunità più bella e solidale a Sestri Levante.">
     <meta name="robots" content="index, follow, max-image-preview:large">
@@ -1269,5 +1273,72 @@
         });
     </script>
     <script src="site-content.js"></script>
+
+    <!-- Pulsante installazione app -->
+    <div id="pwaInstallWrap" class="fixed bottom-4 right-4 z-[100] flex flex-col items-end gap-3" style="display:none">
+      <div id="pwaInstallHelp" class="hidden max-w-xs rounded-2xl border border-slate-200 bg-white p-4 text-sm text-slate-700 shadow-xl" role="status" aria-live="polite">
+        <div class="mb-2 font-bold text-slate-900">Installa l'app</div>
+        <p id="pwaInstallInstructions">Aggiungi questo sito alla schermata Home per aprirlo come un'app.</p>
+        <button id="pwaInstallHelpClose" type="button" class="mt-3 rounded-lg bg-slate-100 px-3 py-2 font-semibold hover:bg-slate-200">Chiudi</button>
+      </div>
+      <button id="pwaInstallButton" type="button" class="inline-flex items-center gap-2 rounded-full bg-brand-green px-4 py-3 font-bold text-white shadow-lg transition hover:bg-brand-darkgreen focus:outline-none focus:ring-4 focus:ring-green-200" aria-haspopup="true" aria-controls="pwaInstallHelp">
+        <i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i>
+        <span>Installa app</span>
+      </button>
+    </div>
+    <script>
+      (() => {
+        if ("serviceWorker" in navigator) {
+          window.addEventListener("load", () => {
+            navigator.serviceWorker.register("/service-worker.js").catch(error => {
+              console.warn("Registrazione app offline non riuscita:", error);
+            });
+          });
+        }
+
+        const wrap = document.getElementById("pwaInstallWrap");
+        const button = document.getElementById("pwaInstallButton");
+        const help = document.getElementById("pwaInstallHelp");
+        const instructions = document.getElementById("pwaInstallInstructions");
+        const close = document.getElementById("pwaInstallHelpClose");
+        if (!wrap || !button || !help || !instructions || !close) return;
+
+        let installPrompt = null;
+        const isStandalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+        if (!isStandalone) wrap.style.display = "flex";
+
+        window.addEventListener("beforeinstallprompt", event => {
+          event.preventDefault();
+          installPrompt = event;
+          button.querySelector("span").textContent = "Installa app";
+        });
+
+        window.addEventListener("appinstalled", () => {
+          wrap.style.display = "none";
+          installPrompt = null;
+        });
+
+        button.addEventListener("click", async () => {
+          if (installPrompt) {
+            installPrompt.prompt();
+            await installPrompt.userChoice;
+            installPrompt = null;
+            return;
+          }
+
+          const isAppleMobile = /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+            (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+          if (isAppleMobile) {
+            instructions.textContent = "Su iPhone o iPad: apri questa pagina in Safari, tocca il pulsante Condividi e scegli “Aggiungi alla schermata Home”. Se non trovi l'opzione, scorri il menu di condivisione verso il basso.";
+          } else {
+            instructions.textContent = "Apri il menu del browser (⋮ su Chrome o il menu di condivisione su altri browser) e scegli “Installa app” oppure “Aggiungi a schermata Home”. La voce può variare in base al browser.";
+          }
+          help.classList.remove("hidden");
+        });
+
+        close.addEventListener("click", () => help.classList.add("hidden"));
+      })();
+    </script>
+
 </body>
 </html>
