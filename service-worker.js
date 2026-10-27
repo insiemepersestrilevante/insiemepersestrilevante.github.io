@@ -4,6 +4,7 @@ const APP_SHELL = [
   "/index.html",
   "/manifest.webmanifest",
   "/app-icon.svg",
+  "/logo.jpeg",
   "/site-content.js",
   "/content/site.json"
 ];
