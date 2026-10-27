@@ -1,4 +1,4 @@
-const CACHE_NAME = "insieme-sestri-pwa-v2";
+const CACHE_NAME = "insieme-sestri-pwa-v3";
 const APP_SHELL = [
   "/",
   "/index.html",
