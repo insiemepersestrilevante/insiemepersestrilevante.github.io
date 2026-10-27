@@ -13,9 +13,9 @@
   "categories": ["lifestyle", "social"],
   "icons": [
     {
-      "src": "/logo.jpeg",
+      "src": "/app-icon.svg",
       "sizes": "any",
-      "type": "image/jpeg",
+      "type": "image/svg+xml",
       "purpose": "any"
     }
   ]
