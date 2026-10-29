@@ -844,7 +844,7 @@
                 <i class="fa-solid fa-circle-check text-xl text-emerald-600"></i>
                 <div>Messaggio inviato correttamente! Verrai reindirizzato alla home...</div>
               </div>
-              <form id="contactForm" action="https://formsubmit.co/ajax/insiemepersestrilevante@gmail.com" method="POST" class="space-y-4">
+              <form id="contactForm" action="https://formsubmit.co/insiemepersestrilevante@gmail.com" method="POST" class="space-y-4">
                 <!-- Disattiva il captcha di FormSubmit -->
                 <input type="hidden" name="_captcha" value="false">
                 <div> <label for="fullName" class="block text-xs font-bold text-slate-700 uppercase mb-1">Nome
@@ -1158,38 +1158,8 @@
         });
 
         // AJAX Contact Form submission with success message and delayed redirect to home
-        const contactForm = document.getElementById('contactForm');
-        const contactSuccess = document.getElementById('contactSuccess');
-
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = Object.fromEntries(new FormData(contactForm).entries());
-
-            fetch(contactForm.action, {
-                method: 'POST',
-                body: JSON.stringify(formData),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
-            }).then(response => {
-                if (response.ok) {
-                    // Mostra il messaggio di successo
-                    contactSuccess.classList.remove('hidden');
-                    contactForm.reset();
-                    
-                    // Dopo 3 secondi reindirizza alla home page (#home)
-                    setTimeout(() => {
-                        contactSuccess.classList.add('hidden');
-                        window.location.href = '#home';
-                    }, 3000);
-                } else {
-                    alert('Errore durante l\'invio del messaggio. Riprova più tardi.');
-                }
-            }).catch(error => {
-                alert('Errore di connessione. Controlla la tua rete e riprova.');
-            });
-        });
+        // Il modulo viene inviato direttamente a FormSubmit tramite POST HTML.
+        // Evita fetch/AJAX e il relativo blocco CORS del browser.
 
         // --- CAROSELLO CON DISSOLVENZA IMMAGINI VOLONTARI ---
         let currentVolunteerSlide = 0;
