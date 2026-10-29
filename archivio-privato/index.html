@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Archivio privato — Insieme per Sestri Levante ODV</title>
+  <style>
+    :root { color-scheme: light; --ink:#1d2939; --muted:#667085; --line:#d0d5dd; --accent:#175cd3; --bg:#f7f9fc; }
+    * { box-sizing:border-box; }
+    body { margin:0; font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif; color:var(--ink); background:var(--bg); }
+    main { width:min(760px,calc(100% - 32px)); margin:36px auto; }
+    header, section { background:#fff; border:1px solid var(--line); border-radius:14px; padding:24px; margin-bottom:18px; }
+    h1 { font-size:1.55rem; line-height:1.25; margin:0 0 8px; }
+    h2 { font-size:1.1rem; margin:0 0 12px; }
+    p { margin:8px 0; }
+    .muted { color:var(--muted); font-size:.93rem; }
+    label { display:block; font-weight:600; margin:14px 0 5px; }
+    input[type=email], input[type=password], input[type=file] { width:100%; padding:11px; border:1px solid var(--line); border-radius:8px; font:inherit; background:white; }
+    button { border:0; border-radius:8px; padding:10px 15px; font:inherit; font-weight:650; cursor:pointer; background:var(--accent); color:white; margin-top:12px; }
+    button.secondary { background:#eef4ff; color:#1849a9; }
+    button:disabled { opacity:.6; cursor:wait; }
+    .row { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+    .hidden { display:none !important; }
+    #status { padding:10px 12px; border-radius:8px; background:#f2f4f7; white-space:pre-wrap; overflow-wrap:anywhere; }
+    #status.error { background:#fef3f2; color:#b42318; }
+    #status.success { background:#ecfdf3; color:#027a48; }
+    ul { list-style:none; padding:0; margin:0; }
+    li { display:flex; align-items:center; justify-content:space-between; gap:12px; border-top:1px solid #eaecf0; padding:12px 0; overflow-wrap:anywhere; }
+    li:first-child { border-top:0; }
+    li button { margin:0; flex-shrink:0; }
+    .small { font-size:.86rem; }
+    footer { color:var(--muted); font-size:.85rem; text-align:center; padding:10px; }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Archivio privato</h1>
+    <p>Insieme per Sestri Levante ODV</p>
+    <p class="muted">Area riservata per consultare e caricare documenti dell’associazione.</p>
+  </header>
+
+  <section id="setup-warning" class="hidden">
+    <h2>Configurazione necessaria</h2>
+    <p>L’interfaccia è pronta per il test, ma deve essere collegata con la chiave pubblicabile di Supabase prima di poter accedere.</p>
+    <p class="muted">Segui il file README.md in questa cartella. Non inserire mai una chiave <code>service_role</code> o una secret key nel sito.</p>
+  </section>
+
+  <section id="login-panel">
+    <h2>Accedi</h2>
+    <p class="muted">L’accesso è riservato agli account creati dall’amministratore. Non è disponibile la registrazione pubblica.</p>
+    <form id="login-form">
+      <label for="email">Email</label>
+      <input id="email" type="email" autocomplete="username" required>
+      <label for="password">Password</label>
+      <input id="password" type="password" autocomplete="current-password" required>
+      <button id="login-button" type="submit">Accedi</button>
+    </form>
+  </section>
+
+  <section id="archive-panel" class="hidden">
+    <div class="row">
+      <h2>Documenti</h2>
+      <button id="logout-button" class="secondary" type="button">Esci</button>
+    </div>
+    <form id="upload-form">
+      <label for="file">Carica un documento</label>
+      <input id="file" type="file" required>
+      <p class="muted small">Per ora usa solo file di prova. Evita dati personali o documenti reali finché non sono stati completati i test di sicurezza.</p>
+      <button id="upload-button" type="submit">Carica file</button>
+    </form>
+    <h2 style="margin-top:26px">File presenti</h2>
+    <p class="muted small">I file sono richiesti da un bucket privato e vengono scaricati solo dopo l’autenticazione.</p>
+    <ul id="file-list"></ul>
+    <p id="empty-list" class="muted">Nessun file da mostrare.</p>
+  </section>
+
+  <section aria-labelledby="status-title">
+    <h2 id="status-title">Stato</h2>
+    <p id="status" role="status" aria-live="polite">In attesa di configurazione.</p>
+  </section>
+  <footer>Questa pagina non rende pubblici i documenti: la riservatezza dipende anche dalle policy di accesso configurate in Supabase.</footer>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(() => {
+  // Inserire qui l'URL del progetto e la chiave publishable/anon di Supabase.
+  // È normale che la chiave publishable/anon sia visibile nel frontend.
+  // NON inserire mai service_role o una secret key.
+  const SUPABASE_URL = "https://dccuvlfceuontjniehhf.supabase.co";
+  const SUPABASE_ANON_KEY = "INSERISCI_QUI_LA_CHIAVE_PUBLISHABLE_O_ANON";
+  const BUCKET = "archivio-associazione";
+
+  const $ = (id) => document.getElementById(id);
+  const loginPanel = $("login-panel");
+  const archivePanel = $("archive-panel");
+  const setupWarning = $("setup-warning");
+  const statusBox = $("status");
+  let client = null;
+
+  function status(message, kind = "") {
+    statusBox.textContent = message;
+    statusBox.className = kind;
+  }
+  function safeName(name) {
+    return String(name || "").replace(/[\\/]/g, "_").replace(/[\u0000-\u001f\u007f]/g, "_");
+  }
+  function setLoggedIn(loggedIn) {
+    loginPanel.classList.toggle("hidden", loggedIn);
+    archivePanel.classList.toggle("hidden", !loggedIn);
+  }
+
+  if (!window.supabase || SUPABASE_ANON_KEY.startsWith("INSERISCI_QUI")) {
+    setupWarning.classList.remove("hidden");
+    status("Configurazione incompleta: aggiungi la chiave publishable/anon seguendo README.md.", "error");
+    $("login-button").disabled = true;
+    $("upload-button").disabled = true;
+    return;
+  }
+
+  client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+  });
+
+  async function refreshFiles() {
+    const list = $("file-list");
+    list.replaceChildren();
+    $("empty-list").classList.remove("hidden");
+    const { data, error } = await client.storage.from(BUCKET).list("", {
+      limit: 100,
+      sortBy: { column: "name", order: "asc" }
+    });
+    if (error) {
+      status("Non riesco a leggere l’elenco dei file: " + error.message, "error");
+      return;
+    }
+    const files = (data || []).filter(item => item.name && item.name !== ".emptyFolderPlaceholder");
+    $("empty-list").classList.toggle("hidden", files.length > 0);
+    for (const file of files) {
+      const li = document.createElement("li");
+      const name = document.createElement("span");
+      name.textContent = file.name;
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "secondary";
+      button.textContent = "Scarica";
+      button.addEventListener("click", async () => {
+        button.disabled = true;
+        const { data: blobData, error: downloadError } = await client.storage.from(BUCKET).download(file.name);
+        if (downloadError) {
+          status("Download non riuscito: " + downloadError.message, "error");
+          button.disabled = false;
+          return;
+        }
+        const url = URL.createObjectURL(blobData);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = safeName(file.name);
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        status("Download avviato.", "success");
+        button.disabled = false;
+      });
+      li.append(name, button);
+      list.appendChild(li);
+    }
+    status("Elenco aggiornato.", "success");
+  }
+
+  $("login-form").addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const button = $("login-button");
+    button.disabled = true;
+    status("Accesso in corso…");
+    const { error } = await client.auth.signInWithPassword({
+      email: $("email").value.trim(),
+      password: $("password").value
+    });
+    button.disabled = false;
+    if (error) {
+      status("Accesso non riuscito. Controlla email e password; dettagli: " + error.message, "error");
+      return;
+    }
+    $("password").value = "";
+    setLoggedIn(true);
+    await refreshFiles();
+  });
+
+  $("logout-button").addEventListener("click", async () => {
+    const { error } = await client.auth.signOut();
+    setLoggedIn(false);
+    status(error ? "Uscita con avviso: " + error.message : "Sei uscito dall’archivio.", error ? "error" : "success");
+  });
+
+  $("upload-form").addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const file = $("file").files[0];
+    if (!file) return;
+    const button = $("upload-button");
+    button.disabled = true;
+    status("Caricamento in corso…");
+    // Nome univoco per evitare di sovrascrivere involontariamente un file esistente.
+    const cleanName = safeName(file.name);
+    const objectName = new Date().toISOString().replace(/[:.]/g, "-") + "_" + cleanName;
+    const { error } = await client.storage.from(BUCKET).upload(objectName, file, {
+      cacheControl: "0",
+      upsert: false
+    });
+    button.disabled = false;
+    if (error) {
+      status("Caricamento non riuscito: " + error.message, "error");
+      return;
+    }
+    $("file").value = "";
+    status("File caricato. Aggiorno l’elenco…", "success");
+    await refreshFiles();
+  });
+
+  client.auth.onAuthStateChange((_event, session) => {
+    setLoggedIn(!!session);
+    if (session) {
+      // Evita chiamate asincrone dentro il callback di auth.
+      Promise.resolve().then(refreshFiles);
+    }
+  });
+
+  client.auth.getSession().then(({ data, error }) => {
+    if (error) status("Errore nel controllo della sessione: " + error.message, "error");
+    setLoggedIn(!!data.session);
+    if (data.session) refreshFiles();
+  });
+})();
+</script>
+</body>
+</html>
