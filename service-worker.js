@@ -86,16 +86,13 @@ self.addEventListener("fetch", event => {
   }
 
   // Immagini e risorse statiche: risposta immediata dalla cache e aggiornamento in background.
-  event.respondWith((async () => {
-    const cache = await caches.open(CACHE_NAME);
+  const cachePromise = caches.open(CACHE_NAME);
+  const networkUpdate = cachePromise.then(cache => updateCache(request, cache)).catch(() => null);
+  event.waitUntil(networkUpdate);
+
+  event.respondWith(cachePromise.then(async cache => {
     const cached = await cache.match(request);
-    const networkUpdate = updateCache(request, cache).catch(() => null);
-
-    if (cached) {
-      event.waitUntil(networkUpdate);
-      return cached;
-    }
-
+    if (cached) return cached;
     return (await networkUpdate) || Response.error();
-  })());
+  }));
 });
