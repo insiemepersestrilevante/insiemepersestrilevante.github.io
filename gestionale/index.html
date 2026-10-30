@@ -14,4 +14,4 @@ async function load(){const [title,desc,cols]=defs[tab];$('title').textContent=t
 $('loginform').addEventListener('submit',async e=>{e.preventDefault();$('loginbtn').disabled=true;$('loginmsg').textContent='Controllo credenziali…';const {data,error}=await db.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});$('loginbtn').disabled=false;if(error){$('loginmsg').textContent='Accesso non riuscito: verifica email e password.';return}await render(data.session)});
 $('logout').onclick=async()=>{await db.auth.signOut();location.reload()};$('reload').onclick=load;$('nav').onclick=e=>{const b=e.target.closest('[data-tab]');if(!b)return;tab=b.dataset.tab;document.querySelectorAll('#nav button').forEach(x=>x.classList.toggle('active',x===b));load()};db.auth.getSession().then(({data})=>render(data.session));db.auth.onAuthStateChange((ev,s)=>{if(ev==='SIGNED_OUT')render(null)});
 })();
-</script></body></html>
+</script><script src="app.js" defer></script></body></html>
