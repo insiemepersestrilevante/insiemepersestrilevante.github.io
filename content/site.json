@@ -145,16 +145,41 @@
       "imageAlt": "Panoramica dell'evento",
       "period": "Durante l'anno",
       "location": "Parco Mandela - Sestri Levante (GE)"
+    },
+    {
+      "title": "Sfalcio alla Lavagnina",
+      "category": "verde",
+      "date": "2026-10-30",
+      "status": "recenti",
+      "description": "Notiamo con piacere che piccoli passi vengono fatti, piccole attenzioni dei residenti della Lavagnina ci sono e qualche grazie arriva. Sempre disponibili dove viene richiesto il nostro supporto. Un ringraziamento speciale a Tiziana, Orietta e Sara, con il supporto di Giò! Cerchiamo sempre volontari disponibili che abbiano voglia di dedicare tempo e una mezza giornata al mese! Vi aspettiamo! Tutte le info le potete trovare sul ns sito https://insiemepersestrilevante.github.io/",
+      "images": [
+        "/images/WhatsApp Image 2026-10-30 at 17.25.39 (1)-1.jpeg",
+        "/images/WhatsApp Image 2026-10-30 at 15.31.21.jpeg",
+        "/images/WhatsApp Image 2026-10-30 at 15.15.32 (2)-1.jpeg",
+        "/images/WhatsApp Image 2026-10-30 at 15.15.51-2.jpeg",
+        "/images/WhatsApp Image 2026-10-30 at 15.15.32 (1)-1.jpeg",
+        "/images/WhatsApp Image 2026-10-30 at 15.15.32.jpeg",
+        "/images/WhatsApp Image 2026-10-30 at 17.25.39 (3).jpeg",
+        "/images/WhatsApp Image 2026-10-30 at 17.25.39.jpeg",
+        "/images/WhatsApp Image 2026-10-30 at 17.28.05 (1)-1.jpeg",
+        "/images/WhatsApp Image 2026-10-30 at 17.28.06-1.jpeg",
+        "/images/WhatsApp Image 2026-10-30 at 17.30.19 (1).jpeg",
+        "/images/WhatsApp Image 2026-10-30 at 17.30.17-1.jpeg"
+      ],
+      "videoUrl": "https://youtube.com/shorts/BeqHf9_Do_Q?feature=share",
+      "imageAlt": "Sfalcio in corso nella giornata odierna",
+      "period": "Tutto l'anno",
+      "location": "Sestri Levante - Quartiere della Lavagnina"
     }
   ],
   "featuredEvent": {
     "status": "In Programma",
-    "collaboration": "Per ARTE.",
-    "title": "Sfalcio erba quartiere Lavagnina",
-    "description": "Saremo presenti nel quartiere della Lavagnina per proseguire con lo sfalcio delle aiuole. Chi volesse aiutare bastano un paio di scarpe antinfortunistiche e tanta volontà. Vi aspettiamo!",
-    "date": "Prossimo Venerdì 30 Ottobre 2026 dalle ore 14:30",
-    "location": "Quartiere Lavagnina - Sestri Levante (GE)",
-    "time": "Dalle ore 14:30"
+    "collaboration": "---",
+    "title": "Sfalcio erba quartiere Lavagnina del 30 Ottobre 2026 eseguito",
+    "description": "Seguiteci per conoscere il prossimo evento! Sosteneteci!",
+    "date": "---",
+    "location": "---",
+    "time": "---"
   },
   "documents": [
     {
