@@ -840,13 +840,12 @@
                 <i class="fa-regular fa-paper-plane text-brand-green"></i> Invia
                 un Messaggio </h3>
               <!-- Success Banner (Hidden by default) -->
-              <div id="contactSuccess" class="hidden mb-6 p-4 rounded-xl bg-emerald-100 border border-emerald-300 text-emerald-800 text-sm font-semibold flex items-center gap-3">
+              <div id="contactSuccess" role="status" aria-live="polite" class="hidden mb-6 p-4 rounded-xl bg-emerald-100 border border-emerald-300 text-emerald-800 text-sm font-semibold flex items-center gap-3">
                 <i class="fa-solid fa-circle-check text-xl text-emerald-600"></i>
-                <div>Messaggio inviato correttamente! Verrai reindirizzato alla home...</div>
+                <div>Messaggio inviato correttamente! Grazie per averci contattato.</div>
               </div>
-              <form id="contactForm" action="https://formsubmit.co/insiemepersestrilevante@gmail.com" method="POST" class="space-y-4">
-                <!-- Disattiva il captcha di FormSubmit -->
-                <input type="hidden" name="_captcha" value="false">
+              <div id="contactError" role="alert" aria-live="assertive" class="hidden mb-6 p-4 rounded-xl bg-red-100 border border-red-300 text-red-800 text-sm font-semibold"></div>
+              <form id="contactForm" action="#" method="POST" class="space-y-4">
                 <div> <label for="fullName" class="block text-xs font-bold text-slate-700 uppercase mb-1">Nome
                     e Cognome *</label> <input id="fullName" name="name" required="" placeholder="Mario Rossi"
                     class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-transparent text-sm transition-all"
@@ -862,7 +861,7 @@
                 </div>
                 <div> <label for="subject" class="block text-xs font-bold text-slate-700 uppercase mb-1">Oggetto
                     *</label>
-                  <select id="subject" name="subject" required="" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-transparent text-sm transition-all bg-white">
+                  <select id="subject" name="oggetto" required="" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-transparent text-sm transition-all bg-white">
                     <option value="">Seleziona un argomento...</option>
                     <option value="volontariato">Informazioni per diventare
                       Volontario</option>
@@ -1276,6 +1275,63 @@
             startVolunteerTimer();
             startRunTimer();
         });
+    </script>
+    <script>
+      // Invio del modulo contatti tramite RG Forms / Google Apps Script.
+      (() => {
+        const form = document.getElementById('contactForm');
+        if (!form) return;
+
+        const endpoint = 'https://script.google.com/macros/s/AKfycbxbTdXmct6IGY_TmqHwW2tpnptmHRw8N2RPQ5OmUnUKkD-ZH1E18nWsurghEAyWlnVHtw/exec';
+        const successBox = document.getElementById('contactSuccess');
+        const errorBox = document.getElementById('contactError');
+        const submitButton = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', async (event) => {
+          event.preventDefault();
+          successBox.classList.add('hidden');
+          errorBox.classList.add('hidden');
+
+          if (!form.reportValidity()) return;
+
+          const fields = {
+            name: form.elements.name.value.trim(),
+            email: form.elements.email.value.trim(),
+            phone: form.elements.phone.value.trim(),
+            oggetto: form.elements.oggetto.value,
+            message: form.elements.message.value.trim()
+          };
+
+          const originalButton = submitButton.innerHTML;
+          submitButton.disabled = true;
+          submitButton.classList.add('opacity-70', 'cursor-not-allowed');
+          submitButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Invio in corso...';
+
+          try {
+            const response = await fetch(endpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'text/plain' },
+              body: JSON.stringify({ tab: 'contact', fields })
+            });
+            const data = await response.json();
+
+            if (!response.ok || data.result !== 'success') {
+              throw new Error(data.error || 'Non è stato possibile inviare il messaggio. Riprova tra poco.');
+            }
+
+            form.reset();
+            successBox.classList.remove('hidden');
+          } catch (error) {
+            console.error('Errore invio modulo contatti:', error);
+            errorBox.textContent = error.message || 'Errore di connessione. Controlla la connessione e riprova.';
+            errorBox.classList.remove('hidden');
+          } finally {
+            submitButton.disabled = false;
+            submitButton.classList.remove('opacity-70', 'cursor-not-allowed');
+            submitButton.innerHTML = originalButton;
+          }
+        });
+      })();
     </script>
     <script src="site-content.js"></script>
 
