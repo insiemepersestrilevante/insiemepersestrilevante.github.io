@@ -7,6 +7,7 @@
     <meta name="theme-color" content="#2e7d32">
     <link rel="manifest" href="/manifest.webmanifest">
     <link rel="icon" href="/logo.jpeg" type="image/jpeg">
+    <link rel="preload" as="image" href="/Sfondo.jpg" fetchpriority="high">
     <link rel="apple-touch-icon" href="/logo.jpeg">
     <title>Insieme per Sestri Levante ODV | Associazione di Volontariato</title>
     <meta name="description" content="Insieme per Sestri Levante ODV: volontariato, tutela del verde, decoro urbano ed eventi per una comunità più bella e solidale a Sestri Levante.">
@@ -184,7 +185,7 @@
         <div class="flex justify-between items-center h-20">
           <!-- BRAND LOGO --> <a href="#home" class="flex items-center gap-3 group">
             <div class="relative w-12 h-12 flex-shrink-0 bg-white rounded-full shadow-md border-2 border-brand-green flex items-center justify-center overflow-hidden">
-              <img alt="Logo Insieme per Sestri Levante ODV" src="logo.jpeg" class="block w-full h-full object-contain object-center" style="margin:0; padding:0;">
+              <img alt="Logo Insieme per Sestri Levante ODV" src="logo.jpeg" decoding="async" class="block w-full h-full object-contain object-center" style="margin:0; padding:0;">
             </div>
             <div class="min-w-0"> <span class="whitespace-nowrap font-serif font-semibold text-[13px] sm:text-base md:text-lg tracking-tight text-brand-green leading-none group-hover:text-brand-darkgreen transition-colors">Insieme per Sestri Levante <span class="font-sans font-extrabold text-brand-green text-[0.82em] tracking-wide">ODV</span></span> </div>
           </a>
@@ -229,7 +230,7 @@
       <section id="home" class="relative bg-slate-900 text-white min-h-[85vh] flex items-center justify-center overflow-hidden">
         <!-- Background Image with Lightened Transparent Gradient Overlay -->
         <div class="absolute inset-0 z-0">
-          <img src="Sfondo.jpg" alt="Murales dell'albero del volontariato" class="w-full h-full object-cover object-center">
+          <img src="Sfondo.jpg" alt="Murales dell'albero del volontariato" fetchpriority="high" decoding="async" class="w-full h-full object-cover object-center">
           <div class="absolute inset-0 hero-gradient"></div>
         </div>
         <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
@@ -373,15 +374,15 @@
                 <div class="relative w-full h-full">
                   <!-- Slide 1 -->
                   <div class="volunteer-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100 pointer-events-auto flex items-center justify-center">
-                    <img src="Volontari1.jpg" alt="Volontari al lavoro per il decoro urbano" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/800x600/2e7d32/ffffff?text=Volontari+Insieme+per+Sestri'">
+                    <img loading="lazy" decoding="async" src="Volontari1.jpg" alt="Volontari al lavoro per il decoro urbano" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/800x600/2e7d32/ffffff?text=Volontari+Insieme+per+Sestri'">
                   </div>
                   <!-- Slide 2 -->
                   <div class="volunteer-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none flex items-center justify-center">
-                    <img src="Volontari2.jpg" alt="Volontari in azione" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/800x600/2e7d32/ffffff?text=Volontari+Insieme+per+Sestri'">
+                    <img loading="lazy" decoding="async" src="Volontari2.jpg" alt="Volontari in azione" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/800x600/2e7d32/ffffff?text=Volontari+Insieme+per+Sestri'">
                   </div>
                   <!-- Slide 3 -->
                   <div class="volunteer-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none flex items-center justify-center">
-                    <img src="Volontari3.jpg" alt="Intervento di riqualificazione verde" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/800x600/2e7d32/ffffff?text=Volontari+Insieme+per+Sestri'">
+                    <img loading="lazy" decoding="async" src="Volontari3.jpg" alt="Intervento di riqualificazione verde" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/800x600/2e7d32/ffffff?text=Volontari+Insieme+per+Sestri'">
                   </div>
                 </div>
 
@@ -459,10 +460,10 @@
                 <!-- Contenitore delle Slide Andersen Run -->
                 <div class="relative w-full h-full">
                   <div class="run-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100 pointer-events-auto flex items-center justify-center">
-                    <img src="Run1.jpg" alt="Supporto Andersen Run 1" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0288d1/ffffff?text=Andersen+Run+1'">
+                    <img loading="lazy" decoding="async" src="Run1.jpg" alt="Supporto Andersen Run 1" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0288d1/ffffff?text=Andersen+Run+1'">
                   </div>
                   <div class="run-slide absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0 pointer-events-none flex items-center justify-center">
-                    <img src="Run2.JPG" alt="Supporto Andersen Run 2" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0288d1/ffffff?text=Andersen+Run+2'">
+                    <img loading="lazy" decoding="async" src="Run2.JPG" alt="Supporto Andersen Run 2" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/600x400/0288d1/ffffff?text=Andersen+Run+2'">
                   </div>
                 </div>
                 <span class="absolute top-3 left-3 z-20 bg-brand-blue text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Sport &amp; Eventi</span>
@@ -497,7 +498,7 @@
             </div>
             <!-- Activity Card 2 -->
             <div class="activity-card verde bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col">
-              <div class="relative h-64 bg-slate-900 flex items-center justify-center overflow-hidden"> <img src="https://images.unsplash.com/photo-1592417817098-8f3d6eb12765?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+              <div class="relative h-64 bg-slate-900 flex items-center justify-center overflow-hidden"> <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1592417817098-8f3d6eb12765?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
                   alt="Cura del Verde Pubblico" class="w-full h-full object-contain"
                   onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1588880331179-bc9b93a8cb5e?auto=format&amp;fit=crop&amp;w=800&amp;q=80'">
                 <span class="absolute top-3 left-3 bg-brand-green text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Verde
@@ -519,7 +520,7 @@
             </div>
             <!-- Activity Card 3 -->
             <div class="activity-card quartiere bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col">
-              <div class="relative h-64 bg-slate-900 flex items-center justify-center overflow-hidden"> <img src="https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+              <div class="relative h-64 bg-slate-900 flex items-center justify-center overflow-hidden"> <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1618477461853-cf6ed80faba5?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
                   alt="Pulizie di Quartiere" class="w-full h-full object-contain"
                   onerror="this.onerror=null; this.src='https://placehold.co/600x400/f59e0b/ffffff?text=Operazione+Salva+il+Mondo'">
                 <span class="absolute top-3 left-3 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Pulizie
@@ -542,7 +543,7 @@
             </div>
             <!-- Activity Card 4 -->
             <div class="activity-card verde bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col">
-              <div class="relative h-64 bg-slate-900 flex items-center justify-center overflow-hidden"> <img src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+              <div class="relative h-64 bg-slate-900 flex items-center justify-center overflow-hidden"> <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
                   alt="Restauro Panchine" class="w-full h-full object-contain"
                   onerror="this.onerror=null; this.src='https://placehold.co/600x400/1b5e20/ffffff?text=Ripristino+Arredi'">
                 <span class="absolute top-3 left-3 bg-brand-green text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Verde
@@ -564,7 +565,7 @@
             </div>
             <!-- Activity Card 5 -->
             <div class="activity-card eventi bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col">
-              <div class="relative h-64 bg-slate-900 flex items-center justify-center overflow-hidden"> <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+              <div class="relative h-64 bg-slate-900 flex items-center justify-center overflow-hidden"> <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
                   alt="Convegni e Incontri" class="w-full h-full object-contain"
                   onerror="this.onerror=null; this.src='https://placehold.co/600x400/01579b/ffffff?text=Biodiversit%C3%A0+e+Ambiente'">
                 <span class="absolute top-3 left-3 bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Incontri
@@ -587,7 +588,7 @@
             </div>
             <!-- Activity Card 6 -->
             <div class="activity-card quartiere bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-slate-200 flex flex-col">
-              <div class="relative h-64 bg-slate-900 flex items-center justify-center overflow-hidden"> <img src="https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
+              <div class="relative h-64 bg-slate-900 flex items-center justify-center overflow-hidden"> <img loading="lazy" decoding="async" src="https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?auto=format&amp;fit=crop&amp;w=800&amp;q=80"
                   alt="Manutenzione Frazioni" class="w-full h-full object-contain"
                   onerror="this.onerror=null; this.src='https://placehold.co/600x400/8e24aa/ffffff?text=Cura+Frazioni'">
                 <span class="absolute top-3 left-3 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Pulizie
