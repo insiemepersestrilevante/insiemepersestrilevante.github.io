@@ -52,7 +52,7 @@ self.addEventListener("fetch", event => {
   const request = event.request;
   const url = new URL(request.url);
 
-  if (request.method !== "GET" || url.origin !== self.location.origin) return;
+  if (request.method !== "GET" || url.origin !== self.location.origin) return;\n\n  // L’area gestionale privata resta fuori dalla cache offline pubblica.\n  if (url.pathname.startsWith("/gestionale/")) return;
 
   // Le pagine devono essere aggiornate dalla rete; la copia locale è un ripiego offline.
   if (request.mode === "navigate") {
