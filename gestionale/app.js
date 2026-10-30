@@ -33,6 +33,7 @@ const enrollmentDate=v.data_iscrizione||new Date().toISOString().slice(0,10);con
 close();await load();alert((v.tipo==='rinnovo'?'Rinnovo':'Nuovo socio')+' registrato con iscrizione all’annualità '+year+'. Quota di 30 euro da incassare: nessun pagamento è stato registrato.')}catch(err){status.textContent='Salvataggio non riuscito: '+(err.message||'errore');btn.disabled=false}};
 }
 function activate(){const nav=$('nav');if(!nav||nav.dataset.crud==='1')return;nav.dataset.crud='1';nav.onclick=null;nav.insertAdjacentHTML('beforeend','<button data-tab="categorie_movimenti">Categorie</button>');nav.addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(!b||!config[b.dataset.tab])return;state.tab=b.dataset.tab;nav.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));$('title').textContent=config[state.tab].title;load()});$('reload').onclick=load;const original=$('nav').querySelector('[data-tab="soci"]');if(original){original.classList.add('active');setTimeout(()=>load(),700)}}
+window.activateGestionale=activate;
 db.auth.onAuthStateChange((event,session)=>{if(session?.user?.id===ADMIN&&session.user.email?.toLowerCase()==='gioinsa@inwind.it')setTimeout(activate,100);else if(event==='SIGNED_OUT'){$('crudmodal')?.remove()}});
 db.auth.getSession().then(({data})=>{if(data.session?.user?.id===ADMIN&&data.session.user.email?.toLowerCase()==='gioinsa@inwind.it')activate()});
 })();
