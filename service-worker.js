@@ -1,11 +1,13 @@
 const CACHE_PREFIX = "insieme-sestri-pwa-";
-const CACHE_NAME = CACHE_PREFIX + "v4";
+const CACHE_NAME = CACHE_PREFIX + "v5";
 
 const APP_SHELL = [
   "/",
   "/index.html",
   "/manifest.webmanifest",
   "/app-icon.svg",
+  "/logo.jpeg",
+  "/Sfondo.jpg",
   "/site-content.js",
   "/content/site.json"
 ];
@@ -70,7 +72,7 @@ self.addEventListener("fetch", event => {
   }
 
   const pathname = url.pathname;
-  const isRefreshableAsset = /\\.(?:html?|js|css|json|webmanifest)$/i.test(pathname);
+  const isRefreshableAsset = /\.(?:html?|js|css|json|webmanifest)$/i.test(pathname);
 
   // Script, contenuti e manifest: rete prima, cache solo se offline.
   if (isRefreshableAsset) {
