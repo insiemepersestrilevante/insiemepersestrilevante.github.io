@@ -77,6 +77,24 @@
     <!-- FontAwesome Icons CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Accessibilità: focus visibile, ancore leggibili e movimento ridotto */
+        html { scroll-padding-top: 6rem; }
+        section[id] { scroll-margin-top: 6rem; }
+        :focus-visible { outline: 3px solid #f59e0b; outline-offset: 3px; }
+        a, button, input, select, textarea { touch-action: manipulation; }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto !important; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+        @media (max-width: 1023px) {
+            #mobileMenu .mobile-nav-link { min-height: 48px; }
+            #mobileMenuBtn { min-width: 48px; min-height: 48px; }
+        }
         /* Custom Styles for smooth UI touches */
         .glass-nav {
             background: rgba(255, 255, 255, 0.92);
@@ -122,6 +140,7 @@
 })();</script>
   </head>
   <body class="font-sans text-slate-800 bg-slate-50 flex flex-col min-h-screen">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-white focus:text-brand-darkgreen focus:px-4 focus:py-3 focus:rounded-lg focus:shadow-lg font-bold">Salta al contenuto principale</a>
     <!-- TOP HEADER BAR -->
     <div class="bg-brand-darkgreen text-white text-[10px] sm:text-xs py-2 px-3 overflow-x-auto">
       <div class="max-w-7xl mx-auto flex flex-nowrap justify-start lg:justify-between items-center gap-x-4 min-w-max lg:min-w-0">
@@ -170,7 +189,7 @@
             <div class="min-w-0"> <span class="whitespace-nowrap font-serif font-semibold text-[13px] sm:text-base md:text-lg tracking-tight text-brand-green leading-none group-hover:text-brand-darkgreen transition-colors">Insieme per Sestri Levante <span class="font-sans font-extrabold text-brand-green text-[0.82em] tracking-wide">ODV</span></span> </div>
           </a>
           <!-- DESKTOP NAVIGATION -->
-          <nav class="hidden lg:flex items-center space-x-1 xl:space-x-2"> <a href="#home"
+          <nav class="hidden lg:flex items-center space-x-1 xl:space-x-2" aria-label="Navigazione principale"> <a href="#home"
               class="nav-link px-3 py-2 text-sm font-semibold text-slate-700 hover:text-brand-green rounded-lg transition-colors">Home</a>
             <a href="#chi-siamo" class="nav-link px-3 py-2 text-sm font-semibold text-slate-700 hover:text-brand-green rounded-lg transition-colors">Chi
               Siamo</a> <a href="#attivita" class="nav-link px-3 py-2 text-sm font-semibold text-slate-700 hover:text-brand-green rounded-lg transition-colors">Attività</a>
@@ -185,14 +204,14 @@
               <i class="fa-solid fa-hand-holding-heart"></i> Diventa Volontario
             </a> </div>
           <!-- MOBILE MENU BUTTON -->
-          <div class="flex lg:hidden items-center"> <button id="mobileMenuBtn"
-              aria-label="Apri Menu" class="text-slate-700 hover:text-brand-green p-2 rounded-lg focus:outline-none">
+          <div class="flex lg:hidden items-center"> <button id="mobileMenuBtn" type="button"
+              aria-label="Apri menu" aria-controls="mobileMenu" aria-expanded="false" class="text-slate-700 hover:text-brand-green p-2 rounded-lg focus:outline-none">
               <i class="fa-solid fa-bars text-2xl" id="menuIcon"></i> </button>
           </div>
         </div>
       </div>
       <!-- MOBILE NAVIGATION DROPDOWN -->
-      <div id="mobileMenu" class="hidden lg:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-2 shadow-lg">
+      <div id="mobileMenu" role="navigation" aria-label="Navigazione mobile" class="hidden lg:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-2 shadow-lg">
         <a href="#home" class="mobile-nav-link block px-4 py-2.5 text-base font-semibold text-slate-700 hover:bg-emerald-50 hover:text-brand-green rounded-lg">Home</a>
         <a href="#chi-siamo" class="mobile-nav-link block px-4 py-2.5 text-base font-semibold text-slate-700 hover:bg-emerald-50 hover:text-brand-green rounded-lg">Chi
           Siamo</a> <a href="#attivita" class="mobile-nav-link block px-4 py-2.5 text-base font-semibold text-slate-700 hover:bg-emerald-50 hover:text-brand-green rounded-lg">Attività</a>
@@ -205,7 +224,7 @@
         </div>
       </div>
     </header>
-    <main class="flex-grow">
+    <main id="main-content" class="flex-grow">
       <!-- SECTION 1: HERO & HOME -->
       <section id="home" class="relative bg-slate-900 text-white min-h-[85vh] flex items-center justify-center overflow-hidden">
         <!-- Background Image with Lightened Transparent Gradient Overlay -->
@@ -847,16 +866,16 @@
               <div id="contactError" role="alert" aria-live="assertive" class="hidden mb-6 p-4 rounded-xl bg-red-100 border border-red-300 text-red-800 text-sm font-semibold"></div>
               <form id="contactForm" action="#" method="POST" class="space-y-4">
                 <div> <label for="fullName" class="block text-xs font-bold text-slate-700 uppercase mb-1">Nome
-                    e Cognome *</label> <input id="fullName" name="name" required="" placeholder="Mario Rossi"
+                    e Cognome *</label> <input id="fullName" name="name" type="text" autocomplete="name" required="" placeholder="Mario Rossi"
                     class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-transparent text-sm transition-all"
                     type="text"> </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div> <label for="emailAddr" class="block text-xs font-bold text-slate-700 uppercase mb-1">Email
-                      *</label> <input id="emailAddr" name="email" required="" placeholder="mario@esempio.it"
+                      *</label> <input id="emailAddr" name="email" type="email" autocomplete="email" inputmode="email" required="" placeholder="mario@esempio.it"
                       class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-transparent text-sm transition-all"
                       type="email"> </div>
                   <div> <label for="phoneNum" class="block text-xs font-bold text-slate-700 uppercase mb-1">Telefono</label>
-                    <input id="phoneNum" name="phone" placeholder="+39 333 1234567" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-transparent text-sm transition-all"
+                    <input id="phoneNum" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+39 333 1234567" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-green focus:border-transparent text-sm transition-all"
                       type="tel"> </div>
                 </div>
                 <div> <label for="subject" class="block text-xs font-bold text-slate-700 uppercase mb-1">Oggetto
@@ -1062,26 +1081,31 @@
         const mobileMenu = document.getElementById('mobileMenu');
         const menuIcon = document.getElementById('menuIcon');
 
+        const setMobileMenuOpen = (open) => {
+            mobileMenu.classList.toggle('hidden', !open);
+            mobileMenuBtn.setAttribute('aria-expanded', String(open));
+            mobileMenuBtn.setAttribute('aria-label', open ? 'Chiudi menu' : 'Apri menu');
+            menuIcon.classList.toggle('fa-bars', !open);
+            menuIcon.classList.toggle('fa-xmark', open);
+        };
+
         mobileMenuBtn.addEventListener('click', () => {
-            const isHidden = mobileMenu.classList.contains('hidden');
-            if (isHidden) {
-                mobileMenu.classList.remove('hidden');
-                menuIcon.classList.remove('fa-bars');
-                menuIcon.classList.add('fa-xmark');
-            } else {
-                mobileMenu.classList.add('hidden');
-                menuIcon.classList.remove('fa-xmark');
-                menuIcon.classList.add('fa-bars');
-            }
+            setMobileMenuOpen(mobileMenu.classList.contains('hidden'));
         });
 
-        // Close mobile menu on clicking any navigation link
+        // Chiude il menu dopo la navigazione o premendo Esc.
         document.querySelectorAll('.mobile-nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                menuIcon.classList.remove('fa-xmark');
-                menuIcon.classList.add('fa-bars');
-            });
+            link.addEventListener('click', () => setMobileMenuOpen(false));
+        });
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+                setMobileMenuOpen(false);
+                mobileMenuBtn.focus();
+            }
+        });
+        // Se si passa alla visualizzazione desktop, ripristina lo stato del menu mobile.
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024) setMobileMenuOpen(false);
         });
 
         // Filter Activity Cards
