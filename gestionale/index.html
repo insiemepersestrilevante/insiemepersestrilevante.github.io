@@ -14,4 +14,4 @@ async function counts(){for(const [t,id] of [['soci','n-soci'],['iscrizioni','n-
 $('loginform').addEventListener('submit',async e=>{e.preventDefault();$('loginbtn').disabled=true;$('loginmsg').textContent='Controllo credenziali…';const {data,error}=await db.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});$('loginbtn').disabled=false;if(error){$('loginmsg').textContent='Accesso non riuscito: verifica email e password.';return}await render(data.session)});
 $('logout').onclick=async()=>{await db.auth.signOut();location.reload()};db.auth.getSession().then(({data})=>render(data.session));db.auth.onAuthStateChange((ev,s)=>{if(ev==='SIGNED_OUT')render(null)});
 })();
-$('email').value='';$('password').value='';window.addEventListener('pageshow',()=>{$('email').value='';$('password').value=''});</script><script src="app.js" defer></script></body></html>
+$('email').value='';$('password').value='';window.addEventListener('pageshow',()=>{$('email').value='';$('password').value=''});</script><script src="app.js"></script></body></html>
