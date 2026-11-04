@@ -177,23 +177,23 @@ async function loadSolleciti(){
   if(!annuality){records.innerHTML='<div class="empty">Non è ancora configurata l’annualità '+year+'. Crea prima l’annualità nella scheda Annualità.</div><div class="crud-actions"><button class="primary" id="sollecitiAnnualita">Apri annualità</button></div>';$('sollecitiAnnualita').onclick=()=>goTab('annualita');return}
   const paid=new Set((paymentsRes.data||[]).filter(p=>p.annualita_id===annuality.id||(!p.annualita_id&&String(p.data_pagamento||'').slice(0,4)===String(year))).map(p=>p.socio_id));
   const unpaid=(sociRes.data||[]).filter(m=>!paid.has(m.id));
-  let html='<div class="hint" style="margin-bottom:12px">Solleciti per la quota associativa EA1 dell’annualità '+year+'. Sono esclusi i soci con un versamento EA1 registrato per questa annualità.</div>';
+  let html='<div class="hint" style="margin-bottom:12px">Solleciti per la quota associativa EA1 dell’annualità '+year+'. Sono esclusi i soci con un versamento EA1 registrato per questa annualità. Ogni messaggio viene inviato singolarmente, solo dopo la tua conferma.</div>';
   html+='<div class="report-kpis"><div><small>Soci attivi</small><strong>'+((sociRes.data||[]).length)+'</strong></div><div><small>Quota già versata</small><strong>'+((sociRes.data||[]).length-unpaid.length)+'</strong></div><div><small>Da sollecitare</small><strong>'+unpaid.length+'</strong></div></div>';
   if(!unpaid.length)html+='<div class="empty">Tutti i soci attivi risultano in regola per il '+year+'.</div>';
   else{
    html+='<div class="tablewrap"><table><thead><tr><th>Socio</th><th>Numero tessera</th><th>E-mail</th><th>Quota</th><th>Azione</th></tr></thead><tbody>';
    for(const m of unpaid){
     const amount=Number(annuality.quota_base)||0;
-    html+='<tr><td>'+esc((m.cognome||'')+' '+(m.nome||''))+'</td><td>'+esc(m.codice_socio||'—')+'</td><td>'+esc(m.email||'E-mail mancante')+'</td><td>'+(amount>0?euro(amount):'Da definire')+'</td><td>'+(m.email?'<button class="mini primary" data-reminder="'+esc(m.id)+'">Prepara e-mail</button>':'<span class="hint">Inserire e-mail</span>')+'</td></tr>';
+    html+='<tr><td>'+esc((m.cognome||'')+' '+(m.nome||''))+'</td><td>'+esc(m.codice_socio||'—')+'</td><td>'+esc(m.email||'E-mail mancante')+'</td><td>'+(amount>0?euro(amount):'Da definire')+'</td><td>'+(m.email?'<button class="mini primary" data-reminder="'+esc(m.id)+'">Invia sollecito</button>':'<span class="hint">Inserire e-mail</span>')+'</td></tr>';
    }
-   html+='</tbody></table></div><p class="hint" style="margin-top:10px">Il pulsante apre il programma di posta con il messaggio già compilato: l’e-mail parte solo dopo il tuo controllo e il tuo invio.</p>';
+   html+='</tbody></table></div><p class="hint" style="margin-top:10px">L’invio avviene dal tuo account Google dell’associazione. Nessun messaggio viene spedito senza la conferma finale.</p>';
   }
   records.innerHTML=html;
-  records.querySelectorAll('[data-reminder]').forEach(b=>b.onclick=()=>{
+  records.querySelectorAll('[data-reminder]').forEach(b=>b.onclick=async()=>{
    const m=unpaid.find(x=>x.id===b.dataset.reminder);if(!m||!m.email)return;
    const subject='Rinnovo quota associativa '+year+' – Insieme per Sestri Levante';
    const amount=Number(annuality.quota_base)||0;
-   const body='Gentile '+(m.nome||'socio/a')+' '+(m.cognome||'')+',\n\n'
+   const message='Gentile '+(m.nome||'socio/a')+' '+(m.cognome||'')+',\n\n'
     +'ti ricordiamo che la quota associativa annuale '+year+' di Insieme per Sestri Levante risulta ancora da regolarizzare.\n'
     +'La quota associativa scade il 31 dicembre '+year+'.\n'
     +(amount>0?'Importo della quota: '+amount.toLocaleString('it-IT',{style:'currency',currency:'EUR'})+'.\n':'')
@@ -202,7 +202,23 @@ async function loadSolleciti(){
     +'Associazione Insieme per Sestri Levante\n'
     +'Via Alessandro Manzoni 5, 16039 Sestri Levante (GE)\n'
     +'Codice fiscale 90088290102';
-   window.location.href='mailto:'+encodeURIComponent(m.email)+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+   b.disabled=true;b.textContent='Verifica…';
+   try{
+    const check=await db.functions.invoke('send-reminder',{body:{to:m.email,subject,message,send:false}});
+    if(check.error)throw new Error(check.error.message||'Verifica non riuscita');
+    if(check.data?.result!=='validated')throw new Error(check.data?.error||'Il messaggio non ha superato la verifica.');
+    const preview='Destinatario: '+m.email+'\nOggetto: '+subject+'\n\n'+message+'\n\nConfermi l’invio effettivo di questa email?';
+    if(!window.confirm(preview)){b.disabled=false;b.textContent='Invia sollecito';return}
+    b.textContent='Invio…';
+    const sent=await db.functions.invoke('send-reminder',{body:{to:m.email,subject,message,send:true}});
+    if(sent.error)throw new Error(sent.error.message||'Invio non riuscito');
+    if(sent.data?.result!=='success'||sent.data?.sent!==true)throw new Error(sent.data?.error||'Il servizio non ha confermato l’invio.');
+    b.textContent='Inviata';b.disabled=true;
+    alert('Email inviata a '+m.email+'.');
+   }catch(err){
+    b.disabled=false;b.textContent='Riprova';
+    alert('Non è stato possibile inviare il sollecito: '+(err.message||'errore imprevisto'));
+   }
   });
  }catch(err){records.innerHTML='<div class="empty">Caricamento solleciti non riuscito: '+esc(err.message||'errore imprevisto')+'</div>'}
 }
