@@ -168,7 +168,19 @@ function pdfTextRows(page,content){
 function splitPdfValueRow(page,targetY){
   const row=(page?.rows||[]).filter(r=>r.x<50).sort((a,b)=>Math.abs(a.y-targetY)-Math.abs(b.y-targetY))[0];
   if(!row||Math.abs(row.y-targetY)>9)return [];
-  return row.text.split(/\s{3,}/).map(x=>x.trim().replace(/\s+/g,' ')).filter(Boolean);
+  const items=[...(row.items||[])].sort((a,b)=>a.x-b.x);
+  if(!items.length)return row.text?[cleanPdfValue(row.text)]:[];
+  const groups=[];let group=[],right=-Infinity;
+  for(const item of items){
+    const value=cleanPdfValue(item.text);
+    if(!value)continue;
+    const gap=item.x-right;
+    if(group.length&&gap>12){groups.push(group);group=[]}
+    group.push(value);
+    right=Math.max(right,item.x+Math.max(0,item.width||0));
+  }
+  if(group.length)groups.push(group);
+  return groups.map(parts=>cleanPdfValue(parts.join(' '))).filter(Boolean);
 }
 function pdfDateToIso(value){
   const m=String(value||'').match(/(\d{1,2})[\/.\s-]+(\d{1,2})[\/.\s-]+(\d{2,4})/);
