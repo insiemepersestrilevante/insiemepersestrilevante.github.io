@@ -50,9 +50,9 @@ function pdfDateToIso(value){
   if(Number(m[1])<1||Number(m[1])>31||Number(m[2])<1||Number(m[2])>12)return '';
   return year+'-'+mo+'-'+d;
 }
-function cleanPdfValue(value){return String(value||'').trim().replace(/^[\s:.,;-]+|[\s:;,]+$/g,'').replace(/\s+/g,' ')}
+function cleanPdfValue(value){return String(value||'').trim().replace(/^[\s:.,;-]+|[\s:;,.]+$/g,'').replace(/\s+/g,' ')}
 function parseItalianAmount(value){
-  const n=Number(String(value||'').replace(/\./g,'').replace(',','.'));
+  const raw=String(value||'');const n=Number(raw.includes(',')?raw.replace(/\./g,'').replace(',','.'):raw);
   return Number.isFinite(n)&&n>=0?n:null;
 }
 
