@@ -85,7 +85,7 @@ function setExcelFormula(ws,cell,formula,result){ws.getCell(cell).value={formula
 function sumCode(movements,catById,code){return movements.reduce((n,m)=>n+(catById.get(m.categoria_id)?.codice===code?Number(m.importo)||0:0),0)}
 function makeDataSheet(book,year,movements,cats,isIncome){
  const ws=book.addWorksheet((isIncome?'Entrate ':'Uscite ')+year);
- const headers=isIncome?['Numero Ricevuta','Nominativo','Data','Importo','Voci di entrata','Voci Generali','NOTE']:['Numero Scontrino/Fattura','Negozio/Ente','Data','Importo','Descrizione bene','Volontario','Anticipi','Rimborso','Voci di Uscita','Codice Generale'];
+ const headers=isIncome?['Numero Ricevuta','Nominativo','Data','Importo','Voci di entrata','Voci Generali','NOTE']:['Numero Scontrino/Fattura','Negozio/Ente','Data','Importo','Descrizione bene','Volontario','Anticipi','Rimborso','Voci di Uscita','Voci Generali'];
  ws.mergeCells(1,1,1,headers.length);ws.getCell(1,1).value=(isIncome?'ENTRATE ':'USCITE ')+year;ws.getRow(1).height=25;ws.getRow(1).font={bold:true,size:13,color:{argb:'FFFFFFFF'}};ws.getRow(1).alignment={horizontal:'center',vertical:'middle'};ws.getRow(1).eachCell(c=>c.fill={type:'pattern',pattern:'solid',fgColor:{argb:'FF174B3B'}});
  ws.addRow(headers);ws.getRow(2).height=34;ws.getRow(2).font={bold:true,color:{argb:'FFFFFFFF'}};ws.getRow(2).alignment={wrapText:true,vertical:'middle',horizontal:'center'};ws.getRow(2).eachCell(c=>c.fill={type:'pattern',pattern:'solid',fgColor:{argb:'FF2F6954'}});
  const catById=new Map(cats.map(c=>[c.id,c])),rows=movements.filter(m=>(catById.get(m.categoria_id)?.codice||'').startsWith(isIncome?'E':'U'));
