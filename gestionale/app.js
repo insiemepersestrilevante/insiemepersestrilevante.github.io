@@ -400,6 +400,8 @@ async function load(){const table=state.tab,cfg=config[table];if(!cfg)return;if(
   if(!ea1.has(mv.categoria_id)||Number(mv.importo)<=0||(mv.pagamento_id&&linked.has(mv.pagamento_id)))continue;
   if(!/quota|iscrizion|rinnov|tesser/i.test(String(mv.descrizione||''))||/donazion|liberalit|anticipo|rimborso/i.test(String(mv.descrizione||'')))continue;
   const label=norm(mv.nominativo);
+  // Un nominativo con iniziale (es. 'Insalaco S') non può essere attribuito a un altro socio omonimo.
+  if(label==='insalaco s'&&!people.some(m=>m._first==='sara'&&m._last==='insalaco'))continue;
   const match=people.filter(m=>label&&((label===m._last||label===m._first+' '+m._last||label===m._last+' '+m._first)&&!(label==='insalaco s'&&m._first!=='sara')));
   if(match.length!==1)continue;
   ledgerRows.push({id:'ledger:'+mv.id+':'+match[0].id,socio_id:match[0].id,annualita_id:mv.annualita_id,data_pagamento:mv.data_movimento,importo:mv.importo,metodo:mv.metodo||mv.conto||'—',categoria_id:mv.categoria_id,__ledger:true,numero_documento:mv.numero_documento});
