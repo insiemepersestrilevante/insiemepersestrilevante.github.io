@@ -241,7 +241,7 @@ async function receiptPdf(paymentId){
  ctx.fillText('ASSOCIAZIONE INSIEME PER SESTRI LEVANTE ODV',170*scale,42*scale);
  ctx.font=(10*scale)+'px Arial, sans-serif';
  ctx.fillText('Sede Legale: Via Alessandro Manzoni 5, 16039 Sestri Levante (GE)',170*scale,62*scale);
- ctx.fillText('Sede Operativa: Viale Dante, 16039 Sestri Levante (GE)',170*scale,80*scale);
+ ctx.fillText('Sede Operativa: Viale Dante Alighieri, 16039 Sestri Levante (GE)',170*scale,80*scale);
  ctx.fillText('C.F.: 90088290102 | IBAN: IT24S0623032231000035664162',170*scale,98*scale);
  ctx.strokeStyle='#d4d4d4';ctx.beginPath();ctx.moveTo(65*scale,128*scale);ctx.lineTo(530*scale,128*scale);ctx.stroke();
  // Il logo approvato è conservato in gestionale/logo.jpeg; sostituisce quello del PDF di esempio.
@@ -339,7 +339,7 @@ async function prepareReceiptEmail(paymentId){
    +'Segreteria associativa\n\n'
    +'ASSOCIAZIONE INSIEME PER SESTRI LEVANTE ODV\n'
    +'Sede legale: Via Alessandro Manzoni 5, 16039 Sestri Levante (GE)\n'
-   +'Sede operativa: Viale Dante, 16039 Sestri Levante (GE)\n'
+   +'Sede operativa: Viale Dante Alighieri, 16039 Sestri Levante (GE)\n'
    +'Codice fiscale: 90088290102\n'
    +'IBAN: IT24S0623032231000035664162\n'
    +'Email: insiemepersestrilevante@gmail.com\n'
@@ -369,7 +369,7 @@ async function sendMemberReminder(member,button){
   +'Segreteria associativa\n\n'
   +'ASSOCIAZIONE INSIEME PER SESTRI LEVANTE ODV\n'
   +'Sede legale: Via Alessandro Manzoni 5, 16039 Sestri Levante (GE)\n'
-  +'Sede operativa: Viale Dante, 16039 Sestri Levante (GE)\n'
+  +'Sede operativa: Viale Dante Alighieri, 16039 Sestri Levante (GE)\n'
   +'Codice fiscale: 90088290102\n'
   +'IBAN: IT24S0623032231000035664162\n'
   +'Email: insiemepersestrilevante@gmail.com\n'
