@@ -299,7 +299,7 @@ async function prepareReceiptEmail(paymentId){
    +'Codice fiscale: 90088290102\n'
    +'IBAN: IT24S0623032231000035664162\n'
    +'Email: insiemepersestrilevante@gmail.com\n'
-   +'Logo ufficiale: https://insiemepersestrilevante.github.io/gestionale/logo.jpeg';
+   +'Sito web: https://insiemepersestrilevante.github.io/';
   alert('La ricevuta PDF è stata scaricata. Si aprirà Gmail per completare l’invio: verifica che il mittente sia insiemepersestrilevante@gmail.com e allega manualmente il PDF '+filename+'. Il gestionale non può ancora inviare automaticamente allegati.');
   const gmail='https://mail.google.com/mail/?authuser='+encodeURIComponent('insiemepersestrilevante@gmail.com')+'&view=cm&fs=1&to='+encodeURIComponent(m.email)+'&su='+encodeURIComponent(subject)+'&body='+encodeURIComponent(message);
   window.open(gmail,'_blank','noopener');
