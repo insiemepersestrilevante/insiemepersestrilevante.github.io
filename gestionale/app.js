@@ -302,6 +302,22 @@ async function loadSolleciti(){
   const annuality=annualityRes.data;
   if(!annuality){records.innerHTML='<div class="empty">Non è ancora configurata l’annualità '+year+'. Crea prima l’annualità nella scheda Annualità.</div><div class="crud-actions"><button class="primary" id="sollecitiAnnualita">Apri annualità</button></div>';$('sollecitiAnnualita').onclick=()=>goTab('annualita');return}
   const paid=new Set((paymentsRes.data||[]).filter(p=>p.annualita_id===annuality.id||(!p.annualita_id&&String(p.data_pagamento||'').slice(0,4)===String(year))).map(p=>p.socio_id));
+  // Le quote EA1 già registrate nel Rendiconto valgono come pagate, senza duplicazioni.
+  const [movementRes,categoryRes]=await Promise.all([
+   db.from('movimenti').select('annualita_id,data_movimento,descrizione,nominativo,importo,categoria_id').eq('annualita_id',annuality.id).limit(5000),
+   db.from('categorie_movimenti').select('id,codice').eq('codice','EA1')
+  ]);
+  if(movementRes.error)throw movementRes.error;if(categoryRes.error)throw categoryRes.error;
+  const ea1=new Set((categoryRes.data||[]).map(c=>c.id));
+  const norm=receiptNorm;
+  const people=(sociRes.data||[]).map(m=>({...m,_first:norm(m.nome),_last:norm(m.cognome)}));
+  for(const mv of movementRes.data||[]){
+   if(!ea1.has(mv.categoria_id)||Number(mv.importo)<=0)continue;
+   if(!/quota|iscrizion|rinnov|tesser/i.test(String(mv.descrizione||''))||/donazion|liberalit|anticipo|rimborso/i.test(String(mv.descrizione||'')))continue;
+   const label=norm(mv.nominativo);
+   const matches=people.filter(m=>label&&(label===m._last||label===m._first+' '+m._last||label===m._last+' '+m._first));
+   if(matches.length===1)paid.add(matches[0].id);
+  }
   const unpaid=(sociRes.data||[]).filter(m=>!paid.has(m.id));
   let html='<div class="hint" style="margin-bottom:12px">Solleciti per la quota associativa EA1 dell’annualità '+year+'. Sono esclusi i soci con un versamento EA1 registrato per questa annualità. Ogni messaggio viene inviato singolarmente, solo dopo la tua conferma.</div>';
   html+='<div class="report-kpis"><div><small>Soci attivi</small><strong>'+((sociRes.data||[]).length)+'</strong></div><div><small>Quota già versata</small><strong>'+((sociRes.data||[]).length-unpaid.length)+'</strong></div><div><small>Da sollecitare</small><strong>'+unpaid.length+'</strong></div></div>';
