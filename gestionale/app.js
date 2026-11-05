@@ -291,7 +291,15 @@ async function prepareReceiptEmail(paymentId){
    +'Il tuo sostegno è prezioso e ci aiuta a portare avanti le attività dell’associazione.\n\n'
    +'In allegato trovi la ricevuta relativa al versamento della quota associativa per l’anno '+year+'.\n\n'
    +'Grazie ancora per la fiducia e la partecipazione.\n\n'
-   +'Associazione Insieme per Sestri Levante ODV';
+   +'Cordiali saluti,\n'
+   +'Segreteria associativa\n\n'
+   +'ASSOCIAZIONE INSIEME PER SESTRI LEVANTE ODV\n'
+   +'Sede legale: Via Alessandro Manzoni 5, 16039 Sestri Levante (GE)\n'
+   +'Sede operativa: Viale Dante, 16039 Sestri Levante (GE)\n'
+   +'Codice fiscale: 90088290102\n'
+   +'IBAN: IT24S0623032231000035664162\n'
+   +'Email: insiemepersestrilevante@gmail.com\n'
+   +'Logo ufficiale: https://insiemepersestrilevante.github.io/gestionale/logo.jpeg';
   alert('La ricevuta PDF è stata scaricata. Si aprirà Gmail per completare l’invio: verifica che il mittente sia insiemepersestrilevante@gmail.com e allega manualmente il PDF '+filename+'. Il gestionale non può ancora inviare automaticamente allegati.');
   const gmail='https://mail.google.com/mail/?authuser='+encodeURIComponent('insiemepersestrilevante@gmail.com')+'&view=cm&fs=1&to='+encodeURIComponent(m.email)+'&su='+encodeURIComponent(subject)+'&body='+encodeURIComponent(message);
   window.open(gmail,'_blank','noopener');
