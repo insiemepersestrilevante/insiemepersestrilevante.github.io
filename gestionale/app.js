@@ -208,7 +208,6 @@ async function receiptData(paymentId){
 }
 async function receiptPdf(paymentId){
  const {p,r,m,year,amount}=await receiptData(paymentId);
- const jspdf=await receiptScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js','jspdf');
  const scale=2.5;
  const canvas=document.createElement('canvas');canvas.width=Math.ceil(595.28*scale);canvas.height=Math.ceil(841.89*scale);
  const ctx=canvas.getContext('2d',{alpha:false});
@@ -246,8 +245,25 @@ async function receiptPdf(paymentId){
   ["Operazione fuori campo IVA ai sensi dell'art. 4 DPR 633/72.",409]
  ];
  for(const [line,y] of lines){ctx.font=(12*scale)+'px Arial, sans-serif';if(ctx.measureText(line).width>465*scale)throw Error('Testo troppo lungo per il modello ufficiale: '+line.slice(0,40));draw(line,71,y,12)}
- const pdf=new jspdf.jsPDF({orientation:'portrait',unit:'pt',format:'a4',compress:true});
- pdf.addImage(canvas.toDataURL('image/jpeg',0.93),'JPEG',0,0,595.28,841.89);
+ // PDF autonomo: incorpora il JPEG del canvas senza librerie esterne.
+ const jpeg64=canvas.toDataURL('image/jpeg',0.93).split(',')[1];
+ const binary=atob(jpeg64),jpg=new Uint8Array(binary.length);
+ for(let i=0;i<binary.length;i++)jpg[i]=binary.charCodeAt(i);
+ const enc=new TextEncoder(),parts=[],offsets=[0];let length=0;
+ const append=x=>{const bytes=typeof x==='string'?enc.encode(x):x;parts.push(bytes);length+=bytes.length};
+ append('%PDF-1.4\\n');
+ const object=(n,content)=>{offsets[n]=length;append(n+' 0 obj\\n');append(content);append('\\nendobj\\n')};
+ object(1,'<< /Type /Catalog /Pages 2 0 R >>');
+ object(2,'<< /Type /Pages /Kids [3 0 R] /Count 1 >>');
+ object(3,'<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /XObject << /Im0 4 0 R >> >> /Contents 5 0 R >>');
+ offsets[4]=length;append('4 0 obj\\n<< /Type /XObject /Subtype /Image /Width '+canvas.width+' /Height '+canvas.height+' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length '+jpg.length+' >>\\nstream\\n');append(jpg);append('\\nendstream\\nendobj\\n');
+ const commands='q 595.28 0 0 841.89 0 0 cm /Im0 Do Q\\n';
+ object(5,'<< /Length '+enc.encode(commands).length+' >>\\nstream\\n'+commands+'endstream');
+ const xref=length;append('xref\\n0 6\\n0000000000 65535 f \\n');
+ for(let i=1;i<=5;i++)append(String(offsets[i]).padStart(10,'0')+' 00000 n \\n');
+ append('trailer\\n<< /Size 6 /Root 1 0 R >>\\nstartxref\\n'+xref+'\\n%%EOF');
+ const pdfBlob=new Blob(parts,{type:'application/pdf'});
+ const pdf={save(filename){const url=URL.createObjectURL(pdfBlob),link=document.createElement('a');link.href=url;link.download=filename;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),60000)}};
  const filename='Ricevuta_'+num.replace(/[^0-9a-z]+/gi,'_')+'_'+m.cognome.replace(/[^0-9a-zà-ÿ]+/gi,'_')+'_'+m.nome.replace(/[^0-9a-zà-ÿ]+/gi,'_')+'.pdf';
  return {pdf,filename,details:{p,r,m,year,amount}};
 }
