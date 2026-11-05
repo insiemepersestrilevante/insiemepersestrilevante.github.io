@@ -191,6 +191,14 @@ async function receiptPdf(paymentId){
  const page=await doc.getPage(1),scale=2.5,view=page.getViewport({scale});
  const canvas=document.createElement('canvas');canvas.width=Math.ceil(view.width);canvas.height=Math.ceil(view.height);
  const ctx=canvas.getContext('2d',{alpha:false});await page.render({canvasContext:ctx,viewport:view}).promise;
+ // Il logo approvato è conservato in gestionale/logo.jpeg; sostituisce quello del PDF di esempio.
+ const officialLogo=await new Promise((resolve,reject)=>{
+  const im=new Image();im.onload=()=>resolve(im);im.onerror=()=>reject(new Error('Logo ufficiale non disponibile.'));
+  im.src='./logo.jpeg';
+ });
+ ctx.fillStyle='#fff';ctx.fillRect(58*scale,22*scale,105*scale,92*scale);
+ ctx.drawImage(officialLogo,66*scale,27*scale,82*scale,84*scale);
+
  // Cancellazione definitiva dei dati dell'esempio sul raster: il PDF originale non viene incorporato.
  ctx.fillStyle='#fff';ctx.fillRect(65*scale,150*scale,465*scale,265*scale);
  const draw=(text,x,y,size,bold=false)=>{ctx.fillStyle='#000';ctx.font=(bold?'bold ':'')+(size*scale)+'px Arial, sans-serif';ctx.fillText(text,x*scale,y*scale)};
