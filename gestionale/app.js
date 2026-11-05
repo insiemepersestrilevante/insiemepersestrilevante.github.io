@@ -192,7 +192,7 @@ async function ledgerReceiptData(key){
  if(category.error)throw category.error;
  if(category.data.codice!=='EA1'||Number(p.importo)<=0||!/quota|iscrizion|rinnov|tesser/i.test(String(p.descrizione||''))||/donazion|liberalit|anticipo|rimborso/i.test(String(p.descrizione||'')))throw Error('Questo movimento non è una quota associativa.');
  const label=receiptNorm(p.nominativo);
- const matches=(allMembers.data||[]).filter(x=>{const first=receiptNorm(x.nome),last=receiptNorm(x.cognome);return label===last||label===first+' '+last||label===last+' '+first});
+ const matches=(allMembers.data||[]).filter(x=>{const first=receiptNorm(x.nome),last=receiptNorm(x.cognome);return (label===last||label===first+' '+last||label===last+' '+first)&&!(label==='insalaco s'&&first!=='sara')});
  if(matches.length!==1||matches[0].id!==m.id)throw Error('Il nominativo del Rendiconto non identifica univocamente questo socio.');
  if(!p.numero_documento||!/^[0-9]+$/.test(String(p.numero_documento).trim()))throw Error('Il movimento non ha un numero di ricevuta valido.');
  const annual=await db.from('annualita').select('anno').eq('id',p.annualita_id).single();
@@ -333,7 +333,7 @@ async function loadSolleciti(){
    if(!ea1.has(mv.categoria_id)||Number(mv.importo)<=0)continue;
    if(!/quota|iscrizion|rinnov|tesser/i.test(String(mv.descrizione||''))||/donazion|liberalit|anticipo|rimborso/i.test(String(mv.descrizione||'')))continue;
    const label=norm(mv.nominativo);
-   const matches=people.filter(m=>label&&(label===m._last||label===m._first+' '+m._last||label===m._last+' '+m._first));
+   const matches=people.filter(m=>label&&((label===m._last||label===m._first+' '+m._last||label===m._last+' '+m._first)&&!(label==='insalaco s'&&m._first!=='sara')));
    if(matches.length===1)paid.add(matches[0].id);
   }
   const unpaid=(sociRes.data||[]).filter(m=>!paid.has(m.id));
@@ -400,7 +400,7 @@ async function load(){const table=state.tab,cfg=config[table];if(!cfg)return;if(
   if(!ea1.has(mv.categoria_id)||Number(mv.importo)<=0||(mv.pagamento_id&&linked.has(mv.pagamento_id)))continue;
   if(!/quota|iscrizion|rinnov|tesser/i.test(String(mv.descrizione||''))||/donazion|liberalit|anticipo|rimborso/i.test(String(mv.descrizione||'')))continue;
   const label=norm(mv.nominativo);
-  const match=people.filter(m=>label&&(label===m._last||label===m._first+' '+m._last||label===m._last+' '+m._first));
+  const match=people.filter(m=>label&&((label===m._last||label===m._first+' '+m._last||label===m._last+' '+m._first)&&!(label==='insalaco s'&&m._first!=='sara')));
   if(match.length!==1)continue;
   ledgerRows.push({id:'ledger:'+mv.id+':'+match[0].id,socio_id:match[0].id,annualita_id:mv.annualita_id,data_pagamento:mv.data_movimento,importo:mv.importo,metodo:mv.metodo||mv.conto||'—',categoria_id:mv.categoria_id,__ledger:true,numero_documento:mv.numero_documento});
  }
@@ -428,7 +428,7 @@ let memberRenewals={};let ledgerReceipts={};if(table==='soci'){
   const year=years[m.annualita_id]||Number(String(m.data_movimento||'').slice(0,4));
   const label=norm(m.nominativo);if(!label)continue;
   // Il cognome da solo vale soltanto se individua un unico socio.
-  const candidates=people.filter(p=>label===p._last||label===p._first+' '+p._last||label===p._last+' '+p._first);
+  const candidates=people.filter(p=>(label===p._last||label===p._first+' '+p._last||label===p._last+' '+p._first)&&!(label==='insalaco s'&&p._first!=='sara'));
   if(candidates.length===1){register(candidates[0].id,year);if(m.numero_documento&&/^[0-9]+$/.test(String(m.numero_documento).trim())&&(!ledgerReceipts[candidates[0].id]||year>ledgerReceipts[candidates[0].id].year||(year===ledgerReceipts[candidates[0].id].year&&String(m.data_movimento)>String(ledgerReceipts[candidates[0].id].date))))ledgerReceipts[candidates[0].id]={id:m.id,year,number:m.numero_documento,date:m.data_movimento};}
  }
  for(const [id,year] of paidById)memberRenewals[id]='Pagato '+year+' · scadenza 31/12/'+year;
