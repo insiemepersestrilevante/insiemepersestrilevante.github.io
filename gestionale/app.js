@@ -335,7 +335,7 @@ async function sendMemberReminder(member,button){
   +'ti ricordiamo che non risulta ancora registrato il versamento della quota associativa per l’anno '+year+'.\n'
   +'Ti invitiamo cortesemente a provvedere al rinnovo.\n'
   +(amount>0?'Importo della quota: '+amount.toLocaleString('it-IT',{style:'currency',currency:'EUR'})+'.\n':'')
-  +'Per informazioni sulle modalità di versamento puoi rispondere a questa email.\n\n'
+  +'Per il bonifico bancario, utilizza l’IBAN dell’associazione: IT24S0623032231000035664162.\n'\n  +'Per informazioni sulle modalità di versamento puoi rispondere a questa email.\n\n'
   +'Grazie per il tuo sostegno.\n'
   +'Associazione Insieme per Sestri Levante ODV\n'
   +'Via Alessandro Manzoni 5, 16039 Sestri Levante (GE)\n'
