@@ -9,7 +9,36 @@
 (()=>{const db=window.supabase.createClient('https://dccuvlfceuontjniehhf.supabase.co','sb_publishable_hgZeweFGVwpSl3Hrmrk1KQ_hq9mCBxo',{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});window.gestionaleDb=db;const ADMIN='084247bb-729d-494e-a26a-e003520e0932',EMAIL='gioinsa@inwind.it';const $=id=>document.getElementById(id);let tab='soci';const defs={soci:['Soci','Anagrafica soci',['cognome','nome','codice_socio','telefono','email','stato']],annualita:['Annualità','Anni associativi e quote',['anno','data_inizio','data_fine','quota_base']],iscrizioni:['Iscrizioni','Adesioni annuali',['socio_id','annualita_id','data_iscrizione','stato','importo_quota']],pagamenti:['Pagamenti','Versamenti registrati',['data_pagamento','socio_id','importo','metodo','causale']],verbali:['Verbali','Assemblee e direttivo',['data_verbale','numero','tipo','oggetto']],documenti:['Documenti','Archivio documentale',['titolo','categoria','data_documento','descrizione']],movimenti:['Rendiconto','Entrate e uscite',['data_movimento','tipo','descrizione','importo','metodo']]};const labels={cognome:'Cognome',nome:'Nome',codice_socio:'N. tessera',telefono:'Telefono',email:'Email',stato:'Stato',anno:'Anno',data_inizio:'Inizio',data_fine:'Fine',quota_base:'Quota €',socio_id:'ID socio',annualita_id:'ID annualità',data_iscrizione:'Data',importo_quota:'Quota €',data_pagamento:'Data',importo:'Importo €',metodo:'Metodo',causale:'Causale',data_verbale:'Data',numero:'Numero',tipo:'Tipo',oggetto:'Oggetto',titolo:'Titolo',categoria:'Categoria',data_documento:'Data',descrizione:'Descrizione',data_movimento:'Data'};
 function esc(v){return String(v??'—').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 async function render(session){if(!session){$('login').classList.remove('hidden');$('dashboard').classList.add('hidden');$('account').classList.add('hidden');return}if(session.user.id!==ADMIN||session.user.email?.toLowerCase()!==EMAIL){await db.auth.signOut();$('loginmsg').textContent='Account non autorizzato.';return}$('login').classList.add('hidden');$('dashboard').classList.remove('hidden');$('account').classList.remove('hidden');$('accountmail').textContent=session.user.email;await counts();if(window.activateGestionale)window.activateGestionale()}
-async function counts(){for(const [t,id] of [['soci','n-soci'],['iscrizioni','n-iscrizioni'],['pagamenti','n-pagamenti'],['documenti','n-documenti']]){const {count,error}=await db.from(t).select('*',{count:'exact',head:true});$(id).textContent=error?'—':count}}
+async function counts(){
+ for(const [t,id] of [['soci','n-soci'],['iscrizioni','n-iscrizioni'],['documenti','n-documenti']]){
+  const {count,error}=await db.from(t).select('*',{count:'exact',head:true});
+  $(id).textContent=error?'—':count;
+ }
+ const output=$('n-pagamenti');
+ try{
+  const [payments,members,movements,categories]=await Promise.all([
+   db.from('pagamenti').select('id').limit(5000),
+   db.from('soci').select('id,nome,cognome').limit(5000),
+   db.from('movimenti').select('id,nominativo,descrizione,importo,categoria_id,pagamento_id').limit(5000),
+   db.from('categorie_movimenti').select('id').eq('codice','EA1')
+  ]);
+  if([payments,members,movements,categories].some(r=>r.error))throw Error('Conteggio non disponibile');
+  const norm=v=>String(v||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().replace(/\\s+/g,' ');
+  const people=(members.data||[]).map(m=>({first:norm(m.nome),last:norm(m.cognome)}));
+  const linked=new Set((payments.data||[]).map(p=>p.id));
+  const ea1=new Set((categories.data||[]).map(c=>c.id));
+  let count=(payments.data||[]).length;
+  for(const mv of movements.data||[]){
+   if(!ea1.has(mv.categoria_id)||Number(mv.importo)<=0||(mv.pagamento_id&&linked.has(mv.pagamento_id)))continue;
+   if(!/quota|iscrizion|rinnov|tesser/i.test(String(mv.descrizione||''))||/donazion|liberalit|anticipo|rimborso/i.test(String(mv.descrizione||'')))continue;
+   const label=norm(mv.nominativo);
+   if(label==='insalaco s'&&!people.some(m=>m.first==='sara'&&m.last==='insalaco'))continue;
+   const matches=people.filter(m=>label&&(label===m.last||label===m.first+' '+m.last||label===m.last+' '+m.first)&&!(label==='insalaco s'&&m.first!=='sara'));
+   if(matches.length===1)count++;
+  }
+  output.textContent=String(count);
+ }catch(err){output.textContent='—';console.error('Conteggio pagamenti:',err)}
+}
 
 $('loginform').addEventListener('submit',async e=>{e.preventDefault();$('loginbtn').disabled=true;$('loginmsg').textContent='Controllo credenziali…';const {data,error}=await db.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});$('loginbtn').disabled=false;if(error){$('loginmsg').textContent='Accesso non riuscito: verifica email e password.';return}await render(data.session)});
 $('logout').onclick=async()=>{await db.auth.signOut();location.reload()};db.auth.getSession().then(({data})=>render(data.session));db.auth.onAuthStateChange((ev,s)=>{if(ev==='SIGNED_OUT')render(null)});
