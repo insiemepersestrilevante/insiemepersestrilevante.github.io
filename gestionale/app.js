@@ -331,21 +331,21 @@ async function sendMemberReminder(member,button){
  if(!annual)throw new Error('Annualità '+year+' non configurata.');
  const amount=Number(annual.quota_base)||0;
  const subject='Promemoria quota associativa '+year+' – Insieme per Sestri Levante';
- const message='Gentile '+(member.nome||'socio/a')+' '+(member.cognome||'')+',\\n\\n'
-  +'ti ricordiamo che non risulta ancora registrato il versamento della quota associativa per l’anno '+year+'.\\n'
-  +'Ti invitiamo cortesemente a provvedere al rinnovo.\\n'
-  +(amount>0?'Importo della quota: '+amount.toLocaleString('it-IT',{style:'currency',currency:'EUR'})+'.\\n':'')
-  +'Per informazioni sulle modalità di versamento puoi rispondere a questa email.\\n\\n'
-  +'Grazie per il tuo sostegno.\\n'
-  +'Associazione Insieme per Sestri Levante ODV\\n'
-  +'Via Alessandro Manzoni 5, 16039 Sestri Levante (GE)\\n'
+ const message='Gentile '+(member.nome||'socio/a')+' '+(member.cognome||'')+',\n\n'
+  +'ti ricordiamo che non risulta ancora registrato il versamento della quota associativa per l’anno '+year+'.\n'
+  +'Ti invitiamo cortesemente a provvedere al rinnovo.\n'
+  +(amount>0?'Importo della quota: '+amount.toLocaleString('it-IT',{style:'currency',currency:'EUR'})+'.\n':'')
+  +'Per informazioni sulle modalità di versamento puoi rispondere a questa email.\n\n'
+  +'Grazie per il tuo sostegno.\n'
+  +'Associazione Insieme per Sestri Levante ODV\n'
+  +'Via Alessandro Manzoni 5, 16039 Sestri Levante (GE)\n'
   +'C.F. 90088290102';
  button.disabled=true;button.textContent='Verifica…';
  try{
   const check=await db.functions.invoke('send-reminder',{body:{to:member.email,subject,message,send:false}});
   if(check.error)throw new Error(check.error.message||'Verifica non riuscita');
   if(check.data?.result!=='validated')throw new Error(check.data?.error||'Messaggio non validato');
-  if(!window.confirm('Destinatario: '+member.email+'\\nOggetto: '+subject+'\\n\\n'+message+'\\n\\nConfermi l’invio effettivo?'))return;
+  if(!window.confirm('Destinatario: '+member.email+'\nOggetto: '+subject+'\n\n'+message+'\n\nConfermi l’invio effettivo?'))return;
   button.textContent='Invio…';
   const sent=await db.functions.invoke('send-reminder',{body:{to:member.email,subject,message,send:true}});
   if(sent.error)throw new Error(sent.error.message||'Invio non riuscito');
