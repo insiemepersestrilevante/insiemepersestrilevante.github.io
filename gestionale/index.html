@@ -10,10 +10,15 @@
 function esc(v){return String(v??'—').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 async function render(session){if(!session){$('login').classList.remove('hidden');$('dashboard').classList.add('hidden');$('account').classList.add('hidden');return}if(session.user.id!==ADMIN||session.user.email?.toLowerCase()!==EMAIL){await db.auth.signOut();$('loginmsg').textContent='Account non autorizzato.';return}$('login').classList.add('hidden');$('dashboard').classList.remove('hidden');$('account').classList.remove('hidden');$('accountmail').textContent=session.user.email;await counts();if(window.activateGestionale)window.activateGestionale()}
 async function counts(){
- for(const [t,id] of [['soci','n-soci'],['documenti','n-documenti']]){
+ for(const [t,id] of [['soci','n-soci']]){
   const {count,error}=await db.from(t).select('*',{count:'exact',head:true});
   $(id).textContent=error?'—':count;
  }
+ const [docs,minutes]=await Promise.all([
+  db.from('documenti').select('id,verbale_id').limit(5000),
+  db.from('verbali').select('id').limit(5000)
+ ]);
+ $('n-documenti').textContent=docs.error||minutes.error?'—':String((minutes.data||[]).length+(docs.data||[]).filter(d=>!d.verbale_id).length);
  const output=$('n-pagamenti');
  try{
   const [payments,members,movements,categories]=await Promise.all([
