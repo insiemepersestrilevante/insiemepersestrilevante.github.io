@@ -208,15 +208,19 @@ async function receiptData(paymentId){
 }
 async function receiptPdf(paymentId){
  const {p,r,m,year,amount}=await receiptData(paymentId);
- const {data:blob,error}=await db.storage.from(BUCKET).download(RECEIPT_TEMPLATE_PATH);
- if(error)throw Error('Modello ufficiale non accessibile: '+error.message);
- const pdfjs=await receiptScript('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js','pdfjsLib');
- pdfjs.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
  const jspdf=await receiptScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js','jspdf');
- const doc=await pdfjs.getDocument({data:new Uint8Array(await blob.arrayBuffer())}).promise;
- const page=await doc.getPage(1),scale=2.5,view=page.getViewport({scale});
- const canvas=document.createElement('canvas');canvas.width=Math.ceil(view.width);canvas.height=Math.ceil(view.height);
- const ctx=canvas.getContext('2d',{alpha:false});await page.render({canvasContext:ctx,viewport:view}).promise;
+ const scale=2.5;
+ const canvas=document.createElement('canvas');canvas.width=Math.ceil(595.28*scale);canvas.height=Math.ceil(841.89*scale);
+ const ctx=canvas.getContext('2d',{alpha:false});
+ ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);
+ ctx.fillStyle='#000';ctx.textAlign='left';
+ ctx.font='bold '+(13*scale)+'px Arial, sans-serif';
+ ctx.fillText('ASSOCIAZIONE INSIEME PER SESTRI LEVANTE ODV',170*scale,42*scale);
+ ctx.font=(10*scale)+'px Arial, sans-serif';
+ ctx.fillText('Sede Legale: Via Alessandro Manzoni 5, 16039 Sestri Levante (GE)',170*scale,62*scale);
+ ctx.fillText('Sede Operativa: Viale Dante, 16039 Sestri Levante (GE)',170*scale,80*scale);
+ ctx.fillText('C.F.: 90088290102 | IBAN: IT24S0623032231000035664162',170*scale,98*scale);
+ ctx.strokeStyle='#d4d4d4';ctx.beginPath();ctx.moveTo(65*scale,128*scale);ctx.lineTo(530*scale,128*scale);ctx.stroke();
  // Il logo approvato è conservato in gestionale/logo.jpeg; sostituisce quello del PDF di esempio.
  const officialLogo=await new Promise((resolve,reject)=>{
   const im=new Image();im.onload=()=>resolve(im);im.onerror=()=>reject(new Error('Logo ufficiale non disponibile.'));
@@ -225,8 +229,7 @@ async function receiptPdf(paymentId){
  ctx.fillStyle='#fff';ctx.fillRect(58*scale,22*scale,105*scale,92*scale);
  ctx.drawImage(officialLogo,66*scale,27*scale,82*scale,84*scale);
 
- // Cancellazione definitiva dei dati dell'esempio sul raster: il PDF originale non viene incorporato.
- ctx.fillStyle='#fff';ctx.fillRect(65*scale,150*scale,465*scale,265*scale);
+ // Il PDF è costruito localmente senza incorporare dati personali del documento campione.
  const draw=(text,x,y,size,bold=false)=>{ctx.fillStyle='#000';ctx.font=(bold?'bold ':'')+(size*scale)+'px Arial, sans-serif';ctx.fillText(text,x*scale,y*scale)};
  const number=String(r.numero).trim();const num=number.includes('/')?number:number+' / '+year;
  const title='RICEVUTA QUOTA ASSOCIATIVA N° '+num;
