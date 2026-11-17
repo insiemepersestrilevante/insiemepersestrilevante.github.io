@@ -77,3 +77,10 @@ test('scritture diverse dai soci, eliminazione e update senza id restano bloccat
   }
   assert.equal(calls.length,0);
 });
+
+test('altre tabelle rimangono bloccate anche se la route NAS è predisposta',async()=>{
+  const {db,calls}=adapter({});
+  const result=await db.from('annualita').insert({anno:2027});
+  assert.ok(result.error);
+  assert.equal(calls.length,0);
+});
