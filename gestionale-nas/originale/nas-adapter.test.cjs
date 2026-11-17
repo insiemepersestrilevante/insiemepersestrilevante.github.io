@@ -84,3 +84,10 @@ test('altre tabelle rimangono bloccate anche se la route NAS è predisposta',asy
   assert.ok(result.error);
   assert.equal(calls.length,0);
 });
+
+test('login con email differente non raggiunge il NAS',async()=>{
+  const {db,calls}=adapter({});
+  const result=await db.auth.signInWithPassword({email:'non-autorizzato@example.org',password:'test'});
+  assert.ok(result.error);
+  assert.equal(calls.length,0);
+});
