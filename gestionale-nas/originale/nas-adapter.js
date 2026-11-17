@@ -103,6 +103,39 @@ const auth={
   },
   onAuthStateChange(fn){subscribers.add(fn);return {data:{subscription:{unsubscribe(){subscribers.delete(fn)}}}}}
 };
-const unavailable=()=>({upload:async()=>forbidden(),remove:async()=>forbidden(),info:async()=>forbidden(),createSignedUrl:async()=>forbidden()});
-window.gestionaleNasCompat=Object.freeze({auth,from:query,storage:{from:unavailable},functions:{invoke:async()=>forbidden()}});
+const filePath=p=>'/api/originale/files/'+p.split('/').map(encodeURIComponent).join('/');
+function storage(bucket){
+  const enabled=()=>window.NAS_ORIGINALE_ARCHIVIO_VERIFICATO===true;
+  return {
+    async upload(p,file,opts={}){
+      if(!enabled()||opts.upsert===true)return forbidden();
+      try{
+        const {csrfToken}=await request('/api/csrf');
+        const result=await request(filePath(p),{method:'PUT',headers:{'Content-Type':'application/octet-stream','X-CSRF-Token':csrfToken},body:file});
+        return {data:result,error:null};
+      }catch(e){return {data:null,error:{message:e.message}}}
+    },
+    async remove(paths){
+      if(!enabled()||!Array.isArray(paths)||paths.length!==1)return forbidden();
+      try{
+        const {csrfToken}=await request('/api/csrf');
+        const result=await request(filePath(paths[0]),{method:'DELETE',headers:{'X-CSRF-Token':csrfToken}});
+        return {data:result,error:null};
+      }catch(e){return {data:null,error:{message:e.message}}}
+    },
+    async info(p){
+      // Non sostituire una verifica remota con un falso positivo.
+      return forbidden();
+    },
+    async createSignedUrl(p){
+      if(!enabled())return forbidden();
+      try{
+        // URL a sessione NAS, NON link firmato condivisibile: accessibile solo dopo login.
+        const url=filePath(p);
+        return {data:{signedUrl:url},error:null};
+      }catch(e){return {data:null,error:{message:e.message}}}
+    }
+  };
+}
+window.gestionaleNasCompat=Object.freeze({auth,from:query,storage:{from:storage},functions:{invoke:async()=>forbidden()}});
 })();
