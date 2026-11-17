@@ -1,0 +1,20 @@
+# File locali del NAS: non versionare dati reali, backup o segreti
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+**/admin.json
+**/backup-*/
+**/aggiornamento-nas/
+**/node_modules/
+**/.DS_Store
+**/Thumbs.db
+**/*.log
+**/*.sql.gz
+**/*.dump
+**/*.backup
+**/archivio-privato/
+**/storage-originale/
