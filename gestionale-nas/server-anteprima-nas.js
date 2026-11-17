@@ -46,5 +46,9 @@ app.post('/api/logout',security.richiediAccesso,security.richiediCsrf,(req,res)=
 require('./api-soci.js')(app,pool);
 require('./api-tabelle.js')(app,pool);
 require('./api-soci-scrittura.js')({app,pool,richiediAccesso:security.richiediAccesso,richiediCsrf:security.richiediCsrf});
+// Non attivare finché schema, backup e test CRUD non sono verificati sul NAS.
+if(process.env.NAS_ORIGINALE_SCRITTURE_VERIFICATE==='true') {
+  require('./api-originale-scrittura.js')({app,pool,richiediAccesso:security.richiediAccesso,richiediCsrf:security.richiediCsrf});
+}
 app.use(express.static('/node/app/anteprima-nas'));
 app.listen(3003,'0.0.0.0',()=>console.log('Anteprima NAS con protezioni HTTPS e CSRF pronta'));
