@@ -24,7 +24,9 @@ for(const f of ['api-soci.js','api-tabelle.js']) if(typeof appRequire('/node/app
 # Backup reale PostgreSQL prima di abilitare qualsiasi scrittura.
 docker exec postgres-associazione pg_dump -U associazione -d associazione_db -Fc > "$BACKUP/associazione_db.dump"
 test -s "$BACKUP/associazione_db.dump" || { echo "Backup database non riuscito"; exit 1; }
-docker exec postgres-associazione pg_restore -l /dev/stdin < "$BACKUP/associazione_db.dump" >/dev/null || { echo "Backup non leggibile"; exit 1; }
+# Il file dump è sul NAS host, non dentro il container: verifica con pg_restore via stdin.
+docker exec -i postgres-associazione pg_restore -l < "$BACKUP/associazione_db.dump" > "$BACKUP/backup-indice.txt" || { echo "Backup non leggibile"; exit 1; }
+grep -q 'TABLE DATA' "$BACKUP/backup-indice.txt" || { echo "Backup senza tabelle dati: attivazione annullata"; exit 1; }
 for name in server-anteprima.js server-anteprima-nas.js sicurezza-nas.js api-soci-scrittura.js; do
   if test -f "$ROOT/$name"; then cp -p "$ROOT/$name" "$BACKUP/$name"; fi
 done
