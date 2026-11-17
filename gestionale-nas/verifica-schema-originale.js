@@ -1,7 +1,6 @@
 'use strict';
 // Preflight di sola lettura per il database NAS: nessuna modifica ai dati.
 // Uso sul NAS: node verifica-schema-originale.js (con PG* già configurati).
-const {Pool}=require('pg');
 const TABLES=['soci','annualita','iscrizioni','pagamenti','verbali','documenti','movimenti','categorie_movimenti','ricevute'];
 const FIELDS={
  soci:['id','nome','cognome','codice_socio','stato'],
@@ -31,6 +30,7 @@ async function verify(pool){
   return report;
 }
 if(require.main===module){
+  const {Pool}=require('pg');
   const pool=new Pool();
   verify(pool).then(report=>{
     for(const t of report.tables)console.log(t.table+': '+(t.exists?t.count+' record':'ASSENTE')+(t.missing.length?' | colonne mancanti: '+t.missing.join(', '):''));
