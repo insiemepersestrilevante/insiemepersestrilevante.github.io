@@ -18,7 +18,7 @@ function parse(body, partial = false) {
     if (typeof v === 'string') {
       v = v.trim();
       if (v.length > 5000) throw new Error('Campo troppo lungo: ' + k);
-      if (dates.has(k) && v && (!/^\\d{4}-\\d{2}-\\d{2}$/.test(v) || Number.isNaN(Date.parse(v)) || new Date(v).toISOString().slice(0,10) !== v)) throw new Error('Data non valida: ' + k);
+      if (dates.has(k) && v && (!/^\d{4}-\d{2}-\d{2}$/.test(v) || Number.isNaN(Date.parse(v)) || new Date(v).toISOString().slice(0,10) !== v)) throw new Error('Data non valida: ' + k);
       if (v === '') v = null;
     }
     if (k === 'stato' && !states.has(v)) throw new Error('Stato non valido');
