@@ -1,0 +1,24 @@
+name: Test gestionale NAS
+on:
+  push:
+    branches: [gestionale-terramaster]
+    paths:
+      - 'gestionale-nas/**'
+      - '.github/workflows/test-gestionale-nas.yml'
+  workflow_dispatch:
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Controllo sintassi moduli
+        run: |
+          node --check gestionale-nas/client.js
+          node --check gestionale-nas/server-anteprima-nas.js
+          node --check gestionale-nas/api-soci-scrittura.js
+          node --check gestionale-nas/sicurezza-nas.js
+      - name: Test sicurezza e soci
+        run: node --test gestionale-nas/*.test.cjs
