@@ -53,3 +53,33 @@ test('ricevute: blocca inserimento se mancano i trigger contabili',async()=>{
  assert.equal(status,503);
  assert.match(payload.errore,/trigger/);
 });
+
+test('cancellazione ricevute rifiutata senza interrogare il database',async()=>{
+ const routes={};
+ const app={post(p,...h){routes[p]=h},patch(p,...h){routes[p]=h},delete(p,...h){routes[p]=h}};
+ const pool={query(){throw Error('Query non consentita')}};
+ const guard=(req,res,next)=>next();
+ register({app,pool,richiediAccesso:guard,richiediCsrf:guard});
+ const handler=routes['/api/originale/:table/:id'].at(-1);
+ let status=200,payload;
+ const res={status(n){status=n;return this},json(data){payload=data;return this}};
+ await handler({params:{table:'ricevute',id:'00000000-0000-4000-8000-000000000000'}},res);
+ assert.equal(status,400);
+ assert.match(payload.errore,/non consentita/);
+});
+test('cancellazione su tabella autorizzata usa SQL parametrizzato',async()=>{
+ const routes={};
+ const app={post(p,...h){routes[p]=h},patch(p,...h){routes[p]=h},delete(p,...h){routes[p]=h}};
+ const id='00000000-0000-4000-8000-000000000000';
+ let query;
+ const pool={async query(sql,values){query={sql,values};return {rowCount:1,rows:[{id}]}}};
+ const guard=(req,res,next)=>next();
+ register({app,pool,richiediAccesso:guard,richiediCsrf:guard});
+ const handler=routes['/api/originale/:table/:id'].at(-1);
+ let result;
+ const res={status(){return this},json(data){result=data;return this}};
+ await handler({params:{table:'verbali',id}},res);
+ assert.equal(query.sql,'DELETE FROM "verbali" WHERE id=$1 RETURNING id');
+ assert.deepEqual(query.values,[id]);
+ assert.equal(result.id,id);
+});
