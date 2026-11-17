@@ -76,5 +76,20 @@ module.exports = function register({app,pool,richiediAccesso,richiediCsrf}){
       return res.status(500).json({errore:'Modifica non riuscita'});
     }
   });
+  // Cancellazione consentita solo per le tabelle per cui l'originale la prevede.
+  // Ricevute escluse: numeri fiscali immutabili, si annullano anziché eliminare.
+  app.delete('/api/originale/:table/:id',...guards,async(req,res)=>{
+    const {table,id}=req.params;
+    if(!tables.has(table)||table==='ricevute'||!uuid.test(id))
+      return res.status(400).json({errore:'Cancellazione non consentita'});
+    try{
+      const result=await pool.query('DELETE FROM "'+table+'" WHERE id=$1 RETURNING id',[id]);
+      if(!result.rowCount)return res.status(404).json({errore:'Record non trovato'});
+      return res.json({id:result.rows[0].id});
+    }catch(e){
+      if(e.code==='23503')return res.status(409).json({errore:'Record collegato ad altri dati: cancellazione impedita'});
+      return res.status(500).json({errore:'Cancellazione non riuscita'});
+    }
+  });
 };
 module.exports.validateBody=validateBody;
