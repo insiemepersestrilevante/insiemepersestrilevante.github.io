@@ -36,3 +36,20 @@ test('route di inserimento verifica tabella e non esegue query per tabella estra
  assert.equal(status,404);
  assert.match(payload.errore,/non consentita/);
 });
+
+test('ricevute: blocca inserimento se mancano i trigger contabili',async()=>{
+ const routes={};
+ const app={post(p,...h){routes[p]=h},patch(p,...h){routes[p]=h}};
+ const pool={async query(sql){
+   assert.match(sql,/pg_trigger/);
+   return {rows:[]};
+ }};
+ const guard=(req,res,next)=>next();
+ register({app,pool,richiediAccesso:guard,richiediCsrf:guard});
+ const handler=routes['/api/originale/:table'].at(-1);
+ let status=200,payload;
+ const res={status(n){status=n;return this},json(data){payload=data;return this}};
+ await handler({params:{table:'ricevute'},body:{pagamento_id:'00000000-0000-4000-8000-000000000000'}},res);
+ assert.equal(status,503);
+ assert.match(payload.errore,/trigger/);
+});
