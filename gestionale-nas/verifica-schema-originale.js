@@ -28,7 +28,8 @@ async function verify(pool){
     report.tables.push({table,count,missing,exists:columns.size>0});
     if(!columns.size||missing.length)report.ok=false;
   }
-  const triggers=await pool.query("SELECT tgname FROM pg_trigger WHERE NOT tgisinternal AND tgrelid='public.ricevute'::regclass");
+  const hasReceipts=report.tables.find(t=>t.table==='ricevute').exists;
+  const triggers=hasReceipts?await pool.query("SELECT tgname FROM pg_trigger WHERE NOT tgisinternal AND tgrelid='public.ricevute'::regclass"):{rows:[]};
   const found=new Set(triggers.rows.map(r=>r.tgname));
   report.missingReceiptTriggers=RECEIPT_TRIGGERS.filter(name=>!found.has(name));
   if(report.missingReceiptTriggers.length)report.ok=false;
