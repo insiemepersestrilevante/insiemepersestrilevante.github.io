@@ -14,10 +14,12 @@ for name in autenticazione.js api-soci.js api-tabelle.js server-anteprima.js adm
 done
 # Verifica che le dipendenze siano compatibili PRIMA di fermare il vecchio processo.
 docker exec server-gestionale node -e "
-const a=require('/node/app/autenticazione.js');
+const {createRequire}=require('node:module');
+const appRequire=createRequire('/node/app/server.js');
+const a=appRequire('/node/app/autenticazione.js');
 if(typeof a.verificaPassword!=='function') process.exit(31);
-for(const m of ['express','express-session','connect-pg-simple','pg','express-rate-limit']) require(m);
-for(const f of ['api-soci.js','api-tabelle.js']) if(typeof require('/node/app/'+f)!=='function') process.exit(32);
+for(const m of ['express','express-session','connect-pg-simple','pg','express-rate-limit']) appRequire(m);
+for(const f of ['api-soci.js','api-tabelle.js']) if(typeof appRequire('/node/app/'+f)!=='function') process.exit(32);
 " || { echo "Moduli NAS non compatibili: nessuna modifica eseguita"; exit 1; }
 # Backup reale PostgreSQL prima di abilitare qualsiasi scrittura.
 docker exec postgres-associazione pg_dump -U associazione -d associazione_db -Fc > "$BACKUP/associazione_db.dump"
@@ -38,10 +40,11 @@ mkdir -p "$ROOT/anteprima-nas"
 OLD_PID=$(docker exec server-gestionale node -e "
 const fs=require('fs');
 for(const p of fs.readdirSync('/proc')){
- if(!/^\\d+$/.test(p)||Number(p)===1)continue;
- try{const cmd=fs.readFileSync('/proc/'+p+'/cmdline','utf8').replace(/\\0/g,' ');
- if(/node \\/node\\/app\\/server-anteprima(?:-nas)?\\.js(?: |$)/.test(cmd))console.log(p)}
- catch{}
+ if(!Number.isInteger(Number(p))||Number(p)<=1)continue;
+ try{
+  const cmd=fs.readFileSync('/proc/'+p+'/cmdline','utf8').split(String.fromCharCode(0)).filter(Boolean);
+  if(cmd.some(x=>x==='/node/app/server-anteprima.js'||x==='/node/app/server-anteprima-nas.js'))console.log(p);
+ }catch{}
 }" | head -n1)
 restore() {
   echo "Avvio non riuscito: ripristino dell'anteprima precedente..."
