@@ -40,3 +40,17 @@ test('sessione NAS e uscita non simulano successo se server rifiuta',async()=>{
   const logout=await db.auth.signOut();
   assert.ok(logout.error);
 });
+
+test('CRUD originali falliscono con errore esplicito e non inviano dati',async()=>{
+  const {db,calls}=adapter({});
+  for(const operation of [
+    db.from('soci').insert({nome:'Prova'}).select('id').single(),
+    db.from('soci').update({nome:'Prova'}).eq('id','x'),
+    db.from('soci').delete().eq('id','x'),
+    db.from('soci').upsert({id:'x'}).select('*').maybeSingle()
+  ]){
+    const result=await operation;
+    assert.match(result.error.message,/non ancora migrata/);
+  }
+  assert.equal(calls.length,0);
+});
