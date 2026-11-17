@@ -24,7 +24,20 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ password })
     }),
-    logout: () => request('/api/logout', { method: 'POST' }),
+    csrf: () => request('/api/csrf'),
+    logout: async () => {
+      const {csrfToken} = await request('/api/csrf');
+      return request('/api/logout', { method: 'POST', headers: {'X-CSRF-Token':csrfToken} });
+    },
+    createSocio: async (data) => {
+      const {csrfToken} = await request('/api/csrf');
+      return request('/api/soci', { method:'POST', headers:{'Content-Type':'application/json','X-CSRF-Token':csrfToken}, body:JSON.stringify(data) });
+    },
+    updateSocio: async (id, data) => {
+      if (!/^[0-9a-f-]{36}$/i.test(id)) throw new Error('ID socio non valido');
+      const {csrfToken} = await request('/api/csrf');
+      return request('/api/soci/'+encodeURIComponent(id), { method:'PATCH', headers:{'Content-Type':'application/json','X-CSRF-Token':csrfToken}, body:JSON.stringify(data) });
+    },
     read: (table) => {
       if (!allowed.has(table)) return Promise.reject(new Error('Tabella non consentita'));
       return request('/api/' + table);
