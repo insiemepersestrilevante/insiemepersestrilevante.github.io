@@ -61,19 +61,20 @@ function query(table){
       catch(fn){return executeWrite().catch(fn)}
     };
     async function executeWrite(){
-      if(!['insert','update'].includes(method))return forbidden();
+      if(!['insert','update','delete'].includes(method))return forbidden();
+      if(method==='delete'&&(table==='ricevute'||table==='soci'))return forbidden();
       if(table!=='soci'&&window.NAS_ORIGINALE_SCRITTURE_VERIFICATE!==true)return forbidden();
       try{
         if(method==='insert'&&Array.isArray(payload))throw Error('Inserimento multiplo non supportato');
-        if(method==='update'&&!id)throw Error('ID socio obbligatorio');
+        if((method==='update'||method==='delete')&&!id)throw Error('ID record obbligatorio');
         const {csrfToken}=await request('/api/csrf');
         if(!csrfToken)throw Error('Token CSRF assente');
         const base=table==='soci'?'/api/soci':'/api/originale/'+encodeURIComponent(table);
         const path=method==='insert'?base:base+'/'+encodeURIComponent(id);
         const data=await request(path,{
-          method:method==='insert'?'POST':'PATCH',
+          method:method==='insert'?'POST':method==='update'?'PATCH':'DELETE',
           headers:{'Content-Type':'application/json','X-CSRF-Token':csrfToken},
-          body:JSON.stringify(payload)
+          ...(method==='delete'?{}:{body:JSON.stringify(payload)})
         });
         return {data:returnRows?(returnOne?data:[data]):null,error:null};
       }catch(e){return {data:null,error:{message:e.message}}}
