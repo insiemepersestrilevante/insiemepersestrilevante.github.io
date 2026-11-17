@@ -47,20 +47,35 @@ function query(table){
       return {data:head?null:rows,error:null,count:wantCount?count:null};
     }catch(e){return {data:null,error:{message:e.message},count:null}}
   }
-  // Mantiene la sintassi Supabase anche quando la scrittura non è ancora disponibile:
-  // un errore esplicito è più sicuro di un TypeError o di un successo simulato.
-  for(const method of ['insert','update','upsert','delete'])builder[method]=()=>{
-    const blocked={
-      select(){return blocked},
-      eq(){return blocked},
-      order(){return blocked},
-      limit(){return blocked},
-      single(){return blocked},
-      maybeSingle(){return blocked},
-      then(resolve,reject){return Promise.resolve(forbidden()).then(resolve,reject)},
-      catch(fn){return Promise.resolve(forbidden()).catch(fn)}
+  // Scritture abilitate esclusivamente per i soci, tramite API NAS esistente.
+  // Le altre tabelle rimangono bloccate finché non saranno migrate e verificate.
+  for(const method of ['insert','update','upsert','delete'])builder[method]=(payload)=>{
+    let id=null,returnRows=false,returnOne=false,returnOptional=false;
+    const write={
+      select(){returnRows=true;return write},
+      eq(field,value){if(field==='id')id=value;else id=null;return write},
+      single(){returnOne=true;return write},
+      maybeSingle(){returnOne=true;returnOptional=true;return write},
+      then(resolve,reject){return executeWrite().then(resolve,reject)},
+      catch(fn){return executeWrite().catch(fn)}
     };
-    return blocked;
+    async function executeWrite(){
+      if(table!=='soci'||!['insert','update'].includes(method))return forbidden();
+      try{
+        if(method==='insert'&&Array.isArray(payload))throw Error('Inserimento multiplo non supportato');
+        if(method==='update'&&!id)throw Error('ID socio obbligatorio');
+        const {csrfToken}=await request('/api/csrf');
+        if(!csrfToken)throw Error('Token CSRF assente');
+        const path=method==='insert'?'/api/soci':'/api/soci/'+encodeURIComponent(id);
+        const data=await request(path,{
+          method:method==='insert'?'POST':'PATCH',
+          headers:{'Content-Type':'application/json','X-CSRF-Token':csrfToken},
+          body:JSON.stringify(payload)
+        });
+        return {data:returnRows?(returnOne?data:[data]):null,error:null};
+      }catch(e){return {data:null,error:{message:e.message}}}
+    }
+    return write;
   };
   return builder;
 }
