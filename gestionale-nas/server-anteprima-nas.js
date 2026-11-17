@@ -50,5 +50,14 @@ require('./api-soci-scrittura.js')({app,pool,richiediAccesso:security.richiediAc
 if(process.env.NAS_ORIGINALE_SCRITTURE_VERIFICATE==='true') {
   require('./api-originale-scrittura.js')({app,pool,richiediAccesso:security.richiediAccesso,richiediCsrf:security.richiediCsrf});
 }
+// Archivio privato solo con flag server e cartella assoluta dedicata.
+if(process.env.NAS_ORIGINALE_ARCHIVIO_VERIFICATO==='true'){
+  require('./api-originale-archivio.js')({
+    app,
+    richiediAccesso:security.richiediAccesso,
+    richiediCsrf:security.richiediCsrf,
+    root:process.env.NAS_ORIGINALE_ARCHIVIO_ROOT
+  });
+}
 app.use(express.static('/node/app/anteprima-nas'));
 app.listen(3003,'0.0.0.0',()=>console.log('Anteprima NAS con protezioni HTTPS e CSRF pronta'));
