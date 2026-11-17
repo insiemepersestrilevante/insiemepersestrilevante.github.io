@@ -20,5 +20,7 @@ jobs:
           node --check gestionale-nas/server-anteprima-nas.js
           node --check gestionale-nas/api-soci-scrittura.js
           node --check gestionale-nas/sicurezza-nas.js
-      - name: Test sicurezza e soci
-        run: node --test gestionale-nas/*.test.cjs
+          node --check gestionale-nas/originale/app.js
+          node --check gestionale-nas/originale/nas-adapter.js
+      - name: Test sicurezza, soci e parità frontend originale
+        run: node --test gestionale-nas/*.test.cjs gestionale-nas/originale/*.test.cjs
