@@ -13,10 +13,19 @@ for name in client.js index.html sicurezza-nas.js sicurezza-nas.test.cjs interfa
   curl --fail --silent --show-error --location --max-time 30 "$BASE/$name" -o "$STAGE/$name"
   test -s "$STAGE/$name"
 done
+# Scarica anche la COPIA integrale del gestionale originale nella cartella di staging.
+# Non sovrascrive il gestionale attualmente pubblicato.
+mkdir -p "$STAGE/originale"
+for name in index.html app.js nas-adapter.js nas-adapter.test.cjs parita-originale.test.cjs; do
+  curl --fail --silent --show-error --location --max-time 30 "$BASE/originale/$name" -o "$STAGE/originale/$name"
+  test -s "$STAGE/originale/$name"
+done
 for name in server-anteprima-nas.js sicurezza-nas.js api-soci-scrittura.js api-originale-lettura.js api-originale-scrittura.js api-originale-archivio.js verifica-schema-originale.js client.js; do
   docker exec server-gestionale node --check "/node/app/aggiornamento-nas/$name"
 done
-docker exec server-gestionale node --test /node/app/aggiornamento-nas/sicurezza-nas.test.cjs /node/app/aggiornamento-nas/api-soci-scrittura.test.cjs /node/app/aggiornamento-nas/interfaccia-nas.test.cjs /node/app/aggiornamento-nas/api-originale-lettura.test.cjs /node/app/aggiornamento-nas/api-originale-scrittura.test.cjs /node/app/aggiornamento-nas/api-originale-archivio.test.cjs /node/app/aggiornamento-nas/verifica-schema-originale.test.cjs
+docker exec server-gestionale node --check /node/app/aggiornamento-nas/originale/app.js
+docker exec server-gestionale node --check /node/app/aggiornamento-nas/originale/nas-adapter.js
+docker exec server-gestionale node --test /node/app/aggiornamento-nas/originale/nas-adapter.test.cjs /node/app/aggiornamento-nas/originale/parita-originale.test.cjs /node/app/aggiornamento-nas/sicurezza-nas.test.cjs /node/app/aggiornamento-nas/api-soci-scrittura.test.cjs /node/app/aggiornamento-nas/interfaccia-nas.test.cjs /node/app/aggiornamento-nas/api-originale-lettura.test.cjs /node/app/aggiornamento-nas/api-originale-scrittura.test.cjs /node/app/aggiornamento-nas/api-originale-archivio.test.cjs /node/app/aggiornamento-nas/verifica-schema-originale.test.cjs
 for name in server-anteprima.js api-soci.js api-tabelle.js autenticazione.js admin.json; do
   if test -f "$ROOT/$name"; then cp -p "$ROOT/$name" "$BACKUP/$name"; fi
 done
