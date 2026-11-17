@@ -34,7 +34,7 @@ th{background:#f6f9f7}#status{min-height:1.4em}.topline{display:flex;justify-con
 <div class="panel topline"><strong>Accesso effettuato</strong><button id="logout">Esci</button></div>
 <div class="panel"><h2>Tabelle</h2><nav id="tabs" aria-label="Tabelle database"></nav></div>
 <div class="panel"><div class="topline"><h2 id="tabletitle">Dati</h2><button id="reload">Aggiorna</button></div>
-<p id="count" class="muted"></p><p><button id="new-socio" type="button" class="hidden">Nuovo socio</button></p><div class="tablewrap" id="records"></div></div>
+<p id="count" class="muted"></p><p><button id="new-socio" type="button" class="hidden">+ Nuovo socio</button></p><div class="tablewrap" id="records"></div></div>
 <div class="panel hidden" id="socio-panel"><h2 id="socio-title">Nuovo socio</h2>
 <p class="muted">Controlla attentamente i dati prima di salvare. Le modifiche agiscono sul database NAS.</p>
 <form id="socio-form"><div id="socio-fields" class="formgrid"></div>
@@ -52,6 +52,7 @@ let active = 'soci';
 let generation = 0;
 let socioEditingId = null;
 let socioRows = [];
+const socioColumns = [['codice_socio','Numero tessera'],['nome','Nome'],['cognome','Cognome'],['codice_fiscale','Codice fiscale'],['email','E-mail']];
 const socioFields = Object.freeze([['codice_socio','Codice socio'],['nome','Nome'],['cognome','Cognome'],['codice_fiscale','Codice fiscale'],['data_nascita','Data di nascita','date'],['luogo_nascita','Luogo di nascita'],['indirizzo','Indirizzo'],['cap','CAP'],['comune','Comune'],['provincia','Provincia'],['telefono','Telefono'],['email','Email','email'],['data_iscrizione','Data iscrizione','date'],['stato','Stato','select'],['note','Note']]);
 const setStatus = (message, error = false) => {
   $('status').textContent = message;
@@ -89,20 +90,19 @@ async function load(table) {
     $('count').textContent = rows.length + ' record';
     if (table === 'soci') socioRows = rows;
     if (!rows.length) { $('records').textContent = 'Nessun dato presente.'; return; }
-    const columns = [...new Set(rows.flatMap(row => Object.keys(row)))];
+    const columns = table === 'soci' ? socioColumns.map(([key]) => key) : [...new Set(rows.flatMap(row => Object.keys(row)))].filter(key => key !== 'id');
     const tableEl = document.createElement('table');
     const thead = document.createElement('thead');
     const headRow = document.createElement('tr');
     for (const col of columns) {
-      const th = document.createElement('th'); th.scope = 'col'; th.textContent = col;
+      const th = document.createElement('th'); th.scope = 'col'; th.textContent = table === 'soci' ? (socioColumns.find(([key]) => key === col)?.[1] || col) : col;
       headRow.append(th);
     }
     thead.append(headRow);
     const tbody = document.createElement('tbody');
-    if (table === 'soci') { const th = document.createElement('th'); th.textContent = 'Azioni'; headRow.append(th); }
+    if (table === 'soci') { const th = document.createElement('th'); th.textContent = 'Azioni'; headRow.insertBefore(th,headRow.firstChild); }
     for (const row of rows) {
       const tr = document.createElement('tr');
-      for (const col of columns) tr.append(safeCell(row[col]));
       if (table === 'soci') {
         const td = document.createElement('td');
         const edit = document.createElement('button');
@@ -110,6 +110,7 @@ async function load(table) {
         edit.addEventListener('click', () => openSocio(row));
         td.append(edit); tr.append(td);
       }
+      for (const col of columns) tr.append(safeCell(row[col]));
       tbody.append(tr);
     }
     tableEl.append(thead, tbody);
