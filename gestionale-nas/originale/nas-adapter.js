@@ -105,7 +105,7 @@ const auth={
 };
 const filePath=p=>'/api/originale/files/'+p.split('/').map(encodeURIComponent).join('/');
 function storage(bucket){
-  const enabled=()=>window.NAS_ORIGINALE_ARCHIVIO_VERIFICATO===true;
+  const enabled=()=>bucket==='archivio-associazione'&&window.NAS_ORIGINALE_ARCHIVIO_VERIFICATO===true;
   return {
     async upload(p,file,opts={}){
       if(!enabled()||opts.upsert===true)return forbidden();
@@ -124,8 +124,12 @@ function storage(bucket){
       }catch(e){return {data:null,error:{message:e.message}}}
     },
     async info(p){
-      // Non sostituire una verifica remota con un falso positivo.
-      return forbidden();
+      if(!enabled())return forbidden();
+      try{
+        const response=await fetch(filePath(p),{method:'HEAD',credentials:'same-origin',cache:'no-store'});
+        if(!response.ok)throw Error('File non trovato (HTTP '+response.status+')');
+        return {data:{name:p.split('/').at(-1)},error:null};
+      }catch(e){return {data:null,error:{message:e.message}}}
     },
     async createSignedUrl(p){
       if(!enabled())return forbidden();
