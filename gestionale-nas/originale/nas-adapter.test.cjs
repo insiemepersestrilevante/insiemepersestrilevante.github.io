@@ -27,7 +27,7 @@ test('l adapter legge, filtra, ordina, pagina e proietta i soci dal NAS',async()
 });
 test('non fa chiamate Supabase e blocca scritture non migrate',async()=>{
   const {db,calls}=adapter({});
-  const r=await db.from('soci').insert({nome:'Prova'});
+  const r=await db.from('pagamenti').insert({importo:100});
   assert.ok(r.error);
   const f=await db.functions.invoke('send-reminder',{});
   assert.ok(f.error);
@@ -41,16 +41,39 @@ test('sessione NAS e uscita non simulano successo se server rifiuta',async()=>{
   assert.ok(logout.error);
 });
 
-test('CRUD originali falliscono con errore esplicito e non inviano dati',async()=>{
+
+test('inserimento socio richiede CSRF e restituisce il record NAS',async()=>{
+  const {db,calls}=adapter({
+    '/api/csrf':{body:{csrfToken:'test-token'}},
+    '/api/soci':{status:201,body:{id:'s1',nome:'Anna',cognome:'Rossi'}}
+  });
+  const result=await db.from('soci').insert({nome:'Anna',cognome:'Rossi'}).select('id').single();
+  assert.equal(result.error,null);
+  assert.equal(result.data.id,'s1');
+  assert.equal(calls[1].options.method,'POST');
+  assert.equal(calls[1].options.headers['X-CSRF-Token'],'test-token');
+});
+test('modifica socio invia PATCH soltanto con id e CSRF',async()=>{
+  const {db,calls}=adapter({
+    '/api/csrf':{body:{csrfToken:'token'}},
+    '/api/soci/s1':{body:{id:'s1',nome:'Nuovo'}}
+  });
+  const result=await db.from('soci').update({nome:'Nuovo'}).eq('id','s1').select('*').single();
+  assert.equal(result.error,null);
+  assert.equal(result.data.nome,'Nuovo');
+  assert.equal(calls[1].options.method,'PATCH');
+});
+test('scritture diverse dai soci, eliminazione e update senza id restano bloccati',async()=>{
   const {db,calls}=adapter({});
-  for(const operation of [
-    db.from('soci').insert({nome:'Prova'}).select('id').single(),
-    db.from('soci').update({nome:'Prova'}).eq('id','x'),
-    db.from('soci').delete().eq('id','x'),
-    db.from('soci').upsert({id:'x'}).select('*').maybeSingle()
-  ]){
+  const operations=[
+    db.from('pagamenti').insert({importo:1}).select('id').single(),
+    db.from('soci').delete().eq('id','s1'),
+    db.from('soci').upsert({id:'s1'}).select('*').maybeSingle(),
+    db.from('soci').update({nome:'A'}).eq('nome','A')
+  ];
+  for(const operation of operations){
     const result=await operation;
-    assert.match(result.error.message,/non ancora migrata/);
+    assert.ok(result.error);
   }
   assert.equal(calls.length,0);
 });
