@@ -50,12 +50,12 @@ function query(table){
   // Le scritture sono abilitate solo per i soci. Le altre tabelle richiedono
   // un consenso esplicito lato client E lato server, dopo verifica dello schema NAS.
   for(const method of ['insert','update','upsert','delete'])builder[method]=(payload)=>{
-    let id=null,returnRows=false,returnOne=false,returnOptional=false;
+    let id=null,returnRows=false,returnOne=false;
     const write={
       select(){returnRows=true;return write},
       eq(field,value){if(field==='id')id=value;else id=null;return write},
       single(){returnOne=true;return write},
-      maybeSingle(){returnOne=true;returnOptional=true;return write},
+      maybeSingle(){returnOne=true;return write},
       then(resolve,reject){return executeWrite().then(resolve,reject)},
       catch(fn){return executeWrite().catch(fn)}
     };
