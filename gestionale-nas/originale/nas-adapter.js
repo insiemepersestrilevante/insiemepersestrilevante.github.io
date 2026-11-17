@@ -47,7 +47,21 @@ function query(table){
       return {data:head?null:rows,error:null,count:wantCount?count:null};
     }catch(e){return {data:null,error:{message:e.message},count:null}}
   }
-  for(const method of ['insert','update','upsert','delete'])builder[method]=()=>({select:()=>({single:async()=>forbidden()}),then:resolve=>Promise.resolve(forbidden()).then(resolve)});
+  // Mantiene la sintassi Supabase anche quando la scrittura non è ancora disponibile:
+  // un errore esplicito è più sicuro di un TypeError o di un successo simulato.
+  for(const method of ['insert','update','upsert','delete'])builder[method]=()=>{
+    const blocked={
+      select(){return blocked},
+      eq(){return blocked},
+      order(){return blocked},
+      limit(){return blocked},
+      single(){return blocked},
+      maybeSingle(){return blocked},
+      then(resolve,reject){return Promise.resolve(forbidden()).then(resolve,reject)},
+      catch(fn){return Promise.resolve(forbidden()).catch(fn)}
+    };
+    return blocked;
+  };
   return builder;
 }
 const auth={
