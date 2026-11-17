@@ -36,7 +36,8 @@ function query(table){
   async function execute(){
     try{
       if(!tables.has(table))throw Error('Tabella NAS non autorizzata');
-      let rows=await request('/api/'+encodeURIComponent(table));
+      const endpoint=window.NAS_ORIGINALE_LETTURA_VERIFICATA===true?'/api/originale/lettura/':'/api/';
+      let rows=await request(endpoint+encodeURIComponent(table));
       if(!Array.isArray(rows))throw Error('Formato API NAS inatteso');
       rows=rows.filter(r=>filters.every(fn=>fn(r)));
       for(let i=orders.length-1;i>=0;i--){const {k,asc}=orders[i];rows.sort((a,b)=>{const av=a[k],bv=b[k];return (av==null?bv==null?0:-1:bv==null?1:String(av).localeCompare(String(bv),'it',{numeric:true}))*(asc?1:-1)})}
