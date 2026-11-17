@@ -82,7 +82,8 @@ function query(table){
   return builder;
 }
 const auth={
-  async signInWithPassword({password}){
+  async signInWithPassword({email,password}){
+    if(typeof email!=='string'||email.trim().toLowerCase()!==EMAIL)return {data:{session:null},error:{message:'Credenziali non valide'}};
     try{
       await request('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password})});
       authenticated=true;
