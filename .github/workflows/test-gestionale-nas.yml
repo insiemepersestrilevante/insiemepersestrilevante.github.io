@@ -19,6 +19,7 @@ jobs:
           node --check gestionale-nas/client.js
           node --check gestionale-nas/server-anteprima-nas.js
           node --check gestionale-nas/api-soci-scrittura.js
+          node --check gestionale-nas/api-originale-scrittura.js
           node --check gestionale-nas/sicurezza-nas.js
           node --check gestionale-nas/originale/app.js
           node --check gestionale-nas/originale/nas-adapter.js
