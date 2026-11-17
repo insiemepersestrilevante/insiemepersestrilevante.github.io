@@ -4,6 +4,13 @@
 const tables = new Set(['annualita','iscrizioni','pagamenti','verbali','documenti','movimenti','categorie_movimenti','ricevute']);
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const identifier = /^[a-z_][a-z0-9_]*$/;
+const receiptTriggers=['ricevute_collega_movimento','ricevute_no_delete','ricevute_numero_immutabile','ricevute_numero_progressivo'];
+async function ensureReceiptSafety(pool,table){
+  if(table!=='ricevute')return;
+  const result=await pool.query("SELECT tgname FROM pg_trigger WHERE NOT tgisinternal AND tgrelid='public.ricevute'::regclass");
+  const found=new Set(result.rows.map(r=>r.tgname));
+  if(receiptTriggers.some(name=>!found.has(name)))throw Error('Trigger ricevute non verificati');
+}
 function validateBody(body, columns) {
   if (!body || typeof body!=='object' || Array.isArray(body)) throw Error('Dati non validi');
   const keys=Object.keys(body);
@@ -33,6 +40,7 @@ module.exports = function register({app,pool,richiediAccesso,richiediCsrf}){
     const table=req.params.table;
     if(!tables.has(table))return res.status(404).json({errore:'Tabella non consentita'});
     try{
+      await ensureReceiptSafety(pool,table);
       const cols=await columnsFor(pool,table);
       const keys=validateBody(req.body,cols);
       const values=keys.map(k=>req.body[k]);
@@ -43,6 +51,7 @@ module.exports = function register({app,pool,richiediAccesso,richiediCsrf}){
     }catch(e){
       if(e.code==='23505')return res.status(409).json({errore:'Record duplicato'});
       if(['23502','23503','23514','22P02','22007'].includes(e.code))return res.status(400).json({errore:'Dati o riferimenti non validi'});
+      if(e.message==='Trigger ricevute non verificati')return res.status(503).json({errore:'Ricevute non attivabili: trigger contabili mancanti'});
       if(e.message==='Tabella assente')return res.status(404).json({errore:'Tabella assente'});
       if(/^(Dati|Campi|Campo|Tipo|Valore|Numero)/.test(e.message))return res.status(400).json({errore:e.message});
       return res.status(500).json({errore:'Inserimento non riuscito'});
