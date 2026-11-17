@@ -7,15 +7,21 @@ const crypto=require('node:crypto');
 const ALLOWED=new Set(['.pdf','.jpg','.jpeg','.png','.webp','.doc','.docx','.xls','.xlsx','.ppt','.pptx','.txt']);
 const MAX=20*1024*1024;
 function safePath(value){
-  if(typeof value!=='string'||value.length>240||!value.length||value.includes('\\')||value.includes('%')||value.includes('\\0'))throw Error('Percorso non valido');
+  if(typeof value!=='string'||value.length>240||!value.length||value.includes('\\')||value.includes('%')||value.includes('\0'))throw Error('Percorso non valido');
   const parts=value.split('/');
-  if(![2,4].includes(parts.length)||parts.some(x=>!x||x==='.'||x==='..'||!/^[a-zA-Z0-9._-]+$/.test(x)))throw Error('Percorso non valido');
-  if(!/^[0-9a-f-]{36}$/i.test(parts[0]))throw Error('Proprietario non valido');
+  if(![1,2,4].includes(parts.length)||parts.some(x=>!x||x==='.'||x==='..'||!/^[a-zA-Z0-9._:-]+$/.test(x)))throw Error('Percorso non valido');
   const name=parts.at(-1);
-  if(parts.length===2){
-    if(!/^[0-9a-f-]{36}\.[a-z0-9]{1,5}$/i.test(name))throw Error('Nome file non valido');
+  if(parts.length===1){
+    // File storici presenti nella radice del bucket Supabase.
+    if(!/^[a-zA-Z0-9][a-zA-Z0-9._-]{0,180}$/.test(name))throw Error('Nome file non valido');
   }else{
-    if(parts[1]!=='ricevute'||!/^\d{4}$/.test(parts[2])||!/^[0-9a-f-]{36}\.pdf$/i.test(name))throw Error('Percorso ricevuta non valido');
+    if(!/^[0-9a-f-]{36}$/i.test(parts[0]))throw Error('Proprietario non valido');
+    if(parts.length===2){
+      if(!/^[0-9a-f-]{36}\.[a-z0-9]{1,5}$/i.test(name))throw Error('Nome file non valido');
+    }else{
+      // La ricevuta originale usa anche chiavi "ledger:<uuid>:<uuid>.pdf".
+      if(parts[1]!=='ricevute'||!/^\d{4}$/.test(parts[2])||!/^((?:ledger:)?[0-9a-f-]{36}(?::[0-9a-f-]{36})?)\.pdf$/i.test(name))throw Error('Percorso ricevuta non valido');
+    }
   }
   if(!ALLOWED.has(path.extname(name).toLowerCase()))throw Error('Estensione non consentita');
   return parts;
