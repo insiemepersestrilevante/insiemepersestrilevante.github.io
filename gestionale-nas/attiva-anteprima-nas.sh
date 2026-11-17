@@ -57,6 +57,8 @@ if test -n "$OLD_PID"; then
   docker exec server-gestionale node -e "process.kill(Number(process.argv[1]),'SIGTERM')" "$OLD_PID"
   sleep 2
 else
+  IN_USE=$(docker exec server-gestionale node -e "require('http').get('http://127.0.0.1:3003/api/sessione',r=>{console.log('YES');r.resume()}).on('error',()=>console.log('NO'))" 2>/dev/null || true)
+  if test "$IN_USE" = YES; then echo "Porta 3003 occupata da processo sconosciuto: attivazione annullata"; exit 1; fi
   echo "Nessun processo anteprima rilevato: procedo con avvio separato."
 fi
 trap restore ERR
