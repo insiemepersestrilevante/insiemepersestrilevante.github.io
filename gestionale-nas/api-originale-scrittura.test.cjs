@@ -25,7 +25,7 @@ test('rifiuta installazione senza autenticazione e CSRF',()=>{
 });
 test('route di inserimento verifica tabella e non esegue query per tabella estranea',async()=>{
  const handlers={};
- const app={post(path,...fns){handlers[path]=fns},patch(path,...fns){handlers[path]=fns}};
+ const app={post(path,...fns){handlers[path]=fns},patch(path,...fns){handlers[path]=fns},delete(path,...fns){handlers[path]=fns}};
  const pool={query(){throw Error('Query non prevista')}};
  const next=(req,res,go)=>go();
  register({app,pool,richiediAccesso:next,richiediCsrf:next});
@@ -39,7 +39,7 @@ test('route di inserimento verifica tabella e non esegue query per tabella estra
 
 test('ricevute: blocca inserimento se mancano i trigger contabili',async()=>{
  const routes={};
- const app={post(p,...h){routes[p]=h},patch(p,...h){routes[p]=h}};
+ const app={post(p,...h){routes[p]=h},patch(p,...h){routes[p]=h},delete(p,...h){routes[p]=h}};
  const pool={async query(sql){
    assert.match(sql,/pg_trigger/);
    return {rows:[]};
