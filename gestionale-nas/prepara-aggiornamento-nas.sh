@@ -9,14 +9,14 @@ test -d "$ROOT" || { echo "Cartella server non trovata"; exit 1; }
 command -v docker >/dev/null || { echo "Docker non disponibile"; exit 1; }
 command -v curl >/dev/null || { echo "curl non disponibile"; exit 1; }
 mkdir -p "$STAGE" "$BACKUP"
-for name in client.js index.html sicurezza-nas.js sicurezza-nas.test.cjs api-soci-scrittura.js api-soci-scrittura.test.cjs server-anteprima-nas.js; do
+for name in client.js index.html sicurezza-nas.js sicurezza-nas.test.cjs interfaccia-nas.test.cjs api-soci-scrittura.js api-soci-scrittura.test.cjs server-anteprima-nas.js; do
   curl --fail --silent --show-error --location --max-time 30 "$BASE/$name" -o "$STAGE/$name"
   test -s "$STAGE/$name"
 done
 for name in server-anteprima-nas.js sicurezza-nas.js api-soci-scrittura.js client.js; do
   docker exec server-gestionale node --check "/node/app/aggiornamento-nas/$name"
 done
-docker exec server-gestionale node --test /node/app/aggiornamento-nas/sicurezza-nas.test.cjs /node/app/aggiornamento-nas/api-soci-scrittura.test.cjs
+docker exec server-gestionale node --test /node/app/aggiornamento-nas/sicurezza-nas.test.cjs /node/app/aggiornamento-nas/api-soci-scrittura.test.cjs /node/app/aggiornamento-nas/interfaccia-nas.test.cjs
 for name in server-anteprima.js api-soci.js api-tabelle.js autenticazione.js admin.json; do
   if test -f "$ROOT/$name"; then cp -p "$ROOT/$name" "$BACKUP/$name"; fi
 done
