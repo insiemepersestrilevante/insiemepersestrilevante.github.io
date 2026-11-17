@@ -197,9 +197,16 @@ $('loginform').addEventListener('submit', async event => {
 });
 $('logout').addEventListener('click', async () => {
   ++generation;
-  try { await api.logout(); } catch (error) { setStatus(error.message, true); }
-  show(false);
-  $('records').replaceChildren();
+  try {
+    await api.logout();
+    show(false);
+    $('records').replaceChildren();
+    setStatus('Sessione terminata.');
+  } catch (error) {
+    setStatus('Uscita non confermata: ' + error.message, true);
+    const sessione = await api.session().catch(() => null);
+    if (sessione?.autenticato === false) { show(false); $('records').replaceChildren(); }
+  }
 });
 $('reload').addEventListener('click', () => load(active));
 (async () => {
