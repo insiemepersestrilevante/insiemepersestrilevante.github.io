@@ -3,7 +3,6 @@
 // I file non sono mai serviti da express.static; download solo con sessione.
 const fs=require('node:fs/promises');
 const path=require('node:path');
-const crypto=require('node:crypto');
 const ALLOWED=new Set(['.pdf','.jpg','.jpeg','.png','.webp','.doc','.docx','.xls','.xlsx','.ppt','.pptx','.txt']);
 const MAX=20*1024*1024;
 function safePath(value){
