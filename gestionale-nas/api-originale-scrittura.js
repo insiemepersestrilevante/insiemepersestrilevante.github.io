@@ -4,7 +4,7 @@
 const tables = new Set(['annualita','iscrizioni','pagamenti','verbali','documenti','movimenti','categorie_movimenti','ricevute']);
 const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const identifier = /^[a-z_][a-z0-9_]*$/;
-function validateBody(body, columns, partial=false) {
+function validateBody(body, columns) {
   if (!body || typeof body!=='object' || Array.isArray(body)) throw Error('Dati non validi');
   const keys=Object.keys(body);
   if (!keys.length || keys.length>50) throw Error('Campi non validi');
@@ -53,7 +53,7 @@ module.exports = function register({app,pool,richiediAccesso,richiediCsrf}){
     if(!tables.has(table)||!uuid.test(id))return res.status(400).json({errore:'Tabella o ID non valido'});
     try{
       const cols=await columnsFor(pool,table);
-      const keys=validateBody(req.body,cols,true);
+      const keys=validateBody(req.body,cols);
       const values=keys.map(k=>req.body[k]);
       const assignments=keys.map((k,i)=>'"'+k+'"=$'+(i+1)).join(',');
       const result=await pool.query('UPDATE "'+table+'" SET '+assignments+' WHERE id=$'+(keys.length+1)+' RETURNING *',[...values,id]);
