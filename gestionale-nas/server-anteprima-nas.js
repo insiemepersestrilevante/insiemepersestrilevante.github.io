@@ -46,10 +46,9 @@ app.post('/api/logout',security.richiediAccesso,security.richiediCsrf,(req,res)=
 require('./api-soci.js')(app,pool);
 require('./api-tabelle.js')(app,pool);
 require('./api-soci-scrittura.js')({app,pool,richiediAccesso:security.richiediAccesso,richiediCsrf:security.richiediCsrf});
-// Lettura originale separata, inattiva finché non verificata sul NAS.
-if(process.env.NAS_ORIGINALE_LETTURA_VERIFICATA==='true') {
-  require('./api-originale-lettura.js')({app,pool,richiediAccesso:security.richiediAccesso});
-}
+// Lettura originale protetta da sessione: schema e backup già verificati sul NAS.
+// Nessuna scrittura viene abilitata da questa registrazione.
+require('./api-originale-lettura.js')({app,pool,richiediAccesso:security.richiediAccesso});
 // Non attivare finché schema, backup e test CRUD non sono verificati sul NAS.
 if(process.env.NAS_ORIGINALE_SCRITTURE_VERIFICATE==='true') {
   require('./api-originale-scrittura.js')({app,pool,richiediAccesso:security.richiediAccesso,richiediCsrf:security.richiediCsrf});
