@@ -13,13 +13,8 @@ let authenticated=false;
 const subscribers=new Set();
 async function request(path,options={}) {
   const response=await fetch(path,{...options,credentials:'same-origin',cache:'no-store',headers:{Accept:'application/json',...(options.headers||{})}});
-  const contentType=response.headers.get('content-type')||'';
-  if(!contentType.toLowerCase().includes('application/json')){
-    console.error('Risposta NAS non JSON:',{path,status:response.status,contentType});
-    throw Error('API NAS '+path+': HTTP '+response.status+' (risposta '+(contentType||'senza Content-Type')+', non JSON)');
-  }
   const data=await response.json();
-  if(!response.ok)throw Error(data.errore||'API NAS '+path+': HTTP '+response.status);
+  if(!response.ok)throw Error(data.errore||'HTTP '+response.status);
   return data;
 }
 function notify(event,session){for(const fn of subscribers)try{fn(event,session)}catch(e){console.error(e)}}
@@ -41,7 +36,7 @@ function query(table){
   async function execute(){
     try{
       if(!tables.has(table))throw Error('Tabella NAS non autorizzata');
-      const endpoint='/api/originale/lettura/'; // Solo endpoint autenticato, mai letture legacy non protette.
+      const endpoint=window.NAS_ORIGINALE_LETTURA_VERIFICATA===true?'/api/originale/lettura/':'/api/';
       let rows=await request(endpoint+encodeURIComponent(table));
       if(!Array.isArray(rows))throw Error('Formato API NAS inatteso');
       // PostgreSQL serializza le colonne DATE come timestamp ISO; Supabase le restituiva YYYY-MM-DD.
