@@ -43,6 +43,9 @@ app.post('/api/logout',security.richiediAccesso,security.richiediCsrf,(req,res)=
     res.json({risultato:'USCITA OK'});
   });
 });
+if(process.env.NAS_ORIGINALE_SOLLECITI_VERIFICATI==='true') {
+  require('./api-originale-solleciti.js')({app,richiediAccesso:security.richiediAccesso,richiediCsrf:security.richiediCsrf});
+}
 require('./api-soci.js')(app,pool);
 require('./api-tabelle.js')(app,pool);
 require('./api-soci-scrittura.js')({app,pool,richiediAccesso:security.richiediAccesso,richiediCsrf:security.richiediCsrf});
@@ -62,9 +65,6 @@ if(process.env.NAS_ORIGINALE_ARCHIVIO_VERIFICATO==='true'){
     richiediCsrf:security.richiediCsrf,
     root:process.env.NAS_ORIGINALE_ARCHIVIO_ROOT
   });
-}
-if(process.env.NAS_ORIGINALE_SOLLECITI_VERIFICATI==='true') {
-  require('./api-originale-solleciti.js')({app,richiediAccesso:security.richiediAccesso,richiediCsrf:security.richiediCsrf});
 }
 app.use(express.static('/node/app/anteprima-nas'));
 app.listen(3003,'0.0.0.0',()=>console.log('Anteprima NAS con protezioni HTTPS e CSRF pronta'));
