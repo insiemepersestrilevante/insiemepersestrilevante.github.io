@@ -63,5 +63,8 @@ if(process.env.NAS_ORIGINALE_ARCHIVIO_VERIFICATO==='true'){
     root:process.env.NAS_ORIGINALE_ARCHIVIO_ROOT
   });
 }
+if(process.env.NAS_ORIGINALE_SOLLECITI_VERIFICATI==='true') {
+  require('./api-originale-solleciti.js')({app,richiediAccesso:security.richiediAccesso,richiediCsrf:security.richiediCsrf});
+}
 app.use(express.static('/node/app/anteprima-nas'));
 app.listen(3003,'0.0.0.0',()=>console.log('Anteprima NAS con protezioni HTTPS e CSRF pronta'));
