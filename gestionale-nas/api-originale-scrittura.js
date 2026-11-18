@@ -61,6 +61,7 @@ module.exports = function register({app,pool,richiediAccesso,richiediCsrf}){
     const {table,id}=req.params;
     if(!tables.has(table)||!uuid.test(id))return res.status(400).json({errore:'Tabella o ID non valido'});
     try{
+      await ensureReceiptSafety(pool,table);
       const cols=await columnsFor(pool,table);
       const keys=validateBody(req.body,cols);
       const values=keys.map(k=>req.body[k]);
@@ -72,6 +73,7 @@ module.exports = function register({app,pool,richiediAccesso,richiediCsrf}){
       if(e.code==='23505')return res.status(409).json({errore:'Record duplicato'});
       if(['23502','23503','23514','22P02','22007'].includes(e.code))return res.status(400).json({errore:'Dati o riferimenti non validi'});
       if(e.message==='Tabella assente')return res.status(404).json({errore:'Tabella assente'});
+      if(e.message==='Trigger ricevute non verificati')return res.status(503).json({errore:'Ricevute non attivabili: trigger contabili mancanti'});
       if(/^(Dati|Campi|Campo|Tipo|Valore|Numero)/.test(e.message))return res.status(400).json({errore:e.message});
       return res.status(500).json({errore:'Modifica non riuscita'});
     }
