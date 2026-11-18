@@ -39,6 +39,11 @@ function query(table){
       const endpoint=window.NAS_ORIGINALE_LETTURA_VERIFICATA===true?'/api/originale/lettura/':'/api/';
       let rows=await request(endpoint+encodeURIComponent(table));
       if(!Array.isArray(rows))throw Error('Formato API NAS inatteso');
+      // PostgreSQL serializza le colonne DATE come timestamp ISO; Supabase le restituiva YYYY-MM-DD.
+      // Normalizziamo solo le date senza orario, prima dei filtri e della visualizzazione.
+      rows=rows.map(row=>Object.fromEntries(Object.entries(row).map(([key,value])=>[
+        key,typeof value==='string'&&/^\d{4}-\d{2}-\d{2}T00:00:00(?:\.000)?Z$/.test(value)?value.slice(0,10):value
+      ])));
       rows=rows.filter(r=>filters.every(fn=>fn(r)));
       for(let i=orders.length-1;i>=0;i--){const {k,asc}=orders[i];rows.sort((a,b)=>{const av=a[k],bv=b[k];return (av==null?bv==null?0:-1:bv==null?1:String(av).localeCompare(String(bv),'it',{numeric:true}))*(asc?1:-1)})}
       const count=rows.length;
