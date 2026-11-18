@@ -149,5 +149,16 @@ function storage(bucket){
     }
   };
 }
-window.gestionaleNasCompat=Object.freeze({auth,from:query,storage:{from:storage},functions:{invoke:async()=>forbidden()}});
+window.gestionaleNasCompat=Object.freeze({auth,from:query,storage:{from:storage},functions:{invoke:async(name,opts={})=>{
+  if(name!=='send-reminder'||window.NAS_ORIGINALE_SOLLECITI_VERIFICATI!==true)return forbidden();
+  try{
+    const {csrfToken}=await request('/api/csrf');
+    const data=await request('/api/originale/send-reminder',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','X-CSRF-Token':csrfToken},
+      body:JSON.stringify(opts.body||{})
+    });
+    return {data,error:null};
+  }catch(e){return {data:null,error:{message:e.message}}}
+}}});
 })();
