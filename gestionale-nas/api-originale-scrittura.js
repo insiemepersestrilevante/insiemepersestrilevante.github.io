@@ -7,8 +7,8 @@ const identifier = /^[a-z_][a-z0-9_]*$/;
 const receiptTriggers=['ricevute_collega_movimento','ricevute_no_delete','ricevute_numero_immutabile','ricevute_numero_progressivo'];
 async function ensureReceiptSafety(pool,table){
   if(table!=='ricevute')return;
-  const result=await pool.query("SELECT tgname FROM pg_trigger WHERE NOT tgisinternal AND tgrelid='public.ricevute'::regclass");
-  const found=new Set(result.rows.map(r=>r.tgname));
+  const result=await pool.query("SELECT tgname, tgenabled FROM pg_trigger WHERE NOT tgisinternal AND tgrelid='public.ricevute'::regclass");
+  const found=new Set(result.rows.filter(r=>r.tgenabled==='O'||r.tgenabled==='A').map(r=>r.tgname));
   if(receiptTriggers.some(name=>!found.has(name)))throw Error('Trigger ricevute non verificati');
 }
 function validateBody(body, columns) {
