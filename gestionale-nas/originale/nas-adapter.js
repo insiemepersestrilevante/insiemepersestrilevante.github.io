@@ -36,7 +36,7 @@ function query(table){
   async function execute(){
     try{
       if(!tables.has(table))throw Error('Tabella NAS non autorizzata');
-      const endpoint=window.NAS_ORIGINALE_LETTURA_VERIFICATA===true?'/api/originale/lettura/':'/api/';
+      const endpoint='/api/originale/lettura/'; // Solo endpoint autenticato, mai letture legacy non protette.
       let rows=await request(endpoint+encodeURIComponent(table));
       if(!Array.isArray(rows))throw Error('Formato API NAS inatteso');
       // PostgreSQL serializza le colonne DATE come timestamp ISO; Supabase le restituiva YYYY-MM-DD.
