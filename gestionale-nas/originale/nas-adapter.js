@@ -13,8 +13,13 @@ let authenticated=false;
 const subscribers=new Set();
 async function request(path,options={}) {
   const response=await fetch(path,{...options,credentials:'same-origin',cache:'no-store',headers:{Accept:'application/json',...(options.headers||{})}});
+  const contentType=response.headers.get('content-type')||'';
+  if(!contentType.toLowerCase().includes('application/json')){
+    console.error('Risposta NAS non JSON:',{path,status:response.status,contentType});
+    throw Error('API NAS '+path+': HTTP '+response.status+' (risposta '+(contentType||'senza Content-Type')+', non JSON)');
+  }
   const data=await response.json();
-  if(!response.ok)throw Error(data.errore||'HTTP '+response.status);
+  if(!response.ok)throw Error(data.errore||'API NAS '+path+': HTTP '+response.status);
   return data;
 }
 function notify(event,session){for(const fn of subscribers)try{fn(event,session)}catch(e){console.error(e)}}
