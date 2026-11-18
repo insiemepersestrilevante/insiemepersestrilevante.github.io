@@ -14,8 +14,8 @@ async function main(){
   const found=new Set(tables.rows.map(x=>x.table_name));
   for(const name of REQUIRED){const present=found.has(name);console.log((present?'OK ':'NO ')+'tabella '+name);if(!present)ok=false}
   if(found.has('ricevute')){
-   const triggers=await pool.query("SELECT tgname FROM pg_trigger WHERE NOT tgisinternal AND tgrelid='public.ricevute'::regclass");
-   const existing=new Set(triggers.rows.map(x=>x.tgname));
+   const triggers=await pool.query("SELECT tgname, tgenabled FROM pg_trigger WHERE NOT tgisinternal AND tgrelid='public.ricevute'::regclass");
+   const existing=new Set(triggers.rows.filter(x=>x.tgenabled==='O'||x.tgenabled==='A').map(x=>x.tgname));
    for(const name of TRIGGERS){const present=existing.has(name);console.log((present?'OK ':'NO ')+'trigger '+name);if(!present)ok=false}
   }
   const root=process.env.NAS_ORIGINALE_ARCHIVIO_ROOT;
